@@ -20,24 +20,24 @@ public abstract class Viaje implements IViaje{
 	}
 
 	public Pedido getPedido() {
-		return pedido;
+		return this.pedido;
 	}
 
 	public Vehiculo getVehiculo() {
-		return vehiculo;
+		return this.vehiculo;
 	}
 
 	public Chofer getChofer() {
-		return chofer;
+		return this.chofer;
 	}
 
 
 	public double getDistancia() {
-		return distancia;
+		return this.distancia;
 	}
 
 	public static double getBase() {
-		return base;
+		return this.base;
 	}
 
 	public static void setBase(double base) {

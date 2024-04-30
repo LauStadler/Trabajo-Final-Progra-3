@@ -1,7 +1,7 @@
 package models;
 public class ChoferPermanente extends Chofer{
    private double sueldobase;
-   private double plusantiguedad, plushijos,aportes;
+   private double plusantiguedad, plushijos,aportes//cte??;
    private int antiguedad, canthijos;
    private String fechaingreso;
 

@@ -2,7 +2,7 @@ package models;
 
 public class ChoferTemporario extends Chofer {
     private double sueldobasico;
-    private double aportes;
+    private double aportes//constante??;
     private double pluscantviajes;
 
     public ChoferTemporario(String dni,String nombre){
@@ -10,12 +10,11 @@ public class ChoferTemporario extends Chofer {
     }
 
     public double getSueldoBruto(){
-        // nose como calculo la cantidad de viajes ...
-        return this.sueldobasico+this.sueldobasico*canviajes*this.pluscantviajes;
+        return this.sueldobasico+this.sueldobasico*Sistema.getIntancia().cantviajesChofer(this)*this.pluscantviajes;
     }
 
     @Override
     public double getSueldo(){
-        return this.getSueldoBruto-this.getSueldoBruto()*this.aportes;
+        return this.getSueldoBruto()-this.getSueldoBruto()*this.aportes;
     }
 }
