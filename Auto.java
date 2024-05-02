@@ -10,27 +10,28 @@ public class Auto extends Vehiculo{
         
     }
 
-
-    @Override
-    public int getPrioridad(Pedido pedido){
-        
-    	if((pedido.isBaul())&&(pedido.getCantPasajeros() <= this.getCantPasajeros()))
-          
-        	return 40*pedido.getCantPasajeros();
-        
-        else 
-        	if (pedido.getCantPasajeros()<=this.getCantPasajeros())
-        
-        		return 30*pedido.getCantPasajeros();
-       
-        else 
-        	return 0;
-    }
-
 	@Override
 	public String toString() {
 		return "Auto patente: " + patente + ", baul: " + baul + ", mascota: " + mascota + ", cantpasajeros: "
 				+ cantpasajeros;
+	}
+
+	@Override
+	public boolean verificaBaul(Pedido pedido) {
+		return true;
+	}
+
+	@Override
+	public boolean verificaMascota(Pedido pedido) {
+		return true;
+	}
+
+	@Override
+	public int getIndice(Pedido pedido) {
+		if(pedido.isBaul())   
+        	return 40 * pedido.getCantPasajeros();
+        else 
+        	return 30*pedido.getCantPasajeros();
 	}
 
     

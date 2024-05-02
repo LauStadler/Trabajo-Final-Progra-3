@@ -27,7 +27,21 @@ public abstract class Vehiculo {
 		return this.patente;
 	}
 
-	public int getPrioridad(Pedido pedido) {
+	public abstract boolean verificaBaul(Pedido pedido);
+	
+	public abstract boolean verificaMascota(Pedido pedido);
+	
+	public abstract int getIndice(Pedido pedido);
+	
+	public Integer getPrioridad(Pedido pedido) {
+		boolean condicionMascota=this.verificaMascota(pedido);
+		boolean condicionBaul=this.verificaBaul(pedido);
+		boolean condicionCantPasajeros = this.getCantPasajeros() >= pedido.getCantPasajeros();
+		
+		if(condicionMascota && condicionBaul && condicionCantPasajeros)
+			return this.getIndice(pedido);
+		else
+			return null;
 		
 	}
 

@@ -1,10 +1,9 @@
 package models;
 
-public interface IViaje {
+public interface IViaje extends Cloneable {
 	public double getCosto();
 	public int getPasajero();
 	public double getDistancia();
 	public Chofer getChofer();
 	public Vehiculo getVehiculo();
-	public IViaje clone() throws CloneNotSupportedException;
 }

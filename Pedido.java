@@ -1,6 +1,6 @@
 package models;
 
-import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class Pedido implements Cloneable{
 	
@@ -8,20 +8,27 @@ public class Pedido implements Cloneable{
 	private String zona;
 	private boolean mascota;
 	private boolean baul;
-	private Date fecha;
+	private GregorianCalendar fecha;
 	private Cliente cliente;
+	private double km;
 	
-	public Pedido(int cantPasajeros, String zona, boolean mascota, boolean baul, Date fecha, Cliente cliente) {
+	public Pedido(int cantPasajeros, String zona, boolean mascota, boolean baul, Cliente cliente, double km) {
 		super();
 		this.cantPasajeros = cantPasajeros;
 		this.zona = zona;
 		this.mascota = mascota;
 		this.baul = baul;
-		this.fecha = fecha;
+		this.fecha = new GregorianCalendar();
 		this.cliente = cliente;
+		this.km = km;
 		}
 	
 	
+	
+	public double getKm() {
+		return km;
+	}
+
 	public int getCantPasajeros() {
 		return cantPasajeros;
 	}
@@ -34,7 +41,7 @@ public class Pedido implements Cloneable{
 	public boolean isBaul() {
 		return baul;
 	}
-	public Date getFecha() {
+	public GregorianCalendar getFecha() {
 		return fecha;
 	}
 	

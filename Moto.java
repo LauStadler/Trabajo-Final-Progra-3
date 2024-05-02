@@ -9,17 +9,33 @@ public class Moto extends Vehiculo{
         this.cantpasajeros = 1;
     }
     
+    
     @Override 
-    public int getPrioridad(Pedido pedido){
-        if((!pedido.isMascota())&&(!pedido.isMascota())&&(pedido.getCantPasajeros()==this.getCantPasajeros()))
-          return 1000;
-        else
-          return 0;
+    public int getIndice(Pedido pedido) {
+    	return 1000;
     }
     
     @Override
 	public String toString() {
 		return "Auto patente: " + patente + ", baul: " + baul + ", mascota: " + mascota + ", cantpasajeros: "
 				+ cantpasajeros;
+	}
+
+
+	@Override
+	public boolean verificaBaul(Pedido pedido) {
+		if (pedido.isBaul() == false)
+			return true;
+		else
+			return false;
+	}
+
+
+	@Override
+	public boolean verificaMascota(Pedido pedido) {
+		if (pedido.isMascota() == false)
+			return true;
+		else
+			return false;
 	}
 }

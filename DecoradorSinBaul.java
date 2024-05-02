@@ -44,8 +44,7 @@ public class DecoradorSinBaul extends DecoratorBaul{
 		DecoradorSinBaul clon = null;
 		
 		clon = (DecoradorSinBaul) super.clone();
-		clon.encapsulado = this.encapsulado.clone();
-		
+		clon.encapsulado = ((Viaje) this.encapsulado).clone();		
 		return clon;
 	}
 	

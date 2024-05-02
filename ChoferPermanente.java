@@ -1,14 +1,18 @@
 package models;
+
+import java.util.GregorianCalendar;
+
 public class ChoferPermanente extends Chofer{
    private double sueldobase;
    private double plusantiguedad, plushijos, aportes;//cte??;
    private int antiguedad, canthijos;
-   private String fechaingreso;
+   private GregorianCalendar fechaingreso = new GregorianCalendar();
 
-   public ChoferPermanente(String dni,String nombre,int antiguedad,int canthijos){
+   public ChoferPermanente(String dni,String nombre,int antiguedad,int canthijos, int dia, int mes, int anio){
      super(dni,nombre);
      this.antiguedad=antiguedad;
      this.canthijos=canthijos;
+     this.fechaingreso.set(anio, mes, dia);
    } 
 
    public double getSueldoBruto(){

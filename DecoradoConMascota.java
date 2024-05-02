@@ -44,7 +44,7 @@ public class DecoradoConMascota extends DecoratorMascota {
 		DecoradoConMascota clon = null;
 		
 		clon = (DecoradoConMascota) super.clone();
-		clon.encapsulado = this.encapsulado.clone();
+		clon.encapsulado = ((Viaje) this.encapsulado).clone();
 		
 		return clon;
 	}

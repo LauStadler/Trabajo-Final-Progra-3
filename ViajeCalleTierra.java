@@ -7,8 +7,8 @@ public class ViajeCalleTierra extends Viaje implements Cloneable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ViajeCalleTierra(Pedido pedido, Vehiculo vehiculo, Chofer chofer, double distancia) {
-		super(pedido, vehiculo, chofer, distancia);
+	public ViajeCalleTierra(Pedido pedido, Vehiculo vehiculo, Chofer chofer) {
+		super(pedido, vehiculo, chofer);
 		// TODO Auto-generated constructor stub
 	}
 

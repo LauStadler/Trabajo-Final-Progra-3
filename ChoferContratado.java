@@ -1,21 +1,21 @@
 package models;
 
 public class ChoferContratado extends Chofer {
-    private double ganancia;
+
     
     public ChoferContratado(String nombre,String dni){
         super(dni,nombre);
-        this.ganancia = 0;
     }
 
     @Override
     public double getSueldo(){
-        return this.ganancia;
+    	
+        return  0;
     }
 
 	@Override
 	public String toString() {
-		return "ChoferContratado: " + nombre + ", dni : " + dni +"ganancia : " + ganancia;
+		return "ChoferContratado: " + nombre + ", dni : " + dni;
 	}
 
 	

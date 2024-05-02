@@ -43,7 +43,7 @@ public class DecoradoConBaul extends DecoratorBaul{
 		DecoradoConBaul clon = null;
 		
 		clon = (DecoradoConBaul) super.clone();
-		clon.encapsulado = this.encapsulado.clone();
+		clon.encapsulado = ((Viaje) this.encapsulado).clone();
 		
 		return clon;
 	}

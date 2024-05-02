@@ -29,19 +29,21 @@ public class Sistema {
 	}
 	
 	public Vehiculo buscaVehiculoDisp(Pedido pedido) throws VehiculosNoDisponiblesException {
-		int i = 0;
-		Integer vehiculo = null;
+		Vehiculo vehiculo = null;
+		Integer maxPrioridad = null, aux = null;
 		
-		vehiculo = vehiculos.get(i).getPrioridad(pedido);
-		while (i < vehiculos.size() && vehiculo == null) {
-			i++;
-			vehiculo = vehiculos.get(i).getPrioridad(pedido);
+		for (Vehiculo i : vehiculos) {
+			aux = i.getPrioridad(pedido);
+			if (aux != null && aux> maxPrioridad) {
+				vehiculo = i;
+				maxPrioridad = aux;
+			}
 		}
 			
 		if(vehiculo == null )
 			throw new VehiculosNoDisponiblesException("No hay autos disponibles, no se puede hacer el viaje");
 
-		return vehiculos.get(vehiculo);
+		return vehiculo;
 		
 	}
 	
@@ -55,9 +57,7 @@ public class Sistema {
 
 	public IViaje creaViaje(Pedido pedido) throws PedidoInvalidoException, ZonaInvalidaException, VehiculosNoDisponiblesException, ChoferNoDisponibleException{
 		
-		int maxPrioridad = 0;
 		Vehiculo vehiculo = null;
-		double km;
 		Chofer chofer = null;
 
 		if(pedido.isPedidoValido()) {
@@ -68,7 +68,7 @@ public class Sistema {
 		  // si isPedidoValido()==false tiro exception de viaje no posible
 		  throw new PedidoInvalidoException("Pedido no valido, no se puede hacer el viaje");
 	   
-	   return FactoryViaje.getIntancia().getViaje(pedido, vehiculo, chofer, km);
+	   return FactoryViaje.getIntancia().getViaje(pedido, vehiculo, chofer);
 	}
   
 	public IViaje IniciaViaje(Pedido pedido) {
