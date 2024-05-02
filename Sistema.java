@@ -161,4 +161,9 @@ public class Sistema {
 			System.out.println(i.getSueldo());
 	}
 	
+	public void agregarVehiculo(String tipo,String patente) {
+		Vehiculo aux = FactoryVehiculo.getInstancia().getVehiculo();
+		this.vehiculos.add(aux);
+	}
+	
 }
