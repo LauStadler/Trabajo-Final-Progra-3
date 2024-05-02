@@ -5,11 +5,22 @@ public class ChoferContratado extends Chofer {
     
     public ChoferContratado(String nombre,String dni){
         super(dni,nombre);
-        this.ganancia=0;
+        this.ganancia = 0;
     }
 
     @Override
     public double getSueldo(){
         return this.ganancia;
     }
+
+	@Override
+	public String toString() {
+		return "ChoferContratado: " + nombre + ", dni : " + dni +"ganancia : " + ganancia;
+	}
+
+	
+
+
 }
+
+

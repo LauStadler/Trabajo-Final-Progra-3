@@ -17,7 +17,7 @@ public class FactoryViaje {
 		return instancia;
 	}
 
-	public IViaje getViaje(Pedido pedido, Vehiculo vehiculo, Chofer chofer, double distancia) {
+	public IViaje getViaje(Pedido pedido, Vehiculo vehiculo, Chofer chofer, double distancia) throws ZonaInvalidaException {
 		IViaje encapsulado = null;
 		IViaje encapsulado2 = null;
 		IViaje rta = null;
@@ -30,6 +30,8 @@ public class FactoryViaje {
 			else
 				if (pedido.getZona().equals("Zona Calle de Tierra"))
 					encapsulado = new ViajeCalleTierra(pedido, vehiculo, chofer, distancia);
+				else
+					throw new ZonaInvalidaException();
 		
 		if (encapsulado != null)
 			if (pedido.isMascota())

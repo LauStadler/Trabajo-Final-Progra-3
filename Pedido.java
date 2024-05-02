@@ -2,22 +2,24 @@ package models;
 
 import java.util.Date;
 
-public class Pedido {
+public class Pedido implements Cloneable{
 	
 	private int cantPasajeros;
 	private String zona;
 	private boolean mascota;
 	private boolean baul;
 	private Date fecha;
+	private Cliente cliente;
 	
-	public Pedido(int cantPasajeros, String zona, boolean mascota, boolean baul, Date fecha) {
+	public Pedido(int cantPasajeros, String zona, boolean mascota, boolean baul, Date fecha, Cliente cliente) {
 		super();
 		this.cantPasajeros = cantPasajeros;
 		this.zona = zona;
 		this.mascota = mascota;
 		this.baul = baul;
 		this.fecha = fecha;
-	}
+		this.cliente = cliente;
+		}
 	
 	
 	public int getCantPasajeros() {
@@ -39,6 +41,11 @@ public class Pedido {
 	public boolean isPedidoValido() {
 		
 		return this.cantPasajeros <= 10 && this.cantPasajeros > 0;
+	}
+
+
+	public Cliente getCliente() {
+		return cliente;
 	}
 
 }

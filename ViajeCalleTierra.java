@@ -1,6 +1,6 @@
 package models;
 
-public class ViajeCalleTierra extends Viaje{
+public class ViajeCalleTierra extends Viaje implements Cloneable {
 
 	public ViajeCalleTierra() {
 		super();
@@ -24,6 +24,13 @@ public class ViajeCalleTierra extends Viaje{
 		return this.getPedido().getCantPasajeros();
 	}
 
-	
+	@Override
+	public ViajeCalleTierra clone() throws CloneNotSupportedException{
+		
+		ViajeCalleTierra clon = null;
+		
+		clon = (ViajeCalleTierra) super.clone();
+		return clon;
+	}
 	
 }

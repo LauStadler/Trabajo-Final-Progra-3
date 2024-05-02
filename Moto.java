@@ -4,21 +4,9 @@ public class Moto extends Vehiculo{
 
     public Moto (String patente){
         super(patente);
-    }
-
-    @Override
-    public boolean getBaul(){
-        return false;
-    }
-
-    @Override 
-    public boolean getMascota(){
-        return false;
-    }
-
-    @Override
-    public int getCantPasajeros(){
-        return 1;
+        this.baul = false;
+        this.mascota = false;
+        this.cantpasajeros = 1;
     }
     
     @Override 
@@ -28,4 +16,10 @@ public class Moto extends Vehiculo{
         else
           return 0;
     }
+    
+    @Override
+	public String toString() {
+		return "Auto patente: " + patente + ", baul: " + baul + ", mascota: " + mascota + ", cantpasajeros: "
+				+ cantpasajeros;
+	}
 }

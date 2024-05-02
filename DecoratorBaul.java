@@ -1,6 +1,6 @@
 package models;
 
-public abstract class DecoratorBaul implements IViaje{
+public abstract class DecoratorBaul implements IViaje, Cloneable{
 
 	protected IViaje encapsulado;
 

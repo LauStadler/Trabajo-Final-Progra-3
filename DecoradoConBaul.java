@@ -25,6 +25,27 @@ public class DecoradoConBaul extends DecoratorBaul{
 		return this.encapsulado.getDistancia();
 	}
 
+	@Override
+	public Chofer getChofer() {
+		// TODO Auto-generated method stub
+		return this.encapsulado.getChofer();
+	}
+
+	@Override
+	public Vehiculo getVehiculo() {
+		// TODO Auto-generated method stub
+		return this.encapsulado.getVehiculo();
+	}
 	
+	@Override
+	public DecoradoConBaul clone() throws CloneNotSupportedException{
+		
+		DecoradoConBaul clon = null;
+		
+		clon = (DecoradoConBaul) super.clone();
+		clon.encapsulado = this.encapsulado.clone();
+		
+		return clon;
+	}
 
 }

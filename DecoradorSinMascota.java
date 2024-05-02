@@ -25,5 +25,27 @@ public class DecoradorSinMascota extends DecoratorMascota{
 		return this.encapsulado.getDistancia();
 	}
 
+	@Override
+	public Chofer getChofer() {
+		// TODO Auto-generated method stub
+		return this.encapsulado.getChofer();
+	}
+
+	@Override
+	public Vehiculo getVehiculo() {
+		// TODO Auto-generated method stub
+		return this.encapsulado.getVehiculo();
+	}
+
+	@Override
+	public DecoradorSinMascota clone() throws CloneNotSupportedException{
+		
+		DecoradorSinMascota clon = null;
+		
+		clon = (DecoradorSinMascota) super.clone();
+		clon.encapsulado = this.encapsulado.clone();
+		
+		return clon;
+	}
 }
 

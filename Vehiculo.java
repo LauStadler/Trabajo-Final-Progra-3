@@ -1,20 +1,21 @@
 package models;
 
 public abstract class Vehiculo {
-	private String patente;
-	private boolean baul=true,mascota=true;
-	private int cantpasajeros=0;
+	protected String patente;
+	protected boolean baul;
+	protected boolean mascota;
+	protected int cantpasajeros=0;
 
     public Vehiculo (String patente){
 		super();
 		this.patente=patente;
 	}
 	
-	public boolean getBaul(){
+	public boolean isBaul(){
 		return this.baul;
 	}
 
-	public boolean getMascota(){
+	public boolean isMascota(){
 		return this.mascota;
 	}
 
@@ -26,5 +27,8 @@ public abstract class Vehiculo {
 		return this.patente;
 	}
 
-	public abstract int getPrioridad(Pedido pedido);
+	public int getPrioridad(Pedido pedido) {
+		
+	}
+
 }

@@ -12,18 +12,25 @@ public class FactoryVehiculo {
 	public static FactoryVehiculo getIntancia() {
 		
 		if (instancia == null)
-			instancia = new FactoryViaje();
+			instancia = new FactoryVehiculo();
 		
 		return instancia;
 	}
 
     public Vehiculo getVehiculo(String tipo,String patente){
-        Vehiculo respuesta=null;
+        
+    	Vehiculo respuesta = null;
+        
         if (tipo.equals("Moto"))
-            respuesta= new Moto(patente);
-        else if(tipo.equals("Auto"))
-            respuesta=new Auto(patente);
-        else if (tipo.equals("Combi"))
-            respuesta=new Combi(patente);
-        return respuesta;
-    }
+            respuesta = new Moto(patente);
+        else 
+        	if(tipo.equals("Auto"))
+        		respuesta = new Auto(patente);
+			else 
+				if (tipo.equals("Combi"))
+				
+					respuesta = new Combi(patente);
+		return respuesta;
+	}
+    
+}

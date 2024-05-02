@@ -1,6 +1,6 @@
 package models;
 
-public abstract class Viaje implements IViaje{
+public abstract class Viaje implements IViaje, Cloneable{
 	protected Pedido pedido;
 	protected Vehiculo vehiculo;
 	protected Chofer chofer;
@@ -37,7 +37,7 @@ public abstract class Viaje implements IViaje{
 	}
 
 	public static double getBase() {
-		return this.base;
+		return Viaje.base;
 	}
 
 	public static void setBase(double base) {

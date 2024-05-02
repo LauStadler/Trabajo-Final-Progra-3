@@ -24,6 +24,13 @@ public class ViajeZonaEstandar extends Viaje{
 		return this.getPedido().getCantPasajeros();
 	}
 
-	
+	@Override
+	public ViajeZonaEstandar clone() throws CloneNotSupportedException{
+		
+		ViajeZonaEstandar clon = null;
+		
+		clon = (ViajeZonaEstandar) super.clone();
+		return clon;
+	}
 	
 }

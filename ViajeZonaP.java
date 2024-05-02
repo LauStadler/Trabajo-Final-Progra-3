@@ -23,5 +23,15 @@ public class ViajeZonaP extends Viaje{
 		// TODO Auto-generated method stub
 		return this.getPedido().getCantPasajeros();
 	}
+	
+	@Override
+	public ViajeZonaP clone() throws CloneNotSupportedException{
+		
+		ViajeZonaP clon = null;
+		
+		clon = (ViajeZonaP) super.clone();
+		return clon;
+	}
+	
 
 }
