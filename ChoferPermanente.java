@@ -4,7 +4,7 @@ import java.util.GregorianCalendar;
 
 public class ChoferPermanente extends Chofer{
    private double sueldobase;
-   private double plusantiguedad, plushijos, aportes;//cte??;
+   private static double plusantiguedad = 0.1, plushijos = 0.05, aportes = 0.15;//cte??;
    private int antiguedad, canthijos;
    private GregorianCalendar fechaingreso = new GregorianCalendar();
 
@@ -14,9 +14,21 @@ public class ChoferPermanente extends Chofer{
      this.canthijos=canthijos;
      this.fechaingreso.set(anio, mes, dia);
    } 
+   
+   public double getPlusAntiguedad() {
+	   return plusantiguedad;
+	   
+   }
 
+   public double getPlusHijos() {
+	   return plushijos;
+   }
+   
+   public double getAportes() {
+	   return aportes;
+   }
    public double getSueldoBruto(){
-      return this.sueldobase + this.canthijos*this.plushijos + this.sueldobase * this.antiguedad * this.plusantiguedad;
+      return this.sueldobase + this.canthijos * this.plushijos + this.sueldobase * this.antiguedad * this.plusantiguedad;
    }
 
    @Override

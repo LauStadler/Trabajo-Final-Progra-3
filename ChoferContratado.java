@@ -2,6 +2,7 @@ package models;
 
 public class ChoferContratado extends Chofer {
 
+	private static double porcentajeSueldo = 0.3;
     
     public ChoferContratado(String nombre,String dni){
         super(dni,nombre);
@@ -10,7 +11,7 @@ public class ChoferContratado extends Chofer {
     @Override
     public double getSueldo(){
     	
-        return  0;
+        return  Sistema.getInstancia().getSueldoChoferContratado(this) * porcentajeSueldo;
     }
 
 	@Override

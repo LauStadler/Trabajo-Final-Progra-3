@@ -28,6 +28,15 @@ public class Sistema {
 		return aux;
 	}
 	
+	public double getSueldoChoferContratado(Chofer chofer) {
+		int aux = 0;
+		for(int i=0;i<viajes.size();i++){
+			if (chofer.equals(viajes.get(i).getChofer()))
+			   aux += viajes.get(i).getCosto();
+		}
+		return aux;
+	}
+	
 	public Vehiculo buscaVehiculoDisp(Pedido pedido) throws VehiculosNoDisponiblesException {
 		Vehiculo vehiculo = null;
 		Integer maxPrioridad = null, aux = null;

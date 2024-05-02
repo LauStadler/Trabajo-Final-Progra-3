@@ -3,7 +3,7 @@ package models;
 public class ChoferTemporario extends Chofer {
     private double sueldobasico;
     private double aportes;//constante??;
-    private double pluscantviajes;
+    private static double pluscantviajes = 0.15;
 
     public ChoferTemporario(String dni,String nombre){
         super(dni,nombre);
