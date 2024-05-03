@@ -1,6 +1,6 @@
 package models;
 
-public class Auto extends Vehiculo{
+public class Auto extends Vehiculo{ //AUTO loquiii
 
     public Auto(String patente){
         super(patente);
