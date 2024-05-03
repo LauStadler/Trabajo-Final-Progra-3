@@ -12,13 +12,22 @@ public class Sistema {
 	private Sistema(){
 		super();
 	}
-
+    /**
+     * Este metodo instancia una unica vez a la clase sistema
+     * @return
+     */
 	public static Sistema getInstancia(){
 		if (instancia==null)
 		    instancia= new Sistema();
 		return instancia;
 	}
-
+    /**
+     * Este metodo cuenta los viajes de un chofer, se utiliza para el calculo del sueldo del chofer temporario.
+     * *<b>pre:</b> El chofer ya viene validado.
+     * *<b>post:</b> Se ha calculado la cantidad de viajes de un determinado socio.
+     * @param chofer Es el chofer al que se le quiere calcular la cantidad de viajes que realizo.
+     * @return
+     */
 	public int cantviajesChofer(Chofer chofer){
         int aux=0;
 		for(int i=0;i<viajes.size();i++){
@@ -27,7 +36,28 @@ public class Sistema {
 		}
 		return aux;
 	}
-	
+	/**
+	 * Calcula el sueldo del chofer contratado.
+	 * <b>pre:</b> El chofer debe pertenecer a la lista de choferes.
+	 * <b>post:</b> Devuelde el sueldo de un determinado chofer contratado.
+	 * @param chofer chofer perteneciente a la lista de choferes.
+	 * @return
+	 */
+	public double getSueldoChoferContratado(Chofer chofer) {
+		int aux = 0;
+		for(int i=0;i<viajes.size();i++){
+			if (chofer.equals(viajes.get(i).getChofer()))
+			   aux += viajes.get(i).getCosto();
+		}
+		return aux;
+	}
+	/**
+	 * Este metodo busca un vehicolo disponible de acuerdo a las condiciones del pedido.<br>
+	 * *<b>pre:</b> El pedido tiene que estar validado.
+	 * @param pedido Es el pedido que realiza un cliente.
+	 * @return Devuelve un vehiculo disponible que cumple con el pedido.
+	 * @throws VehiculosNoDisponiblesException si no hubiera vehiculos desponibles para realizar el pedido, se dispara una excepcion indicando que no se puede realizar el viaje por falta de vehiculos.
+	 */
 	public Vehiculo buscaVehiculoDisp(Pedido pedido) throws VehiculosNoDisponiblesException {
 		Vehiculo vehiculo = null;
 		Integer maxPrioridad = null, aux = null;
@@ -46,7 +76,12 @@ public class Sistema {
 		return vehiculo;
 		
 	}
-	
+	/**
+	 * Este metodo busca un chofer disponible en la lista de choferes.<br>
+	 * <b>pre:</b> El pedido debe estar validado.
+	 * @return Devuelve el primer chofer dispnoble de la lista.
+	 * @throws ChoferNoDisponibleException Si no hubiera un chofer disponoble en la lista, se dispara la excepcion indicando que el viaje no se puede relizar por la falta de un chofer.
+	 */
 	public Chofer buscaChoferDisp() throws ChoferNoDisponibleException {
 		if (choferes.size() != 0)
 			return choferes.get(0);
@@ -54,7 +89,15 @@ public class Sistema {
 			throw new ChoferNoDisponibleException("No hay choferes disponibles");
 	}
 	
-
+    /**
+     * Este metodo crea un viaje.
+     * @param pedido Pedido que realiza un cliente.
+     * @return Retorna un viaje.
+     * @throws PedidoInvalidoException Si el pedido fuera invalido, dispara la excepcion indicando el problema.
+     * @throws ZonaInvalidaException 
+     * @throws VehiculosNoDisponiblesException
+     * @throws ChoferNoDisponibleException
+     */
 	public IViaje creaViaje(Pedido pedido) throws PedidoInvalidoException, ZonaInvalidaException, VehiculosNoDisponiblesException, ChoferNoDisponibleException{
 		
 		Vehiculo vehiculo = null;
@@ -98,7 +141,9 @@ public class Sistema {
 		
 		return viaje;
 	}
-	
+	/**
+	 * Este metodo actualiza los puntajes de los choferes.
+	 */
 	public void actualizaPuntajesChoferes() {
 		int act, kmsrecorrido, maxkm = 0;
 		Chofer maxkmRecorridos = null;
@@ -121,37 +166,57 @@ public class Sistema {
 		maxkmRecorridos.actualizaPuntaj(15);
 		
 	}
-	
+	/**
+	 * Este metodo finaliza el viaje y agrega al vehiculo y al chofer que realizaron el mismo al final de sus respectivas listas.<br>
+	 * <b>pre:</b>Viaje valido.
+	 * <b>post:</b> Pone al final de cada lista al chofer y al vehiculo que realizaron el viaje.
+	 * @param viaje Viaje finalizado.
+	 */
 	public void finalizaViaje(IViaje viaje) {
 		choferes.add(viaje.getChofer());
 		vehiculos.add(viaje.getVehiculo());
 	}
-	
+	/**
+	 * Este metodo lista los viajes
+	 */
 	public void listarViajes() {
 		
 	}
-  	
+  	/**
+  	 * Este metodo lista a los choferes de la lista.
+  	 */
 	public void listarChoferes() {
 		for (Chofer i : choferes)
 			System.out.println(i);
 	}
-	
+	/**
+	 * Este metodo lista a los vehiculos de la lista.
+	 */
 	public void listarVehiculos() {
 		for(Vehiculo i : vehiculos)
 			System.out.println(i);
 	}
-	
+	/**
+	 * Este metodo lista a los clientes de la lista.
+	 */
 	public void listaClientes() {
 		for(Cliente i : clientes)
 			System.out.println(i);
 		
 	}
-	
+	/**
+	 * Este metodo hace un reporte de todos los salarios de los choferes que hay en la lista.
+	 */
 	public void reporteSalarios() {
 		for (Chofer i : choferes)
 			System.out.println(i.getSueldo());
 	}
-	
+	/**
+	 * Este metodo agrega un vehiculo a la lista.
+	 * <b>pre:</b> El tipo tiene que ser valido y la patente distinto de nulo y espacio vacio.
+	 * @param tipo Tipo del vehiculo a crear.
+	 * @param patente Pateten del vehiculo a agregar.
+	 */
 	public void agregarVehiculo(String tipo,String patente) {
 		Vehiculo aux = FactoryVehiculo.getInstancia().getVehiculo();
 		this.vehiculos.add(aux);
