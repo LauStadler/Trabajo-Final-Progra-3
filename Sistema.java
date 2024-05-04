@@ -1,6 +1,7 @@
 package models;
 
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 
 public class Sistema {
 	private static Sistema instancia=null;
@@ -8,7 +9,18 @@ public class Sistema {
 	private ArrayList<Vehiculo> vehiculos = new ArrayList<Vehiculo>();//add y remove
 	private ArrayList<IViaje> viajes = new ArrayList<IViaje>();	//add 
 	private ArrayList<Cliente> clientes = new ArrayList<Cliente>();
-	
+	public Arraylist <IViaje> getViajes() {
+		return viajes;
+	}
+	public Arraylist <Chofer> getChoferes() {
+		return choferes;
+	}
+	public Arraylist <Vehiculo> getVehiculos() {
+		return vehiculos;
+	}
+	public Arraylist <Cliente> getClientes() {
+		return clientes;
+	}
 	private Sistema(){
 		super();
 	}
@@ -176,41 +188,27 @@ public class Sistema {
 		choferes.add(viaje.getChofer());
 		vehiculos.add(viaje.getVehiculo());
 	}
-	/**
-	 * Este metodo lista los viajes
-	 */
-	public void listarViajes() {
-		
+	
+	public void listarViajes_Cliente_Fechas(Cliente cliente, GregorianCalendar fecha1, GregorianCalendar fecha2) {
+		for (IViaje i : viajes)
+			
 	}
+	
   	/**
   	 * Este metodo lista a los choferes de la lista.
   	 */
-	public void listarChoferes() {
-		for (Chofer i : choferes)
-			System.out.println(i);
-	}
+	
 	/**
 	 * Este metodo lista a los vehiculos de la lista.
 	 */
-	public void listarVehiculos() {
-		for(Vehiculo i : vehiculos)
-			System.out.println(i);
-	}
+
 	/**
 	 * Este metodo lista a los clientes de la lista.
 	 */
-	public void listaClientes() {
-		for(Cliente i : clientes)
-			System.out.println(i);
-		
-	}
 	/**
 	 * Este metodo hace un reporte de todos los salarios de los choferes que hay en la lista.
 	 */
-	public void reporteSalarios() {
-		for (Chofer i : choferes)
-			System.out.println(i.getSueldo());
-	}
+	
 	/**
 	 * Este metodo agrega un vehiculo a la lista.
 	 * <b>pre:</b> El tipo tiene que ser valido y la patente distinto de nulo y espacio vacio.

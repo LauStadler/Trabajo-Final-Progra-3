@@ -10,4 +10,5 @@ public interface IViaje extends Cloneable {
 	public double getDistancia();
 	public Chofer getChofer();
 	public Vehiculo getVehiculo();
+	public GregorianCalendar getFecha();
 }

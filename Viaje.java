@@ -53,6 +53,9 @@ public abstract class Viaje implements IViaje, Cloneable{
 	public static void setBase(double base) {
 		Viaje.base = base;
 	}
+	public GregorianCalendar getFecha() {
+		return fecha;
+	}
 	/**
 	 * Implementa clonacion para el listado de Viajes
 	 */
