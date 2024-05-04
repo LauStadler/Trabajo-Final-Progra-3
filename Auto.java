@@ -1,7 +1,11 @@
 package models;
 
 public class Auto extends Vehiculo{ //AUTO loquiii
-
+/**
+ * Inicializa el objeto auto<br>
+ * <b>pre:<b> patente debe ser distinto de null y no ser vacio.
+ * @param patente Patente del auto
+ */
     public Auto(String patente){
         super(patente);
         this.baul = true;

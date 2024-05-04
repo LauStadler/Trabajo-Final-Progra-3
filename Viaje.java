@@ -14,7 +14,12 @@ public abstract class Viaje implements IViaje, Cloneable{
 	public Viaje() {
 		super();
 	}
-
+/**
+ * Inicializa el objeto Viaje<br>
+ * @param pedido
+ * @param vehiculo
+ * @param chofer
+ */
 	public Viaje(Pedido pedido, Vehiculo vehiculo, Chofer chofer) {
 		super();
 		this.pedido = pedido;
@@ -48,7 +53,9 @@ public abstract class Viaje implements IViaje, Cloneable{
 	public static void setBase(double base) {
 		Viaje.base = base;
 	}
-	
+	/**
+	 * Implementa clonacion para el listado de Viajes
+	 */
 	@Override
 	public Viaje clone() throws CloneNotSupportedException {
 		return (Viaje)super.clone();

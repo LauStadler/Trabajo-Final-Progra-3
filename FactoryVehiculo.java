@@ -8,7 +8,10 @@ public class FactoryVehiculo {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
+/**
+ * Genera un nuevo FactoryVehiculo solo si no 
+ * @return
+ */
 	public static FactoryVehiculo getIntancia() {
 		
 		if (instancia == null)

@@ -8,7 +8,10 @@ public class FactoryViaje {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
+/**
+ * Instancia un FactoryViaje si no existia uno antes.
+ * @return objeto de tipo FactoryViaje
+ */
 	public static FactoryViaje getIntancia() {
 		
 		if (instancia == null)
@@ -16,7 +19,15 @@ public class FactoryViaje {
 		
 		return instancia;
 	}
-
+/**
+ * Genera un viaje de tipo IViaje utilizando el patron Decorator para "decorar" el calculo del
+ * costo del viaje en funcion de la zona a la cual se dirige, si pide mascotas o no y si pide baul o no.
+ * @param pedido
+ * @param vehiculo
+ * @param chofer
+ * @return viaje
+ * @throws ZonaInvalidaException
+ */
 	public IViaje getViaje(Pedido pedido, Vehiculo vehiculo, Chofer chofer) throws ZonaInvalidaException {
 		IViaje encapsulado = null;
 		IViaje encapsulado2 = null;

@@ -1,7 +1,11 @@
 package models;
 
 public class Combi extends Vehiculo{
-
+	/**
+	 * Inicializa el objeto combi<br>
+	 * <b>pre:<b> patente debe ser distinto de null y no ser vacio.
+	 * @param patente Patente del auto
+	 */
     public Combi(String patente){
         super(patente);
         this.baul = true;
@@ -9,8 +13,7 @@ public class Combi extends Vehiculo{
         this.cantpasajeros = 10;
     }
 
-    
-    
+ 
     @Override
     public int getIndice(Pedido pedido){
        

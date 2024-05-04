@@ -11,7 +11,15 @@ public class Pedido implements Cloneable{
 	private GregorianCalendar fecha;
 	private Cliente cliente;
 	private double km;
-	
+	/**
+	 * Inicializa el objeto pedido<br>
+	 * @param cantPasajeros
+	 * @param zona
+	 * @param mascota
+	 * @param baul
+	 * @param cliente
+	 * @param km
+	 */
 	public Pedido(int cantPasajeros, String zona, boolean mascota, boolean baul, Cliente cliente, double km) {
 		super();
 		this.cantPasajeros = cantPasajeros;
@@ -44,10 +52,13 @@ public class Pedido implements Cloneable{
 	public GregorianCalendar getFecha() {
 		return fecha;
 	}
-	
+	/**
+	 * Informa si mi pedido es valido en funcion de mi atributo cantPasajeros
+	 * @return boolean
+	 */
 	public boolean isPedidoValido() {
 		
-		return this.cantPasajeros <= 10 && this.cantPasajeros > 0;
+		return (this.cantPasajeros <= 10 && this.cantPasajeros > 0) && (this.km >0) ;
 	}
 
 
