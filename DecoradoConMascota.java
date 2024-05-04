@@ -1,5 +1,7 @@
 package models;
 
+import java.util.GregorianCalendar;
+
 public class DecoradoConMascota extends DecoratorMascota {
 
 	public DecoradoConMascota(IViaje encapsulado) {
@@ -39,13 +41,27 @@ public class DecoradoConMascota extends DecoratorMascota {
 
 	
 	@Override
-	public DecoradoConMascota clone() throws CloneNotSupportedException{
+	public DecoradoConMascota clone() {
 		
 		DecoradoConMascota clon = null;
 		
-		clon = (DecoradoConMascota) super.clone();
-		clon.encapsulado = ((Viaje) this.encapsulado).clone();
+		try {
+			clon = (DecoradoConMascota) super.clone();
+		} catch (CloneNotSupportedException e) {
+		
+		}
+		try {
+			clon.encapsulado = ((Viaje) this.encapsulado).clone();
+		} catch (CloneNotSupportedException e) {
+		
+		}
 		
 		return clon;
+	}
+
+	@Override
+	public GregorianCalendar getFecha() {
+		// TODO Auto-generated method stub
+		return this.encapsulado.getFecha();
 	}
 }

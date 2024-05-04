@@ -1,5 +1,7 @@
 package models;
 
+import java.util.GregorianCalendar;
+
 public class DecoradoConBaul extends DecoratorBaul{
 
 	public DecoradoConBaul(IViaje encapsulado) {
@@ -38,14 +40,27 @@ public class DecoradoConBaul extends DecoratorBaul{
 	}
 	
 	@Override
-	public DecoradoConBaul clone() throws CloneNotSupportedException{
+	public DecoradoConBaul clone() {
 		
 		DecoradoConBaul clon = null;
 		
-		clon = (DecoradoConBaul) super.clone();
-		clon.encapsulado = ((Viaje) this.encapsulado).clone();
+		try {
+			clon = (DecoradoConBaul) super.clone();
+		} catch (CloneNotSupportedException e) {
+		
+		}
+		try {
+			clon.encapsulado = ((Viaje) this.encapsulado).clone();
+		} catch (CloneNotSupportedException e) {
+			
+		}
 		
 		return clon;
+	}
+
+	@Override
+	public GregorianCalendar getFecha() {
+		return this.encapsulado.getFecha();
 	}
 
 }
