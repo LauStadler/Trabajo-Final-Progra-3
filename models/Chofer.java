@@ -15,6 +15,8 @@ public abstract class Chofer {
     */
    public Chofer(String dni, String nombre) {
 	   super();
+	   assert dni.equals("") != true : "El dni esta vacio";
+       assert dni != null : "El dni es null";
 	   this.dni=dni;
 	   this.nombre=nombre;
 	   this.puntaje = 0;
@@ -26,6 +28,7 @@ public abstract class Chofer {
     * @param actualiza Cantidad de puntos a actualizar.
     */
    public void actualizaPuntaj(int actualiza) {
+	   assert actualiza >= 0 : "Puntaje negativo"; 
 	   this.puntaje += actualiza;
    }
    

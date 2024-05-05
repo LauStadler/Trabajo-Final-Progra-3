@@ -8,6 +8,8 @@ public class Moto extends Vehiculo{
 	 */
     public Moto (String patente){
         super(patente);
+        assert patente.equals("") != true : "La patente es vacia";
+        assert patente != null : "La patente es null";
         this.baul = false;
         this.mascota = false;
         this.cantpasajeros = 1;
@@ -16,6 +18,7 @@ public class Moto extends Vehiculo{
     
     @Override 
     public int getIndice(Pedido pedido) {
+    	assert pedido != null : "El pedido es null";
     	return 1000;
     }
     
@@ -28,6 +31,7 @@ public class Moto extends Vehiculo{
 
 	@Override
 	public boolean verificaBaul(Pedido pedido) {
+		assert pedido != null : "El pedido es null";
 		if (pedido.isBaul() == false)
 			return true;
 		else
@@ -37,6 +41,7 @@ public class Moto extends Vehiculo{
 
 	@Override
 	public boolean verificaMascota(Pedido pedido) {
+		assert pedido != null : "El pedido es null";
 		if (pedido.isMascota() == false)
 			return true;
 		else

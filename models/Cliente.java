@@ -8,6 +8,10 @@ public class Cliente {
 
 	public Cliente(String usuario, String contrasenia) {
 		super();
+		assert usuario.equals("") != true : "El usuario esta vacio";
+	    assert usuario != null : "El usuario es null";
+	    assert contrasenia.equals("") != true : "La contraseña esta vacia";
+	    assert contrasenia != null : "La contraseña es null";   
 		this.usuario = usuario;
 		this.contrasenia = contrasenia;
 	}

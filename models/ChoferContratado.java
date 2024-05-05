@@ -13,6 +13,8 @@ public class ChoferContratado extends Chofer {
      */
     public ChoferContratado(String nombre,String dni){
         super(dni,nombre);
+        assert dni.equals("") != true : "El dni esta vacio";
+        assert dni != null : "El dni es null";
     }
    /**
     * Este metodo calcula el sueldo neto del chofer contratado.<br>

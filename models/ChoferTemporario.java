@@ -10,6 +10,7 @@ public class ChoferTemporario extends Chofer {
     
     public ChoferTemporario(String dni,String nombre){
         super(dni,nombre);
+        
     }
     
     public static double getSueldobasico() {

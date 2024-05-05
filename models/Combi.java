@@ -12,7 +12,7 @@ public class Combi extends Vehiculo{
  
     @Override
     public int getIndice(Pedido pedido){
-       
+    	assert pedido != null : "El pedido es null";
            if(pedido.isBaul())
              return 10*pedido.getCantPasajeros() +100;
            else
@@ -29,6 +29,7 @@ public class Combi extends Vehiculo{
 
 	@Override
 	public boolean verificaBaul(Pedido pedido) {
+		assert pedido != null : "El pedido es null";
 		return true;
 	}
 
@@ -36,7 +37,7 @@ public class Combi extends Vehiculo{
 
 	@Override
 	public boolean verificaMascota(Pedido pedido) {
-		
+		assert pedido != null : "El pedido es null";
 		if (pedido.isMascota() == false)
 			return true;
 		else

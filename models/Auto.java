@@ -7,7 +7,9 @@ public class Auto extends Vehiculo{ //AUTO loquiii
  * @param patente Patente del auto
  */
     public Auto(String patente){
-        super(patente);
+    	super(patente);
+    	assert patente.equals("") != true : "La patente es vacia";
+        assert patente != null : "La patente es null";
         this.baul = true;
         this.mascota = true;
         this.cantpasajeros = 4;
@@ -22,16 +24,19 @@ public class Auto extends Vehiculo{ //AUTO loquiii
 
 	@Override
 	public boolean verificaBaul(Pedido pedido) {
+		assert pedido != null : "El pedido es null";
 		return true;
 	}
 
 	@Override
 	public boolean verificaMascota(Pedido pedido) {
+		assert pedido != null : "El pedido es null";
 		return true;
 	}
 
 	@Override
 	public int getIndice(Pedido pedido) {
+		assert pedido != null : "El pedido es null";
 		if(pedido.isBaul())   
         	return 40 * pedido.getCantPasajeros();
         else 

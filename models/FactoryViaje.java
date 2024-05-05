@@ -22,6 +22,9 @@ public class FactoryViaje {
 /**
  * Genera un viaje de tipo IViaje utilizando el patron Decorator para "decorar" el calculo del
  * costo del viaje en funcion de la zona a la cual se dirige, si pide mascotas o no y si pide baul o no.
+ * <b>pre:<b> El pedido no debe ser null.
+ * <b>pre:<b> El Vehiculo no debe ser null.
+ * <b>pre:<b> El Chofer no debe ser null.
  * @param pedido
  * @param vehiculo
  * @param chofer

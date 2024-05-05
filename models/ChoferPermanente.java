@@ -21,6 +21,14 @@ public class ChoferPermanente extends Chofer{
     */
    public ChoferPermanente(String dni,String nombre,int canthijos, int dia, int mes, int anio){
      super(dni,nombre);
+     assert dni.equals("") != true : "EL dni esta vacio";
+     assert dni != null : "El dni es null";
+     assert nombre.equals("") != true : "El nombre esta vacio";
+     assert nombre != null : "El nombre es null";
+     assert canthijos >= 0 : "Cantidad de hijos negativa";
+     assert (dia > 0 && dia <= 31) : "Dia invalido";
+     assert (mes > 0 && mes <= 12) : "Mes invalido";
+     assert (anio > 1950 ) : "Año invalido";
      this.canthijos=canthijos;
      this.fechaingreso.set(anio, mes, dia);
    } 

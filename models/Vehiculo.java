@@ -54,6 +54,8 @@ public abstract class Vehiculo {
      * @return Retorna un numero mayor o igual a 0 si el pedidio cumple con las condiones del vehiculo, null en caso contrario. 
      */
 	public Integer getPrioridad(Pedido pedido) {
+		
+		assert pedido != null : "El pedido es null";
 		boolean condicionMascota=this.verificaMascota(pedido);
 		boolean condicionBaul=this.verificaBaul(pedido);
 		boolean condicionCantPasajeros = this.getCantPasajeros() >= pedido.getCantPasajeros();

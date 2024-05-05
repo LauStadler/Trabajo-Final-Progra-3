@@ -45,10 +45,12 @@ public class Sistema {
      */
 	public int cantviajesChofer(Chofer chofer){
         int aux=0;
+        assert chofer != null : "El chofer es null";
 		for(int i=0;i<viajes.size();i++){
 			if (chofer.equals(viajes.get(i).getChofer()))
 			   aux++;
 		}
+		assert aux >= 0;
 		return aux;
 	}
 	/**
@@ -60,10 +62,12 @@ public class Sistema {
 	 */
 	public double getSueldoChoferContratado(Chofer chofer) {
 		int aux = 0;
+		assert choferes.contains(chofer) : "El chofer no pertenece a la empresa";
 		for(int i=0;i<viajes.size();i++){
 			if (chofer.equals(viajes.get(i).getChofer()))
 			   aux += viajes.get(i).getCosto();
 		}
+		assert aux >= 0;
 		return aux;
 	}
 	/**
@@ -76,7 +80,7 @@ public class Sistema {
 	public Vehiculo buscaVehiculoDisp(Pedido pedido) throws VehiculosNoDisponiblesException {
 		Vehiculo vehiculo = null;
 		Integer maxPrioridad = 0, aux = null;
-		
+		assert pedido != null : "Pedido null";
 		for (Vehiculo i : vehiculos) {
 			aux = i.getPrioridad(pedido);
 		    if (aux != null && aux> maxPrioridad) {
@@ -93,7 +97,6 @@ public class Sistema {
 	}
 	/**
 	 * Este metodo busca un chofer disponible en la lista de choferes.<br>
-	 * <b>pre:</b> El pedido debe estar validado.
 	 * @return Devuelve el primer chofer dispnoble de la lista.
 	 * @throws ChoferNoDisponibleException Si no hubiera un chofer disponoble en la lista, se dispara la excepcion indicando que el viaje no se puede relizar por la falta de un chofer.
 	 */
@@ -176,6 +179,7 @@ public class Sistema {
 	 * @param viaje Viaje finalizado.
 	 */
 	public void finalizaViaje(IViaje viaje) {
+		assert viaje != null : "Viaje null";
 		choferes.add(viaje.getChofer());
 		vehiculos.add(viaje.getVehiculo());
 	}
@@ -188,6 +192,9 @@ public class Sistema {
 	 * @param patente Pateten del vehiculo a agregar.
 	 */
 	public void agregarVehiculo(String tipo,String patente) {
+		assert patente.equals("") != true : "La patente es vacia";
+        assert patente != null : "La patente es null";
+        assert (tipo.equals("Zona Peligrosa") == true || tipo.equals("Zona Estandar") == true || tipo.equals("Zona Calle de Tierra") == true);
 		Vehiculo aux = FactoryVehiculo.getInstancia().getVehiculo(tipo, patente);
 		this.vehiculos.add(aux);
 	}
