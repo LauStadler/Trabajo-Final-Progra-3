@@ -139,19 +139,7 @@ public class Sistema {
 			viajes.add(viaje);
 			
 		}
-		catch (PedidoInvalidoException e) {
-			System.out.println(e.getLocalizedMessage());
-		}
-		catch(VehiculosNoDisponiblesException e){
-			System.out.println(e.getLocalizedMessage());
-			
-		}
-		catch (ChoferNoDisponibleException e) {
-			System.out.println(e.getLocalizedMessage());
-		}
-		catch (ZonaInvalidaException e) {
-			System.out.println(e.getLocalizedMessage());
-		}
+		
 		finally {
 		}
 		
@@ -193,10 +181,6 @@ public class Sistema {
 		vehiculos.add(viaje.getVehiculo());
 	}
 	
-	public void listarViajes_Cliente_Fechas(Cliente cliente, GregorianCalendar fecha1, GregorianCalendar fecha2) {
-		for (IViaje i : viajes)
-			
-	}
 	
   	/**
   	 * Este metodo lista a los choferes de la lista.
@@ -222,6 +206,11 @@ public class Sistema {
 	public void agregarVehiculo(String tipo,String patente) {
 		Vehiculo aux = FactoryVehiculo.getInstancia().getVehiculo(tipo, patente);
 		this.vehiculos.add(aux);
+	}
+	
+	public void agregaChofer(Chofer aux) {
+		this.choferes.add(aux);
+		
 	}
 	
 }

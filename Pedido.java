@@ -64,11 +64,11 @@ public class Pedido implements Cloneable{
 	public Cliente getCliente() {
 		return cliente;
 	}
-@Override
-public Object clone() {
-	Pedido clonado = null;
-	clonado = (Pedido)super.clone(); // relacion agregacion con cliente
-	return clonado;
-}
+	@Override
+	public Object clone() {
+		Pedido clonado = null;
+		clonado = (Pedido)super.clone(); // relacion agregacion con cliente
+		return clonado;
+	}
 
 }

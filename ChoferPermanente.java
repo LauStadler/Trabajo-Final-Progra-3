@@ -3,8 +3,8 @@ package models;
 import java.util.GregorianCalendar;
 
 public class ChoferPermanente extends Chofer{
-   private double sueldobase;
-   private static double plusantiguedad = 0.1, plushijos = 0.05, aportes = 0.15;//cte??;
+   private static double sueldobase = 200000;
+   private static double plusantiguedad = 0.03, plushijos = 0.05, aportes = 0.05;
    private int canthijos;
    private GregorianCalendar fechaingreso = new GregorianCalendar();
    /**
@@ -38,7 +38,27 @@ public class ChoferPermanente extends Chofer{
    }
    
    
-   /**
+   public static double getSueldobase() {
+	return sueldobase;
+}
+
+	public static double getPlusantiguedad() {
+		return plusantiguedad;
+	}
+	
+	public static double getPlushijos() {
+		return plushijos;
+	}
+	
+	public int getCanthijos() {
+		return canthijos;
+	}
+	
+	public GregorianCalendar getFechaingreso() {
+		return fechaingreso;
+	}
+
+/**
     * Este metodo retorna la antiguedad del chofer permanente.<br>
     * Al año actual se le resta el alño en el que ingreso.
     * @return Retorna años de antiguedad del chofer.
@@ -56,7 +76,7 @@ public class ChoferPermanente extends Chofer{
     * @return Retorna el sueldo bruto del chofer contratado.
     */
    public double getSueldoBruto(){
-      return this.sueldobase + this.canthijos * ChoferPermanente.plushijos + this.sueldobase * this.getAntiguedad() * ChoferPermanente.plusantiguedad;
+      return ChoferPermanente.sueldobase + this.canthijos * ChoferPermanente.plushijos + ChoferPermanente.sueldobase * this.getAntiguedad() * ChoferPermanente.plusantiguedad;
    }
    /**
     * Este metodo calcula el sueldo neto del chofer permanente.<br>
