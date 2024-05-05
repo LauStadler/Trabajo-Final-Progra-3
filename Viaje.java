@@ -64,4 +64,10 @@ public abstract class Viaje implements IViaje, Cloneable{
 		return (Viaje)super.clone();
 	}
 	
+	@Override
+	public Cliente getCliente() {
+		// TODO Auto-generated method stub
+		return this.pedido.getCliente();
+	}
+	
 }

@@ -30,7 +30,10 @@ public class ViajeCalleTierra extends Viaje implements Cloneable {
 		ViajeCalleTierra clon = null;
 		
 		clon = (ViajeCalleTierra) super.clone();
+		clon.pedido = (Pedido) this.pedido.clone();
 		return clon;
 	}
+
+
 	
 }

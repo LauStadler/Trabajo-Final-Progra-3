@@ -5,10 +5,21 @@ public class main {
 
 	public static void main(String[] args) {
 		Sistema s = Sistema.getInstancia();
-		ListadoViajes(s.getViajes());
-		ListadoChoferes(s.getChoferes());
-		ListadoVehiculos(s.getVehiculos());
-		ListadoClientes(s.getClientes());
+		try {
+			
+			ListadoViajes(s.getViajes());
+			ListadoChoferes(s.getChoferes());
+			ListadoVehiculos(s.getVehiculos());
+			ListadoClientes(s.getClientes());
+			//aca vamos a instanciar todo
+		}
+		catch (Exception e){
+			System.out.println(e.getLocalizedMessage());
+			
+		}
+		finally {
+			
+		}
 	}
 	public static void ListadoViajes(ArrayList<IViaje> viajes) {
 		for (IViaje i : viajes)
@@ -40,3 +51,4 @@ public class main {
 			if ( ( i.getFecha().compareTo(fecha1) == 1 ) && ( i.getFecha().compareTo(fecha2) == -1 ) && ( i.getCliente().equals(cliente) ) )
 				System.out.println(i);
 	}
+}

@@ -22,7 +22,7 @@ public class ChoferTemporario extends Chofer {
      * @return Devuelde el sueldo del chofer.
      */
     public double getSueldoBruto(){
-        return this.sueldobasico + this.sueldobasico*Sistema.getInstancia().cantviajesChofer(this) * this.pluscantviajes;
+        return this.sueldobasico + this.sueldobasico * Sistema.getInstancia().cantviajesChofer(this) * this.pluscantviajes;
     }
      /**
       * Este metodo calcula el sueldo neto del chofer temporario.<br>

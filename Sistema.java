@@ -9,16 +9,20 @@ public class Sistema {
 	private ArrayList<Vehiculo> vehiculos = new ArrayList<Vehiculo>();//add y remove
 	private ArrayList<IViaje> viajes = new ArrayList<IViaje>();	//add 
 	private ArrayList<Cliente> clientes = new ArrayList<Cliente>();
-	public Arraylist <IViaje> getViajes() {
+	
+	public ArrayList <IViaje> getViajes() {
 		return viajes;
 	}
-	public Arraylist <Chofer> getChoferes() {
+	
+	public ArrayList <Chofer> getChoferes() {
 		return choferes;
 	}
-	public Arraylist <Vehiculo> getVehiculos() {
+	
+	public ArrayList <Vehiculo> getVehiculos() {
 		return vehiculos;
 	}
-	public Arraylist <Cliente> getClientes() {
+	
+	public ArrayList <Cliente> getClientes() {
 		return clientes;
 	}
 	private Sistema(){
@@ -216,7 +220,7 @@ public class Sistema {
 	 * @param patente Pateten del vehiculo a agregar.
 	 */
 	public void agregarVehiculo(String tipo,String patente) {
-		Vehiculo aux = FactoryVehiculo.getInstancia().getVehiculo();
+		Vehiculo aux = FactoryVehiculo.getInstancia().getVehiculo(tipo, patente);
 		this.vehiculos.add(aux);
 	}
 	

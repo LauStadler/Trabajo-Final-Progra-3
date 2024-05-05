@@ -28,8 +28,8 @@ public class ViajeZonaP extends Viaje{
 	public ViajeZonaP clone() throws CloneNotSupportedException{
 		
 		ViajeZonaP clon = null;
-		
 		clon = (ViajeZonaP) super.clone();
+		clon.pedido = (Pedido) this.pedido.clone();
 		return clon;
 	}
 	

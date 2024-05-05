@@ -12,7 +12,7 @@ public class FactoryVehiculo {
  * Genera un nuevo FactoryVehiculo solo si no 
  * @return
  */
-	public static FactoryVehiculo getIntancia() {
+	public static FactoryVehiculo getInstancia() {
 		
 		if (instancia == null)
 			instancia = new FactoryVehiculo();

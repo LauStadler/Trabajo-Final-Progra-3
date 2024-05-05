@@ -30,6 +30,7 @@ public class ViajeZonaEstandar extends Viaje{
 		ViajeZonaEstandar clon = null;
 		
 		clon = (ViajeZonaEstandar) super.clone();
+		clon.pedido = (Pedido) this.pedido.clone();
 		return clon;
 	}
 	
