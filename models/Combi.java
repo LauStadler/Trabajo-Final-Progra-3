@@ -1,11 +1,7 @@
 package models;
 
 public class Combi extends Vehiculo{
-	/**
-	 * Inicializa el objeto combi<br>
-	 * <b>pre:<b> patente debe ser distinto de null y no ser vacio.
-	 * @param patente Patente del auto
-	 */
+	
     public Combi(String patente){
         super(patente);
         this.baul = true;
@@ -25,7 +21,7 @@ public class Combi extends Vehiculo{
 
     @Override
 	public String toString() {
-		return "Auto patente: " + patente + ", baul: " + baul + ", mascota: " + mascota + ", cantpasajeros: "
+		return "Combi patente: " + patente + ", baul: " + baul + ", mascota: " + mascota + ", cantpasajeros: "
 				+ cantpasajeros;
 	}
 

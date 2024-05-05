@@ -40,18 +40,15 @@ public class DecoradorSinMascota extends DecoratorMascota{
 	}
 
 	@Override
-	public DecoradorSinMascota clone() {
+	public DecoradorSinMascota clone() throws CloneNotSupportedException {
 		
 		DecoradorSinMascota clon = null;
 		
 		try {
 			clon = (DecoradorSinMascota) super.clone();
-		} catch (CloneNotSupportedException e) {
-		
+			clon.encapsulado = (IViaje) this.encapsulado.clone();
 		}
-		try {
-			clon.encapsulado = ((Viaje) this.encapsulado).clone();
-		} catch (CloneNotSupportedException e) {
+		finally {
 			
 		}
 		
@@ -63,5 +60,7 @@ public class DecoradorSinMascota extends DecoratorMascota{
 		// TODO Auto-generated method stub
 		return this.encapsulado.getFecha();
 	}
+
+	
 }
 

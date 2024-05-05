@@ -41,19 +41,16 @@ public class DecoradoConMascota extends DecoratorMascota {
 
 	
 	@Override
-	public DecoradoConMascota clone() {
+	public Object clone() throws CloneNotSupportedException {
 		
 		DecoradoConMascota clon = null;
 		
 		try {
 			clon = (DecoradoConMascota) super.clone();
-		} catch (CloneNotSupportedException e) {
-		
-		}
-		try {
-			clon.encapsulado = ((Viaje) this.encapsulado).clone();
-		} catch (CloneNotSupportedException e) {
-		
+			clon.encapsulado = (IViaje) this.encapsulado.clone();
+		} 
+		finally {
+			
 		}
 		
 		return clon;

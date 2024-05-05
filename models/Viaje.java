@@ -2,31 +2,25 @@ package models;
 
 import java.util.GregorianCalendar;
 
+
 public abstract class Viaje implements IViaje, Cloneable{
 	protected Pedido pedido;
 	protected Vehiculo vehiculo;
 	protected Chofer chofer;
 	protected double distancia;
-	protected GregorianCalendar fecha = new GregorianCalendar();
 	protected static double base= 1000;
 	
 	
 	public Viaje() {
 		super();
 	}
-/**
- * Inicializa el objeto Viaje<br>
- * @param pedido
- * @param vehiculo
- * @param chofer
- */
+
 	public Viaje(Pedido pedido, Vehiculo vehiculo, Chofer chofer) {
 		super();
 		this.pedido = pedido;
 		this.vehiculo = vehiculo;
 		this.chofer = chofer;
 		this.distancia = pedido.getKm();
-		this.fecha = pedido.getFecha();
 	}
 
 	public Pedido getPedido() {
@@ -54,7 +48,7 @@ public abstract class Viaje implements IViaje, Cloneable{
 		Viaje.base = base;
 	}
 	public GregorianCalendar getFecha() {
-		return fecha;
+		return this.pedido.getFecha();
 	}
 	/**
 	 * Implementa clonacion para el listado de Viajes
@@ -64,6 +58,11 @@ public abstract class Viaje implements IViaje, Cloneable{
 		return (Viaje)super.clone();
 	}
 	
+	@Override
+	public String toString() {
+		return "Viaje " + pedido + ", vehiculo=" + vehiculo + ", chofer=" + chofer + ", distancia=" + distancia
+				+ ", " + "]";
+	}
 	@Override
 	public Cliente getCliente() {
 		// TODO Auto-generated method stub

@@ -8,10 +8,7 @@ public class FactoryVehiculo {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-/**
- * Genera un nuevo FactoryVehiculo solo si no 
- * @return
- */
+
 	public static FactoryVehiculo getInstancia() {
 		
 		if (instancia == null)
@@ -19,7 +16,12 @@ public class FactoryVehiculo {
 		
 		return instancia;
 	}
-
+    /**
+     * Este metodo genera un vehiculo.
+     * @param tipo
+     * @param patente
+     * @return Retorna el tipo de vehiculo solicitado.
+     */
     public Vehiculo getVehiculo(String tipo,String patente){
         
     	Vehiculo respuesta = null;

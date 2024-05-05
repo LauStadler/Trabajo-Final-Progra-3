@@ -21,7 +21,7 @@ public class Moto extends Vehiculo{
     
     @Override
 	public String toString() {
-		return "Auto patente: " + patente + ", baul: " + baul + ", mascota: " + mascota + ", cantpasajeros: "
+		return "MotoS patente: " + patente + ", baul: " + baul + ", mascota: " + mascota + ", cantpasajeros: "
 				+ cantpasajeros;
 	}
 

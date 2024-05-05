@@ -32,7 +32,6 @@ public class FactoryViaje {
 		IViaje encapsulado = null;
 		IViaje encapsulado2 = null;
 		IViaje rta = null;
-		
 		if (pedido.getZona().equals("Zona Peligrosa")) 
 			encapsulado = new ViajeZonaP(pedido, vehiculo, chofer);
 		else
@@ -42,7 +41,7 @@ public class FactoryViaje {
 				if (pedido.getZona().equals("Zona Calle de Tierra"))
 					encapsulado = new ViajeCalleTierra(pedido, vehiculo, chofer);
 				else
-					throw new ZonaInvalidaException();
+					throw new ZonaInvalidaException("Zona Incorrecta");
 		
 			if (pedido.isMascota())
 				encapsulado2 = new DecoradoConMascota(encapsulado);
@@ -51,8 +50,7 @@ public class FactoryViaje {
 			if (pedido.isBaul())
 				rta = new DecoradoConBaul(encapsulado2);
 			else
-				rta = new DecoradorSinBaul(encapsulado2);
-			
+				rta = new DecoradorSinBaul(encapsulado2);	
 		return rta;
 		
 	}

@@ -41,20 +41,17 @@ public class DecoradorSinBaul extends DecoratorBaul{
 	}
 	
 	@Override
-	public DecoradorSinBaul clone() {
+	public DecoradorSinBaul clone() throws CloneNotSupportedException {
 		
 		DecoradorSinBaul clon = null;
 		
 		try {
 			clon = (DecoradorSinBaul) super.clone();
-		} catch (CloneNotSupportedException e) {
-		
-		}
-		try {
-			clon.encapsulado = ((Viaje) this.encapsulado).clone();
-		} catch (CloneNotSupportedException e) {
+			clon.encapsulado = (IViaje) this.encapsulado.clone();
+		} 
+		finally {
 			
-		}		
+		}
 		return clon;
 	}
 

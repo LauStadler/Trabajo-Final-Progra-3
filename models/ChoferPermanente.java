@@ -1,5 +1,6 @@
 package models;
 
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class ChoferPermanente extends Chofer{
@@ -91,7 +92,7 @@ public class ChoferPermanente extends Chofer{
 	@Override
 	public String toString() {
 		return "ChoferPermanente: "+ nombre + ", dni: "+ dni+ "aportes: " + aportes +  ", canthijos: " + canthijos
-				+ ", fechaingreso: " + fechaingreso;
+				+ ", fechaingreso: " + fechaingreso.get(Calendar.DATE)+(fechaingreso.get(Calendar.MONTH)+1)+fechaingreso.get(Calendar.YEAR);
 	}
 
 

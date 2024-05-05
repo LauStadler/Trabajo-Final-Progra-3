@@ -7,12 +7,7 @@ public class ChoferTemporario extends Chofer {
     private static double aportes = 0.05;
     private static double pluscantviajes = 0.15;
     
-    /**
-     * Inicializa las variables.<br>
-     * <b>pre: 
-     * @param dni
-     * @param nombre
-     */
+    
     public ChoferTemporario(String dni,String nombre){
         super(dni,nombre);
     }

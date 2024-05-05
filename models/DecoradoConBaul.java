@@ -40,18 +40,15 @@ public class DecoradoConBaul extends DecoratorBaul{
 	}
 	
 	@Override
-	public DecoradoConBaul clone() {
+	public DecoradoConBaul clone() throws CloneNotSupportedException {
 		
 		DecoradoConBaul clon = null;
 		
 		try {
 			clon = (DecoradoConBaul) super.clone();
-		} catch (CloneNotSupportedException e) {
-		
+			clon.encapsulado = (IViaje) this.encapsulado.clone();
 		}
-		try {
-			clon.encapsulado = ((Viaje) this.encapsulado).clone();
-		} catch (CloneNotSupportedException e) {
+		finally {
 			
 		}
 		
@@ -63,4 +60,5 @@ public class DecoradoConBaul extends DecoratorBaul{
 		return this.encapsulado.getFecha();
 	}
 
+	
 }

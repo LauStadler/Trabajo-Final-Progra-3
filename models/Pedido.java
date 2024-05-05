@@ -1,5 +1,6 @@
 package models;
 
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class Pedido implements Cloneable{
@@ -65,10 +66,18 @@ public class Pedido implements Cloneable{
 		return cliente;
 	}
 	@Override
-	public Object clone() {
+	public Object clone() throws CloneNotSupportedException {
 		Pedido clonado = null;
 		clonado = (Pedido)super.clone(); // relacion agregacion con cliente
 		return clonado;
 	}
 
+
+
+	@Override
+	public String toString() {
+		return "Pedido [cantPasajeros=" + cantPasajeros + ", zona=" + zona + ", mascota=" + mascota + ", baul=" + baul
+				+ ", fecha=" + fecha.get(Calendar.DATE)+(fecha.get(Calendar.MONTH)+1)+fecha.get(Calendar.YEAR) + ", cliente=" + cliente + ", km=" + km + "]";
+	}
+    
 }

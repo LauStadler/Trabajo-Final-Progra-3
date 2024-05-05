@@ -1,7 +1,6 @@
 package models;
 
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
 
 public class Sistema {
 	private static Sistema instancia=null;
@@ -76,18 +75,18 @@ public class Sistema {
 	 */
 	public Vehiculo buscaVehiculoDisp(Pedido pedido) throws VehiculosNoDisponiblesException {
 		Vehiculo vehiculo = null;
-		Integer maxPrioridad = null, aux = null;
+		Integer maxPrioridad = 0, aux = null;
 		
 		for (Vehiculo i : vehiculos) {
 			aux = i.getPrioridad(pedido);
-			if (aux != null && aux> maxPrioridad) {
+		    if (aux != null && aux> maxPrioridad) {
 				vehiculo = i;
 				maxPrioridad = aux;
 			}
 		}
 			
 		if(vehiculo == null )
-			throw new VehiculosNoDisponiblesException("No hay autos disponibles, no se puede hacer el viaje");
+			throw new VehiculosNoDisponiblesException("No hay vehiculos disponibles, no se puede hacer el viaje");
 
 		return vehiculo;
 		
@@ -118,19 +117,19 @@ public class Sistema {
 		
 		Vehiculo vehiculo = null;
 		Chofer chofer = null;
-
 		if(pedido.isPedidoValido()) {
 			vehiculo = this.buscaVehiculoDisp(pedido);
-			chofer = this.buscaChoferDisp();	
+			System.out.println(vehiculo);
+			chofer = this.buscaChoferDisp();
+			System.out.println(chofer);
 		}		
 	   else
-		  // si isPedidoValido()==false tiro exception de viaje no posible
 		  throw new PedidoInvalidoException("Pedido no valido, no se puede hacer el viaje");
 	   
 	   return FactoryViaje.getIntancia().getViaje(pedido, vehiculo, chofer);
 	}
   
-	public IViaje IniciaViaje(Pedido pedido) {
+	public IViaje IniciaViaje(Pedido pedido) throws PedidoInvalidoException, ZonaInvalidaException, VehiculosNoDisponiblesException, ChoferNoDisponibleException {
 		IViaje viaje = null;
 		try {
 			viaje = creaViaje(pedido);
@@ -181,21 +180,6 @@ public class Sistema {
 		vehiculos.add(viaje.getVehiculo());
 	}
 	
-	
-  	/**
-  	 * Este metodo lista a los choferes de la lista.
-  	 */
-	
-	/**
-	 * Este metodo lista a los vehiculos de la lista.
-	 */
-
-	/**
-	 * Este metodo lista a los clientes de la lista.
-	 */
-	/**
-	 * Este metodo hace un reporte de todos los salarios de los choferes que hay en la lista.
-	 */
 	
 	/**
 	 * Este metodo agrega un vehiculo a la lista.
