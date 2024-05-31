@@ -15,50 +15,5 @@ public class DecoradoConBaul extends DecoratorBaul{
 		return this.encapsulado.getCosto()+ + Viaje.getBase()*0.1*getPasajero()+ Viaje.getBase()*0.05*getDistancia();
 	}
 
-	@Override
-	public int getPasajero() {
-		// TODO Auto-generated method stub
-		return this.encapsulado.getPasajero();
-	}
-
-	@Override
-	public double getDistancia() {
-		// TODO Auto-generated method stub
-		return this.encapsulado.getDistancia();
-	}
-
-	@Override
-	public Chofer getChofer() {
-		// TODO Auto-generated method stub
-		return this.encapsulado.getChofer();
-	}
-
-	@Override
-	public Vehiculo getVehiculo() {
-		// TODO Auto-generated method stub
-		return this.encapsulado.getVehiculo();
-	}
-	
-	@Override
-	public DecoradoConBaul clone() throws CloneNotSupportedException {
-		
-		DecoradoConBaul clon = null;
-		
-		try {
-			clon = (DecoradoConBaul) super.clone();
-			clon.encapsulado = (IViaje) this.encapsulado.clone();
-		}
-		finally {
-			
-		}
-		
-		return clon;
-	}
-
-	@Override
-	public GregorianCalendar getFecha() {
-		return this.encapsulado.getFecha();
-	}
-
 	
 }
