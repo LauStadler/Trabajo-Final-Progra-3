@@ -3,6 +3,7 @@ package models;
 import java.util.GregorianCalendar;
 
 public interface IViaje extends Cloneable {
+	public String getEstado();
 	public double getCosto();
 	public int getPasajero();
 	public double getDistancia();

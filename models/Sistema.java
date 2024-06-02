@@ -118,18 +118,18 @@ public class Sistema {
      */
 	public IViaje creaViaje(Pedido pedido) throws PedidoInvalidoException, ZonaInvalidaException, VehiculosNoDisponiblesException, ChoferNoDisponibleException{
 		
+		IViaje viaje = null;
 		Vehiculo vehiculo = null;
 		Chofer chofer = null;
 		if(pedido.isPedidoValido()) {
-			vehiculo = this.buscaVehiculoDisp(pedido);
-			System.out.println(vehiculo);
-			chofer = this.buscaChoferDisp();
-			System.out.println(chofer);
+			
+			viaje = FactoryViaje.getIntancia().getViaje(pedido, vehiculo, chofer);
+	
 		}		
 	   else
 		  throw new PedidoInvalidoException("Pedido no valido, no se puede hacer el viaje");
 	   
-	   return FactoryViaje.getIntancia().getViaje(pedido, vehiculo, chofer);
+	   return viaje; 
 	}
   
 	public IViaje IniciaViaje(Pedido pedido) throws PedidoInvalidoException, ZonaInvalidaException, VehiculosNoDisponiblesException, ChoferNoDisponibleException {

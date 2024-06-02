@@ -8,6 +8,7 @@ public abstract class Viaje implements IViaje, Cloneable{
 	protected Vehiculo vehiculo;
 	protected Chofer chofer;
 	protected double distancia;
+	protected String estado;
 	protected static double base= 1000;
 	
 	
@@ -15,13 +16,28 @@ public abstract class Viaje implements IViaje, Cloneable{
 		super();
 	}
 
-	public Viaje(Pedido pedido, Vehiculo vehiculo, Chofer chofer) {
+	
+
+	public Viaje(Pedido pedido, Vehiculo vehiculo, Chofer chofer, double distancia, String estado) {
 		super();
 		this.pedido = pedido;
 		this.vehiculo = vehiculo;
 		this.chofer = chofer;
-		this.distancia = pedido.getKm();
+		this.distancia = distancia;
+		this.estado = estado;
 	}
+	
+	
+
+	public String getEstado() {
+		return estado;
+	}
+
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
 
 	public Pedido getPedido() {
 		return this.pedido;
