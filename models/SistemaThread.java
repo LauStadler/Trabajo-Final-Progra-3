@@ -12,7 +12,7 @@ public class SistemaThread extends Thread{
 	@Override
 	public void run () {
 		
-		while () {
+		while (rc.getCantChoferes() > 0 && rc.getCantClientes() > 0) {
 			rc.asignaVehiculo();
 		}
 	}
