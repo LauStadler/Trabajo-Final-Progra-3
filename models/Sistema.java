@@ -119,11 +119,9 @@ public class Sistema {
 	public IViaje creaViaje(Pedido pedido) throws PedidoInvalidoException, ZonaInvalidaException, VehiculosNoDisponiblesException, ChoferNoDisponibleException{
 		
 		IViaje viaje = null;
-		Vehiculo vehiculo = null;
-		Chofer chofer = null;
 		if(pedido.isPedidoValido()) {
 			
-			viaje = FactoryViaje.getIntancia().getViaje(pedido, vehiculo, chofer);
+			viaje = FactoryViaje.getIntancia().getViaje(pedido, null, null);
 	
 		}		
 	   else
@@ -132,21 +130,6 @@ public class Sistema {
 	   return viaje; 
 	}
   
-	public IViaje IniciaViaje(Pedido pedido) throws PedidoInvalidoException, ZonaInvalidaException, VehiculosNoDisponiblesException, ChoferNoDisponibleException {
-		IViaje viaje = null;
-		try {
-			viaje = creaViaje(pedido);
-			choferes.remove(viaje.getChofer());
-			vehiculos.remove(viaje.getVehiculo());
-			viajes.add(viaje);
-			
-		}
-		
-		finally {
-		}
-		
-		return viaje;
-	}
 	/**
 	 * Este metodo actualiza los puntajes de los choferes.
 	 */
