@@ -119,11 +119,9 @@ public class Sistema {
 	public IViaje creaViaje(Pedido pedido) throws PedidoInvalidoException, ZonaInvalidaException, VehiculosNoDisponiblesException, ChoferNoDisponibleException{
 		
 		IViaje viaje = null;
-		Vehiculo vehiculo = null;
-		Chofer chofer = null;
 		if(pedido.isPedidoValido()) {
 			
-			viaje = FactoryViaje.getIntancia().getViaje(pedido, vehiculo, chofer);
+			viaje = FactoryViaje.getIntancia().getViaje(pedido, null, null);
 	
 		}		
 	   else

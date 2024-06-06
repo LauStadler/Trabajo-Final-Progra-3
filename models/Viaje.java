@@ -18,13 +18,13 @@ public abstract class Viaje implements IViaje, Cloneable{
 
 	
 
-	public Viaje(Pedido pedido, Vehiculo vehiculo, Chofer chofer, double distancia, String estado) {
+	public Viaje(Pedido pedido, Vehiculo vehiculo, Chofer chofer, double distancia) {
 		super();
 		this.pedido = pedido;
 		this.vehiculo = vehiculo;
 		this.chofer = chofer;
 		this.distancia = distancia;
-		this.estado = estado;
+		this.estado = "Solicitado";
 	}
 	
 	
