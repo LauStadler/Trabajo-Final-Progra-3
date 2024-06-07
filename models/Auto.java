@@ -12,7 +12,7 @@ public class Auto extends Vehiculo{ //AUTO loquiii
         assert patente != null : "La patente es null";
         this.baul = true;
         this.mascota = true;
-        this.cantpasajeros = 4;//asd
+        this.cantpasajeros = 4;
         
     }
 

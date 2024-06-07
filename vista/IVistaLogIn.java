@@ -4,11 +4,11 @@ import java.awt.event.ActionListener;
 
 import controlador.Controlador;
 
-public interface IVistaPedido { //La vista en la que se genera el pedido
+public interface IVistaLogIn { //La vista en la que se loguea/registra el usuario
 
 	 public void setControlador(Controlador controlador);
-	 public void getCantidadPasajeros();
-	 public void getTexto();
-	 public void getKm();
-	 public 
+	 public String getUser();
+	 public String getContra();
+	 public String getNuevoUser();
+	 public String getNuevaContra();
 }
