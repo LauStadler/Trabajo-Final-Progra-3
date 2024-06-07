@@ -122,7 +122,7 @@ public class Sistema {
 		if(pedido.isPedidoValido()) {
 			
 			viaje = FactoryViaje.getIntancia().getViaje(pedido, null, null);
-	
+			
 		}		
 	   else
 		  throw new PedidoInvalidoException("Pedido no valido, no se puede hacer el viaje");

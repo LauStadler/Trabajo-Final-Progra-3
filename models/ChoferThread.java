@@ -23,7 +23,7 @@ public class ChoferThread extends  Thread{
 		while (cantViajes < this.cantMaxViajes  && rc.getCantClientes() > 0) {
 			viaje = rc.tomaViaje();
 			try {
-				//se supone que el hilo se duerme por 30 segs
+				//se supone que el hilo se duerme por 30 segs, para simular un viaje
 				sleep(30000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();

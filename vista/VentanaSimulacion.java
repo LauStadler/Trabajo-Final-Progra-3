@@ -20,6 +20,9 @@ public class VentanaSimulacion extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private JTextArea areaGeneral = new JTextArea();
+	private JTextArea areaCliente = new JTextArea();
+	private JTextArea areaChofer = new JTextArea();
 
 	/**
 	 * Launch the application.
@@ -58,21 +61,21 @@ public class VentanaSimulacion extends JFrame {
 		panelCentral.add(panelGeneral);
 		panelGeneral.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		JScrollPane scrollPane = new JScrollPane();
+		JScrollPane scrollPane = new JScrollPane(areaGeneral);
 		panelGeneral.add(scrollPane);
 		
 		JPanel panelChofer = new JPanel();
 		panelCentral.add(panelChofer);
 		panelChofer.setLayout(new GridLayout(1, 0, 0, 0));
 		
-		JScrollPane scrollPane_1 = new JScrollPane();
+		JScrollPane scrollPane_1 = new JScrollPane(areaChofer);
 		panelChofer.add(scrollPane_1);
 		
 		JPanel panelCliente = new JPanel();
 		panelCentral.add(panelCliente);
 		panelCliente.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		JScrollPane scrollPane_2 = new JScrollPane();
+		JScrollPane scrollPane_2 = new JScrollPane(areaCliente);
 		panelCliente.add(scrollPane_2);
 		
 		JPanel panel = new JPanel();
@@ -98,4 +101,18 @@ public class VentanaSimulacion extends JFrame {
 		subPanelTextoChofer.add(LabelChofer);
 	}
 
+	public void appendTextGeneral(String arg)
+    {
+	    this.areaGeneral.append(arg+"\n");
+    }
+
+	public void appendTextCliente(String arg)
+    {
+	    this.areaCliente.append(arg+"\n");
+    }
+
+	public void appendTextChofer(String arg)
+    {
+	    this.areaChofer.append(arg+"\n");
+    }
 }

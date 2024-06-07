@@ -21,19 +21,23 @@ public class Simulacion {
 	public void start () {
 		
 		
-		for (int i = 0; i < sistema.getChoferes().size() ; i++) {
+		for (int i = 0; i < sistema.getChoferes().size() ; i++)
 			choferes.add(new ChoferThread(rc, (int) (Math.random() * this.cantMaxViajes) + 1, sistema.getChoferes().get(i)));
-			choferes.get(i).start();
-		}
 		rc.setCantChoferes(choferes.size());
 		
-		for (int i = 0; i < sistema.getClientes().size() ; i++) {
+		for (int i = 0; i < sistema.getClientes().size() ; i++) 
 			clientes.add(new ClienteThread(rc, (int) (Math.random() * this.cantMaxSolicitudes) + 1, sistema.getClientes().get(i)));
-			clientes.get(i).start();
-		}
 		rc.setCantClientes(clientes.size());
-		
+
+		for (int i = 0; i < sistema.getChoferes().size() ; i++)
+			choferes.get(i).start();
+
+		for (int i = 0; i < sistema.getClientes().size() ; i++)
+			clientes.get(i).start();
+
 		this.sistemaThread.start();
+
+		
 		
 	}
 	

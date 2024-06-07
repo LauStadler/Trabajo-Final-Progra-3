@@ -2,7 +2,7 @@ package models;
 
 import java.util.ArrayList;
 
-public class RecursoCompartido {
+public class RecursoCompartido extends Observable {
 
 	private boolean available;
 	private Sistema empresa;
@@ -16,6 +16,7 @@ public class RecursoCompartido {
 	//private ArrayList<Cliente> clientes = new ArrayList<Cliente>();
 	private int cantChoferes; //
 	private int cantClientes;
+	private Observer observador;
 	
 	public RecursoCompartido(Sistema s) {
 		this.empresa = s;
@@ -76,10 +77,9 @@ public class RecursoCompartido {
 		viajesSolicitados.remove(0);
 		Vehiculo vehiculo;
 		try {
-			vehiculo = empresa.buscaVehiculoDisp(viaje.getPedido());
+			vehiculo = buscaVehiculoDisp(viaje.getPedido());
 			viaje.setVehiculo(vehiculo);
 			viaje.setEstado("Con Vehiculo");
-			viajesSolicitados.remove(viaje);
 			viajesConVehiculo.add(viaje);
 			vehiculosDisp.remove(vehiculo);
 			vehiculosNoDisp.add(vehiculo);
@@ -89,9 +89,11 @@ public class RecursoCompartido {
 		}
 		
 		notifyAll();	
+		setChange();
+		notifyObservers(viaje);
 	}
 	
-	public Pedido creaPedido() {
+	public Pedido creaPedido() { //creacion de pedidos
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -116,9 +118,11 @@ public class RecursoCompartido {
 	public synchronized IViaje creaViaje(Pedido pedido) throws VehiculosNoDisponiblesException, ChoferNoDisponibleException, PedidoInvalidoException, ZonaInvalidaException {
 	
 		IViaje viaje = empresa.creaViaje(pedido);
-		this.viajesSolicitados.add(viaje);
 		viaje.setEstado("Solicitado");
+		this.viajesSolicitados.add(viaje);
 		notifyAll();
+		setChange();
+		notifyObservers(viaje);
 		return viaje;
 	}
 
@@ -128,6 +132,9 @@ public class RecursoCompartido {
 		
 		viaje.setEstado("Pagado");
 		notifyAll();
+		setChange();
+		notifyObservers(viaje);
+		
 		
 	}
 
@@ -143,6 +150,8 @@ public class RecursoCompartido {
 		IViaje viaje = viajesConVehiculo.get(0);
 		viajesConVehiculo.remove(0);
 		viaje.setEstado("Iniciado");
+		setChange();
+		notifyObservers(viaje);
 		viajesEnCurso.add(viaje);
 		notifyAll();
 		return viaje;
@@ -159,10 +168,16 @@ public class RecursoCompartido {
 		}
 		
 		viaje.setEstado("Finalizado");
+		setChange();
+		notifyObservers(viaje);
 		viajesEnCurso.remove(viaje);
 		viajesFinalizados.add(viaje);
 		vehiculosNoDisp.remove(viaje.getVehiculo());
 		vehiculosDisp.add(viaje.getVehiculo());
 		
+	}
+
+	public void addObserver(Observer obj){
+		this.observador = obj;
 	}
 }
