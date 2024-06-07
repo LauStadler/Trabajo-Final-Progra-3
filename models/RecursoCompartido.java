@@ -2,9 +2,8 @@ package models;
 
 import java.util.ArrayList;
 import java.util.Observable;
-import java.util.Observer;
 
-public class RecursoCompartido extends Observable {
+public class RecursoCompartido extends Observable{
 
 	private boolean available;
 	private Sistema empresa;
@@ -18,7 +17,6 @@ public class RecursoCompartido extends Observable {
 	//private ArrayList<Cliente> clientes = new ArrayList<Cliente>();
 	private int cantChoferes; //
 	private int cantClientes;
-	private Observer observador;
 	
 	public RecursoCompartido(Sistema s) {
 		this.empresa = s;
@@ -79,9 +77,10 @@ public class RecursoCompartido extends Observable {
 		viajesSolicitados.remove(0);
 		Vehiculo vehiculo;
 		try {
-			vehiculo = buscaVehiculoDisp(viaje.getPedido());
+			vehiculo = empresa.buscaVehiculoDisp(viaje.getPedido());
 			viaje.setVehiculo(vehiculo);
 			viaje.setEstado("Con Vehiculo");
+			viajesSolicitados.remove(viaje);
 			viajesConVehiculo.add(viaje);
 			vehiculosDisp.remove(vehiculo);
 			vehiculosNoDisp.add(vehiculo);
@@ -91,11 +90,9 @@ public class RecursoCompartido extends Observable {
 		}
 		
 		notifyAll();	
-		setChanged();
-		notifyObservers(viaje);
 	}
 	
-	public Pedido creaPedido() { //creacion de pedidos
+	public Pedido creaPedido() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -120,11 +117,9 @@ public class RecursoCompartido extends Observable {
 	public synchronized IViaje creaViaje(Pedido pedido) throws VehiculosNoDisponiblesException, ChoferNoDisponibleException, PedidoInvalidoException, ZonaInvalidaException {
 	
 		IViaje viaje = empresa.creaViaje(pedido);
-		viaje.setEstado("Solicitado");
 		this.viajesSolicitados.add(viaje);
+		viaje.setEstado("Solicitado");
 		notifyAll();
-		setChanged();
-		notifyObservers(viaje);
 		return viaje;
 	}
 
@@ -134,9 +129,6 @@ public class RecursoCompartido extends Observable {
 		
 		viaje.setEstado("Pagado");
 		notifyAll();
-		setChanged();
-		notifyObservers(viaje);
-		
 		
 	}
 
@@ -152,8 +144,6 @@ public class RecursoCompartido extends Observable {
 		IViaje viaje = viajesConVehiculo.get(0);
 		viajesConVehiculo.remove(0);
 		viaje.setEstado("Iniciado");
-		setChanged();
-		notifyObservers(viaje);
 		viajesEnCurso.add(viaje);
 		notifyAll();
 		return viaje;
@@ -170,16 +160,10 @@ public class RecursoCompartido extends Observable {
 		}
 		
 		viaje.setEstado("Finalizado");
-		setChanged();
-		notifyObservers(viaje);
 		viajesEnCurso.remove(viaje);
 		viajesFinalizados.add(viaje);
 		vehiculosNoDisp.remove(viaje.getVehiculo());
 		vehiculosDisp.add(viaje.getVehiculo());
 		
-	}
-
-	public void addObserver(Observer obj){
-		this.observador = obj;
 	}
 }
