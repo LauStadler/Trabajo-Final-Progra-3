@@ -2,6 +2,7 @@ package models;
 
 import java.util.ArrayList;
 import java.util.Observable;
+import java.util.Observer;
 
 public class RecursoCompartido extends Observable{
 
@@ -17,6 +18,7 @@ public class RecursoCompartido extends Observable{
 	//private ArrayList<Cliente> clientes = new ArrayList<Cliente>();
 	private int cantChoferes; //
 	private int cantClientes;
+	private ArrayList<Observer> observadores = new ArrayList<>();
 	
 	public RecursoCompartido(Sistema s) {
 		this.empresa = s;
@@ -90,6 +92,8 @@ public class RecursoCompartido extends Observable{
 		}
 		
 		notifyAll();	
+		setChanged();
+		notifyObservers(viaje);
 	}
 	
 	public Pedido creaPedido() {
@@ -120,6 +124,8 @@ public class RecursoCompartido extends Observable{
 		this.viajesSolicitados.add(viaje);
 		viaje.setEstado("Solicitado");
 		notifyAll();
+		setChanged();
+		notifyObservers(viaje);
 		return viaje;
 	}
 
@@ -129,6 +135,8 @@ public class RecursoCompartido extends Observable{
 		
 		viaje.setEstado("Pagado");
 		notifyAll();
+		setChanged();
+		notifyObservers(viaje);
 		
 	}
 
@@ -146,6 +154,8 @@ public class RecursoCompartido extends Observable{
 		viaje.setEstado("Iniciado");
 		viajesEnCurso.add(viaje);
 		notifyAll();
+		setChanged();
+		notifyObservers(viaje);
 		return viaje;
 	}
 
@@ -160,10 +170,16 @@ public class RecursoCompartido extends Observable{
 		}
 		
 		viaje.setEstado("Finalizado");
+		setChanged();
+		notifyObservers(viaje);
 		viajesEnCurso.remove(viaje);
 		viajesFinalizados.add(viaje);
 		vehiculosNoDisp.remove(viaje.getVehiculo());
 		vehiculosDisp.add(viaje.getVehiculo());
 		
+	}
+
+	public void addObservers(Observer obj){
+		this.observadores.add(obj);
 	}
 }

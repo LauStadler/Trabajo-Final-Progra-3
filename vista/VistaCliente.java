@@ -19,6 +19,8 @@ import javax.swing.AbstractListModel;
 import javax.swing.JTextArea;
 import java.awt.Color;
 
+import controlador.Controlador;
+
 public class VistaCliente extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -125,6 +127,26 @@ public class VistaCliente extends JFrame {
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
 		panelEstadoDelViaje.add(scrollPane_1);
+	}
+
+	public JPanel getContentPane() {
+		return this.contentPane;
+	}
+
+	public void setContentPane(JPanel contentPane) {
+		this.contentPane = contentPane;
+	}
+
+	public JTextField getCantPasajeros() {
+		return this.cantPasajeros;
+	}
+
+	public void setCantPasajeros(JTextField cantPasajeros) {
+		this.cantPasajeros = cantPasajeros;
+	}
+
+	public void setControlador(Controlador c){
+	
 	}
 
 }

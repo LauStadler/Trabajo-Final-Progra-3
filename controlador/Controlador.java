@@ -28,7 +28,9 @@ public class Controlador implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent evento) {
-		// TODO Auto-generated method stub
+		int cantidadPasajeros = vista.getCantidadPasajeros();
+
+		if(evento.getActionCommand().equals("Aceptar")) // el boton que ConfirmaPedido
 		
 	}
 
