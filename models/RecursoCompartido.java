@@ -1,6 +1,8 @@
 package models;
 
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
 public class RecursoCompartido extends Observable {
 
@@ -89,7 +91,7 @@ public class RecursoCompartido extends Observable {
 		}
 		
 		notifyAll();	
-		setChange();
+		setChanged();
 		notifyObservers(viaje);
 	}
 	
@@ -121,7 +123,7 @@ public class RecursoCompartido extends Observable {
 		viaje.setEstado("Solicitado");
 		this.viajesSolicitados.add(viaje);
 		notifyAll();
-		setChange();
+		setChanged();
 		notifyObservers(viaje);
 		return viaje;
 	}
@@ -132,7 +134,7 @@ public class RecursoCompartido extends Observable {
 		
 		viaje.setEstado("Pagado");
 		notifyAll();
-		setChange();
+		setChanged();
 		notifyObservers(viaje);
 		
 		
@@ -150,7 +152,7 @@ public class RecursoCompartido extends Observable {
 		IViaje viaje = viajesConVehiculo.get(0);
 		viajesConVehiculo.remove(0);
 		viaje.setEstado("Iniciado");
-		setChange();
+		setChanged();
 		notifyObservers(viaje);
 		viajesEnCurso.add(viaje);
 		notifyAll();
@@ -168,7 +170,7 @@ public class RecursoCompartido extends Observable {
 		}
 		
 		viaje.setEstado("Finalizado");
-		setChange();
+		setChanged();
 		notifyObservers(viaje);
 		viajesEnCurso.remove(viaje);
 		viajesFinalizados.add(viaje);
