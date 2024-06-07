@@ -1,8 +1,9 @@
 package models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Sistema {
+public class Sistema implements Serializable{
 	private static Sistema instancia=null;
 	private ArrayList<Chofer> choferes = new ArrayList<Chofer>();//add y remove
 	private ArrayList<Vehiculo> vehiculos = new ArrayList<Vehiculo>();//add y remove
@@ -24,6 +25,28 @@ public class Sistema {
 	public ArrayList <Cliente> getClientes() {
 		return clientes;
 	}
+	
+	
+	public static void setInstancia(Sistema instancia) {
+		Sistema.instancia = instancia;
+	}
+
+	public void setChoferes(ArrayList<Chofer> choferes) {
+		this.choferes = choferes;
+	}
+
+	public void setVehiculos(ArrayList<Vehiculo> vehiculos) {
+		this.vehiculos = vehiculos;
+	}
+
+	public void setViajes(ArrayList<IViaje> viajes) {
+		this.viajes = viajes;
+	}
+
+	public void setClientes(ArrayList<Cliente> clientes) {
+		this.clientes = clientes;
+	}
+
 	private Sistema(){
 		super();
 	}

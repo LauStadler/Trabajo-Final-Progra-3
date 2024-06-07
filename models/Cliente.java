@@ -1,11 +1,16 @@
 package models;
 
-public class Cliente {
+import java.io.Serializable;
+
+public class Cliente implements Serializable {
 
 	private String usuario;
 	private String contrasenia;
 	
-
+    public Cliente() {
+    	super();
+    }
+	
 	public Cliente(String usuario, String contrasenia) {
 		super();
 		assert usuario.equals("") != true : "El usuario esta vacio";

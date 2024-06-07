@@ -1,11 +1,17 @@
 package models;
 
-public abstract class Vehiculo {
+import java.io.Serializable;
+
+public abstract class Vehiculo implements Serializable {
 	protected String patente;
 	protected boolean baul;
 	protected boolean mascota;
 	protected int cantpasajeros=0;
 
+	public Vehiculo() {
+		super();
+	}
+	
     public Vehiculo (String patente){
 		super();
 		this.patente=patente;
@@ -65,6 +71,22 @@ public abstract class Vehiculo {
 		else
 			return null;
 		
+	}
+
+	public void setPatente(String patente) {
+		this.patente = patente;
+	}
+
+	public void setBaul(boolean baul) {
+		this.baul = baul;
+	}
+
+	public void setMascota(boolean mascota) {
+		this.mascota = mascota;
+	}
+
+	public void setCantpasajeros(int cantpasajeros) {
+		this.cantpasajeros = cantpasajeros;
 	}
 
 }

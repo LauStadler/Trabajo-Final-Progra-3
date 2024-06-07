@@ -1,9 +1,10 @@
 package models;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class Pedido implements Cloneable{
+public class Pedido implements Cloneable, Serializable{
 	
 	private int cantPasajeros;
 	private String zona;
@@ -12,6 +13,11 @@ public class Pedido implements Cloneable{
 	private GregorianCalendar fecha;
 	private Cliente cliente;
 	private double km;
+	
+	public Pedido () {
+		super();
+	}
+	
 	/**
 	 * Inicializa el objeto pedido<br>
 	 * @param cantPasajeros
@@ -65,6 +71,36 @@ public class Pedido implements Cloneable{
 	public Cliente getCliente() {
 		return cliente;
 	}
+	
+	
+	public void setCantPasajeros(int cantPasajeros) {
+		this.cantPasajeros = cantPasajeros;
+	}
+
+	public void setZona(String zona) {
+		this.zona = zona;
+	}
+
+	public void setMascota(boolean mascota) {
+		this.mascota = mascota;
+	}
+
+	public void setBaul(boolean baul) {
+		this.baul = baul;
+	}
+
+	public void setFecha(GregorianCalendar fecha) {
+		this.fecha = fecha;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+	public void setKm(double km) {
+		this.km = km;
+	}
+
 	@Override
 	public Object clone() throws CloneNotSupportedException {
 		Pedido clonado = null;

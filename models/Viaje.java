@@ -1,9 +1,10 @@
 package models;
 
+import java.io.Serializable;
 import java.util.GregorianCalendar;
 
 
-public abstract class Viaje implements IViaje, Cloneable{
+public abstract class Viaje implements IViaje, Cloneable, Serializable{
 	protected Pedido pedido;
 	protected Vehiculo vehiculo;
 	protected Chofer chofer;
@@ -84,5 +85,29 @@ public abstract class Viaje implements IViaje, Cloneable{
 		// TODO Auto-generated method stub
 		return this.pedido.getCliente();
 	}
-	
+
+
+
+	public void setPedido(Pedido pedido) {
+		this.pedido = pedido;
+	}
+
+
+
+	public void setVehiculo(Vehiculo vehiculo) {
+		this.vehiculo = vehiculo;
+	}
+
+
+
+	public void setChofer(Chofer chofer) {
+		this.chofer = chofer;
+	}
+
+
+
+	public void setDistancia(double distancia) {
+		this.distancia = distancia;
+	}
+	 
 }

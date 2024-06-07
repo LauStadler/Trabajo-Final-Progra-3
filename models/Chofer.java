@@ -1,12 +1,21 @@
 package models;
+
+import java.io.Serializable;
+
 /**
  * Clase abstracta de chofer.
  */
-public abstract class Chofer {
+public abstract class Chofer implements Serializable {
+   /**
+	 * 
+	 */
    protected String dni;
    protected String nombre;
    protected int puntaje;
    
+   public Chofer() {
+	   super();
+   }
    /**
     * Iniciliza al obejto chofer.
     * <b>pre: </b> El dni y nombre deben ser distinto de null y espacio vacio.
@@ -44,5 +53,15 @@ public abstract class Chofer {
     * @return sueldo del chofer
     */
    public abstract double getSueldo();
-
+   public void setDni(String dni) {
+	  this.dni = dni;
+   }
+   public void setNombre(String nombre) {
+	  this.nombre = nombre;
+   }
+   public void setPuntaje(int puntaje) {
+	 this.puntaje = puntaje;
+   }
+   
+   
 }
