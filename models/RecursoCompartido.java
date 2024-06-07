@@ -1,8 +1,9 @@
 package models;
 
 import java.util.ArrayList;
+import java.util.Observable;
 
-public class RecursoCompartido {
+public class RecursoCompartido extends Observable{
 
 	private boolean available;
 	private Sistema empresa;
