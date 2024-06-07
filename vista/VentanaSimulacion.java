@@ -14,6 +14,7 @@ import java.awt.GridLayout;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
 
 public class VentanaSimulacion extends JFrame {
 
@@ -74,26 +75,27 @@ public class VentanaSimulacion extends JFrame {
 		JScrollPane scrollPane_2 = new JScrollPane();
 		panelCliente.add(scrollPane_2);
 		
-		JPanel panelSur = new JPanel();
-		contentPane.add(panelSur, BorderLayout.SOUTH);
-		panelSur.setLayout(new GridLayout(0, 2, 0, 0));
-		
 		JPanel panel = new JPanel();
-		panelSur.add(panel);
+		contentPane.add(panel, BorderLayout.NORTH);
+		panel.setLayout(new GridLayout(0, 3, 0, 0));
 		
-		JButton botonInicio = new JButton("Iniciar");
-		botonInicio.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		panel.add(botonInicio);
+		JPanel subPanelTextoGral = new JPanel();
+		panel.add(subPanelTextoGral);
 		
-		JPanel panel_1 = new JPanel();
-		panelSur.add(panel_1);
-		panel_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		JLabel LabelGeneral = new JLabel("General");
+		subPanelTextoGral.add(LabelGeneral);
 		
-		JButton botonFin = new JButton("Finalizar");
-		panel_1.add(botonFin);
+		JPanel subPanelTextoCliente = new JPanel();
+		panel.add(subPanelTextoCliente);
+		
+		JLabel LabelCliente = new JLabel("Cliente");
+		subPanelTextoCliente.add(LabelCliente);
+		
+		JPanel subPanelTextoChofer = new JPanel();
+		panel.add(subPanelTextoChofer);
+		
+		JLabel LabelChofer = new JLabel("Chofer");
+		subPanelTextoChofer.add(LabelChofer);
 	}
 
 }
