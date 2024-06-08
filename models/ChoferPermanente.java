@@ -32,7 +32,10 @@ public class ChoferPermanente extends Chofer{
      this.canthijos=canthijos;
      this.fechaingreso.set(anio, mes, dia);
    } 
-   
+   public ChoferPermanente(String dni,String nombre) //no se como solucionar esto
+   {
+	   super(dni,nombre);
+   }
    public double getPlusAntiguedad() {
 	   return plusantiguedad;
 	   

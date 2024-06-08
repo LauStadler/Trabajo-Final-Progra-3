@@ -5,6 +5,7 @@ public class VehiculoDTO {
 	protected boolean baul;
 	protected boolean mascota;
 	protected int cantpasajeros=0;
+	protected String tipo;
 	public VehiculoDTO() {
 		// TODO Auto-generated constructor stub
 	}
@@ -31,6 +32,12 @@ public class VehiculoDTO {
 	}
 	public void setCantpasajeros(int cantpasajeros) {
 		this.cantpasajeros = cantpasajeros;
+	}
+	public String getTipo() {
+		return tipo;
+	}
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 
 }

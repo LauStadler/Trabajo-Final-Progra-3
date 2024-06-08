@@ -7,6 +7,7 @@ public abstract class Vehiculo implements Serializable {
 	protected boolean baul;
 	protected boolean mascota;
 	protected int cantpasajeros=0;
+	protected String tipo;
 
 	public Vehiculo() {
 		super();
@@ -32,7 +33,16 @@ public abstract class Vehiculo implements Serializable {
 	public String getPatente(){
 		return this.patente;
 	}
-    /**
+	
+    public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+	/**
      * Este metodo verifica el uso de Baul.<br>
      * <b> pre:</b> El pedido tiene ser distinto de null y validado.
      * @param pedido Pedido solicitado por un cliente

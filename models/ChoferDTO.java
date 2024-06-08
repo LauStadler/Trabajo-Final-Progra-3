@@ -4,6 +4,7 @@ public class ChoferDTO {
 	protected String dni;
 	protected String nombre;
 	protected int puntaje;
+	protected String tipo;
 	
 	public ChoferDTO() {
 		super();
@@ -25,6 +26,12 @@ public class ChoferDTO {
 	}
 	public void setPuntaje(int puntaje) {
 		this.puntaje = puntaje;
+	}
+	public String getTipo() {
+		return tipo;
+	}
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 	
 }

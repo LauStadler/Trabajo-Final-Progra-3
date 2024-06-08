@@ -15,4 +15,5 @@ public interface IViaje extends Cloneable {
 	public void setEstado(String estado);
 	public Object clone() throws CloneNotSupportedException;
 	public void setVehiculo(Vehiculo vehiculo);
+	public double getBase();
 }
