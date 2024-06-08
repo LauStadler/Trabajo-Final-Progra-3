@@ -7,7 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
 
-public class PersistenciaXML {
+public class PersistenciaXML implements IPersistencia{
 	    private XMLEncoder xmlEncoder;
 	    private XMLDecoder xmlDecoder;
 	    private FileOutputStream fileoutput;
@@ -26,7 +26,6 @@ public class PersistenciaXML {
 	        fileoutput = new FileOutputStream(nombre);
 	        xmlEncoder = new XMLEncoder(fileoutput);
 
-
 	    }
 
 	    public void cerrarOutput() throws IOException
@@ -38,13 +37,12 @@ public class PersistenciaXML {
 	    {
 	        this.xmlDecoder.close();
 	    }
-
 	    public void escribir(Object objeto) throws IOException
 	    {
 	        xmlEncoder.writeObject(objeto);
 
 	    }
-
+	
 	    public Object leer() throws IOException, ClassNotFoundException
 	    {
 	        Object objecto = null;
