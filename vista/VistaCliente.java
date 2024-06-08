@@ -20,13 +20,148 @@ import javax.swing.JTextArea;
 import java.awt.Color;
 
 import controlador.Controlador;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JRadioButton;
 
-public class VistaCliente extends JFrame {
+public class VistaCliente extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
-	private JTextField cantPasajeros;
-
+	private JPanel panelGeneral;
+	private JPanel panelCreaPedido;
+	private JPanel panelEstadoPedido;
+	private JPanel panelCantPasajeros;
+	private JPanel panelZona;
+	private JPanel panelMascotas;
+	private JPanel panelBaul;
+	private JPanel panelDistancia;
+	private JScrollPane scrollPane;
+	private JPanel panel_5;
+	private JLabel lblNewLabel;
+	private JLabel CantidadPasajeros;
+	private JTextField CantPasajeros;
+	private JComboBox comboBox;
+	private JLabel ingresaZona;
+	private JPanel panelEtiqueta;
+	private JPanel panelOpciones;
+	private JRadioButton RadioBotonNo;
+	private JRadioButton RadioBotonSi;
+	private JPanel panelEtiquetaBaul;
+	private JPanel panelOpcionesBaul;
+	private JLabel labelDistancia;
+	private JLabel LabelBaul;
+	private JRadioButton radioBotonSi;
+	private JRadioButton radioBotonNo;
+	private JLabel LabelMascota;
+	private JTextField ingresaDistancia;
+	private JButton botonAceptar;
+	
+	public VistaCliente() {
+		getContentPane().setLayout(new GridLayout(0, 1, 0, 0));
+		
+		this.panelGeneral = new JPanel();
+		getContentPane().add(this.panelGeneral);
+		this.panelGeneral.setLayout(new GridLayout(0, 2, 0, 0));
+		
+		this.panelCreaPedido = new JPanel();
+		this.panelGeneral.add(this.panelCreaPedido);
+		this.panelCreaPedido.setLayout(new GridLayout(0, 1, 0, 0));
+		
+		this.panelCantPasajeros = new JPanel();
+		this.panelCreaPedido.add(this.panelCantPasajeros);
+		
+		this.CantidadPasajeros = new JLabel("Ingrese la cantidad de pasajeros");
+		this.panelCantPasajeros.add(this.CantidadPasajeros);
+		
+		this.CantPasajeros = new JTextField();
+		this.CantPasajeros.addActionListener(this);
+		this.panelCantPasajeros.add(this.CantPasajeros);
+		this.CantPasajeros.setColumns(10);
+		
+		this.panelZona = new JPanel();
+		this.panelCreaPedido.add(this.panelZona);
+		
+		this.ingresaZona = new JLabel("Ingrese la Zona");
+		this.panelZona.add(this.ingresaZona);
+		
+		this.comboBox = new JComboBox();
+		this.comboBox.addActionListener(this);
+		this.comboBox.setModel(new DefaultComboBoxModel(new String[] {"", "Zona Peligrosa", "Zona Estandar ", "Zona Calle de  Tierra"}));
+		this.panelZona.add(this.comboBox);
+		
+		this.panelMascotas = new JPanel();
+		this.panelCreaPedido.add(this.panelMascotas);
+		this.panelMascotas.setLayout(new GridLayout(0, 2, 0, 0));
+		
+		this.panelEtiqueta = new JPanel();
+		this.panelMascotas.add(this.panelEtiqueta);
+		this.panelEtiqueta.setLayout(new BorderLayout(0, 0));
+		
+		this.LabelMascota = new JLabel("Lleva Mascota?");
+		this.panelEtiqueta.add(this.LabelMascota, BorderLayout.CENTER);
+		
+		this.panelOpciones = new JPanel();
+		this.panelMascotas.add(this.panelOpciones);
+		this.panelOpciones.setLayout(new GridLayout(1, 0, 0, 0));
+		
+		this.RadioBotonSi = new JRadioButton("si");
+		this.panelOpciones.add(this.RadioBotonSi);
+		
+		this.RadioBotonNo = new JRadioButton("no");
+		this.panelOpciones.add(this.RadioBotonNo);
+		
+		this.panelBaul = new JPanel();
+		this.panelCreaPedido.add(this.panelBaul);
+		this.panelBaul.setLayout(new GridLayout(0, 2, 0, 0));
+		
+		this.panelEtiquetaBaul = new JPanel();
+		this.panelBaul.add(this.panelEtiquetaBaul);
+		this.panelEtiquetaBaul.setLayout(new GridLayout(0, 1, 0, 0));
+		
+		this.LabelBaul = new JLabel("Con Baul");
+		this.panelEtiquetaBaul.add(this.LabelBaul);
+		
+		this.panelOpcionesBaul = new JPanel();
+		this.panelBaul.add(this.panelOpcionesBaul);
+		this.panelOpcionesBaul.setLayout(new GridLayout(0, 2, 0, 0));
+		
+		this.radioBotonSi = new JRadioButton("si");
+		this.panelOpcionesBaul.add(this.radioBotonSi);
+		
+		this.radioBotonNo = new JRadioButton("no");
+		this.panelOpcionesBaul.add(this.radioBotonNo);
+		
+		this.panelDistancia = new JPanel();
+		this.panelCreaPedido.add(this.panelDistancia);
+		
+		this.labelDistancia = new JLabel("Ingrese la distancia");
+		this.panelDistancia.add(this.labelDistancia);
+		
+		this.ingresaDistancia = new JTextField();
+		this.ingresaDistancia.addActionListener(this);
+		this.panelDistancia.add(this.ingresaDistancia);
+		this.ingresaDistancia.setColumns(10);
+		
+		this.botonAceptar = new JButton("Aceptar");
+		this.botonAceptar.setActionCommand("Aceptar");
+		this.panelDistancia.add(this.botonAceptar);
+		
+		this.panelEstadoPedido = new JPanel();
+		this.panelGeneral.add(this.panelEstadoPedido);
+		this.panelEstadoPedido.setLayout(new BorderLayout(0, 0));
+		
+		this.scrollPane = new JScrollPane();
+		this.panelEstadoPedido.add(this.scrollPane, BorderLayout.CENTER);
+		
+		this.panel_5 = new JPanel();
+		this.scrollPane.setColumnHeaderView(this.panel_5);
+		
+		this.lblNewLabel = new JLabel("Estado de su Viaje");
+		this.panel_5.add(this.lblNewLabel);
+	}
+	
 	/**
 	 * Launch the application.
 	 */
@@ -43,110 +178,39 @@ public class VistaCliente extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
-	public VistaCliente() {
-		setTitle("Solicitar Viaje");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-
-		setContentPane(contentPane);
-		contentPane.setLayout(new BorderLayout(0, 0));
-		
-		JPanel panelGeneral = new JPanel();
-		contentPane.add(panelGeneral, BorderLayout.CENTER);
-		panelGeneral.setLayout(new GridLayout(0, 2, 0, 0));
-		
-		JPanel panelCreaViaje = new JPanel();
-		panelGeneral.add(panelCreaViaje);
-		panelCreaViaje.setLayout(new GridLayout(0, 1, 0, 0));
-		
-		JPanel panel = new JPanel();
-		panelCreaViaje.add(panel);
-		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		
-		JLabel IngresarCantidad = new JLabel("Ingrese cantidad de pasajeros: ");
-		panel.add(IngresarCantidad);
-		
-		cantPasajeros = new JTextField();
-		panel.add(cantPasajeros);
-		cantPasajeros.setColumns(10);
-		
-		JButton BotonAceptar = new JButton("Aceptar");
-		panel.add(BotonAceptar);
-		
-		JPanel panelZonas = new JPanel();
-		panelCreaViaje.add(panelZonas);
-		
-		JLabel LabelZona = new JLabel("Elija la Zona");
-		LabelZona.setBackground(new Color(240, 240, 240));
-		panelZonas.add(LabelZona);
-		
-		JList list = new JList();
-		list.setModel(new AbstractListModel() {
-			String[] values = new String[] {"Zona Peligrosa", "Zona Calle de Tierra ", "Zona Estandar"};
-			public int getSize() {
-				return values.length;
-			}
-			public Object getElementAt(int index) {
-				return values[index];
-			}
-		});
-		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		panelZonas.add(list);
-		
-		JPanel panelMascota = new JPanel();
-		panelCreaViaje.add(panelMascota);
-		panelMascota.setLayout(new GridLayout(0, 2, 0, 0));
-		
-		JPanel panel_3 = new JPanel();
-		panelMascota.add(panel_3);
-		
-		JPanel panel_2 = new JPanel();
-		panelMascota.add(panel_2);
-		
-		JPanel panelBaul = new JPanel();
-		panelCreaViaje.add(panelBaul);
-		
-		JPanel panelDistancia = new JPanel();
-		panelCreaViaje.add(panelDistancia);
-		
-		JPanel panelEstadoDelViaje = new JPanel();
-		panelGeneral.add(panelEstadoDelViaje);
-		panelEstadoDelViaje.setLayout(new GridLayout(0, 1, 0, 0));
-		
-		JPanel panel_1 = new JPanel();
-		panelEstadoDelViaje.add(panel_1);
-		panel_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		
-		JLabel lblNewLabel_1 = new JLabel("Estado del Viaje");
-		panel_1.add(lblNewLabel_1);
-		
-		JScrollPane scrollPane_1 = new JScrollPane();
-		panelEstadoDelViaje.add(scrollPane_1);
+	public Integer getCantPasajeros() {
+		String value = CantPasajeros.getText();
+		return Integer.parseInt(value);
 	}
 
-	public JPanel getContentPane() {
-		return this.contentPane;
+	public double getIngresaDistancia() {
+		String value = CantPasajeros.getText();
+		return Double.parseDouble(value);
 	}
 
-	public void setContentPane(JPanel contentPane) {
-		this.contentPane = contentPane;
+	public boolean isBaul() {
+		if (this.radioBotonSi.isSelected())
+			return true;
+		else
+			return false;
+				
 	}
-
-	public JTextField getCantPasajeros() {
-		return this.cantPasajeros;
-	}
-
-	public void setCantPasajeros(JTextField cantPasajeros) {
-		this.cantPasajeros = cantPasajeros;
-	}
-
-	public void setControlador(Controlador c){
 	
+	public boolean isMascota() {
+		if (this.RadioBotonSi.isSelected())
+			return true;
+		else
+			return false;
+				
 	}
-
+	
+	public void setActionListener(Controlador c) {
+		
+		this.botonAceptar.addActionListener(c);
+		
+	}
+	
+	
+	
+	
 }

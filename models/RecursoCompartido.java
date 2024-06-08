@@ -133,6 +133,15 @@ public class RecursoCompartido extends Observable{
 
 	public void pagarViaje(IViaje viaje) {
 		
+		while (viaje.getEstado().equals("Iniciado")) {
+			try {
+				wait();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
 		viaje.setEstado("Pagado");
 		notifyAll();
 		setChanged();
@@ -159,7 +168,7 @@ public class RecursoCompartido extends Observable{
 		return viaje;
 	}
 
-	public void finalizaViaje(IViaje viaje) {
+	public synchronized void finalizaViaje(IViaje viaje) {
 		
 		while (!viaje.getEstado().equals("Pagado")) {
 			try {
