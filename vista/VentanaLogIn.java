@@ -17,6 +17,8 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Color;
 import javax.swing.JPasswordField;
 import javax.swing.SpringLayout;
@@ -35,9 +37,8 @@ import controlador.ControladorLogIn;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-public class VentanaLogIn extends JFrame{
+public class VentanaLogIn extends JFrame implements IVistaLogIn{
 
-	//private ControladorLogIn controlador;  (con la manera de las filminas no es necesaria)
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JPanel panel;
@@ -135,8 +136,7 @@ public class VentanaLogIn extends JFrame{
 		this.panel_1.add(this.panel_6);
 		
 		this.btnIniciarSesion = new JButton("Iniciar Sesion");
-		this.btnIniciarSesion.addActionListener(controlador);        //(esta la saque del video de guille)
-		//this.btnIniciarSesion.setActionCommand("Iniciar Sesion");(esta la saque de las filminas)  	   NOSE CUAL DE ESTAS DOS ES LA CORRECTA
+		this.btnIniciarSesion.setActionCommand("Iniciar Sesion"); 
 		this.panel_6.add(this.btnIniciarSesion);
 		
 		this.panel_2 = new JPanel();
@@ -175,26 +175,63 @@ public class VentanaLogIn extends JFrame{
 		this.panel_2.add(this.panel_10);
 		
 		this.btnRegistrarse = new JButton("Registrarse");
-		//this.btnRegistrarse.addActionListener(controlador);                (esta la saque del video de guille)
-		this.btnRegistrarse.setActionCommand("Registrarse");// (esta la saque de las filminas)  		NOSE CUAL DE ESTAS DOS ES LA CORRECTA
+		this.btnRegistrarse.setActionCommand("Registrarse");
 		this.panel_10.add(this.btnRegistrarse);
 		
 	}
 
+	@Override
+	public void setControlador(ControladorLogIn c){
+		btnIniciarSesion.addActionListener(c);
+		btnRegistrarse.addActionListener(c);
+	}
+
+	@Override
 	public String getUsuario(){
-		return this.tfUser.getText();
+		try{
+			return this.tfUser.getText();
+		}
+		catch (NullPointerException e){
+			JOptionPane.showMessageDialog(null,"Debe Introducir un nombre de Usuario valido");
+			return null;
+		}
 	}
 
+	@Override
 	public String getNuevoUsuario(){
-		return this.tfNuevoUser.getText();
+		try{
+			return this.tfNuevoUser.getText();
+		}
+		catch (NullPointerException e){
+			JOptionPane.showMessageDialog(null,"Debe Introducir un nombre de Usuario valido");
+			return null;
+		}
 	}
 
+	@Override
 	public String getContrasena(){
-		return new String(this.pfContrasena.getPassword());
+		try{
+			return new String(this.pfContrasena.getPassword());
+		}
+		catch (NullPointerException e){
+			JOptionPane.showMessageDialog(null,"Debe Introducir una Contrasena valida");
+			return null;
+		}
 	}
 
+	@Override
 	public String getNuevaContrasena(){
-		return new String(this.pfNuevaContrasena.getPassword());
+		try{
+			return new String(this.pfNuevaContrasena.getPassword());
+		}
+		catch (NullPointerException e){
+			JOptionPane.showMessageDialog(null,"Debe Introducir una Contrasena valida");
+			return null;
+		}
+	}
+
+	public void ventanaAviso(String arg){
+		JOptionPane.showMessageDialog(null,arg);
 	}
 
 }

@@ -210,8 +210,15 @@ public class Sistema implements Serializable{
 		
 	}
 
-	public void nuevoCliente(String user, String contra) throws UsuarioYaExisteException {
-		this.clientes.add( new Cliente(user,contra) );
+	public void nuevoCliente(String user, String contra) throws UsuarioYaExistenteException {
+		int i=0;
+		while( i<clientes.size() && clientes.get(i).getUsuario()!= user )
+			i++;
+		
+		if (i==clientes.size())
+			this.clientes.add( new Cliente(user,contra) );
+		else
+			throw new UsuarioYaExistenteException("El cliente ya existe");
 		
 	}
 	
@@ -224,6 +231,7 @@ public class Sistema implements Serializable{
      */	
 	public void verificaUsuario(String usuario, String contra) throws UsuarioInexistenteException, ContrasenaIncorrectaException{
 		int i=0;
+
 		while( i<clientes.size() && clientes.get(i).getUsuario()!= usuario )
 			i++;
 		
