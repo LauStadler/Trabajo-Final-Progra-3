@@ -37,9 +37,6 @@ public class VistaCliente extends JFrame implements ActionListener {
 	private JPanel panelMascotas;
 	private JPanel panelBaul;
 	private JPanel panelDistancia;
-	private JScrollPane scrollPane;
-	private JPanel panel_5;
-	private JLabel lblNewLabel;
 	private JLabel CantidadPasajeros;
 	private JTextField CantPasajeros;
 	private JComboBox comboBox;
@@ -57,6 +54,11 @@ public class VistaCliente extends JFrame implements ActionListener {
 	private JLabel LabelMascota;
 	private JTextField ingresaDistancia;
 	private JButton botonAceptar;
+	private JScrollPane scrollPaneEstadoViaje;
+	private JPanel panelEstado;
+	private JPanel panelPago;
+	private JLabel labelEstado;
+	private JButton botonPagar;
 	
 	public VistaCliente() {
 		getContentPane().setLayout(new GridLayout(0, 1, 0, 0));
@@ -152,14 +154,21 @@ public class VistaCliente extends JFrame implements ActionListener {
 		this.panelGeneral.add(this.panelEstadoPedido);
 		this.panelEstadoPedido.setLayout(new BorderLayout(0, 0));
 		
-		this.scrollPane = new JScrollPane();
-		this.panelEstadoPedido.add(this.scrollPane, BorderLayout.CENTER);
+		this.panelPago = new JPanel();
+		this.panelEstadoPedido.add(this.panelPago, BorderLayout.SOUTH);
 		
-		this.panel_5 = new JPanel();
-		this.scrollPane.setColumnHeaderView(this.panel_5);
+		this.botonPagar = new JButton("Pagar");
+		this.panelPago.add(this.botonPagar);
+		this.botonPagar.setEnabled(false);
 		
-		this.lblNewLabel = new JLabel("Estado de su Viaje");
-		this.panel_5.add(this.lblNewLabel);
+		this.scrollPaneEstadoViaje = new JScrollPane();
+		this.panelEstadoPedido.add(this.scrollPaneEstadoViaje, BorderLayout.CENTER);
+		
+		this.panelEstado = new JPanel();
+		this.panelEstadoPedido.add(this.panelEstado, BorderLayout.NORTH);
+		
+		this.labelEstado = new JLabel("Estado de su viaje");
+		this.panelEstado.add(this.labelEstado);
 	}
 	
 	/**
@@ -207,7 +216,7 @@ public class VistaCliente extends JFrame implements ActionListener {
 	public void setActionListener(Controlador c) {
 		
 		this.botonAceptar.addActionListener(c);
-		
+		this.botonPagar.addActionListener(c);
 	}
 	
 	

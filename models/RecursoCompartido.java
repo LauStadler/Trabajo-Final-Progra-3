@@ -96,7 +96,7 @@ public class RecursoCompartido extends Observable{
 		notifyObservers(viaje);
 	}
 	
-	public Pedido creaPedido() {
+	public Pedido creaPedido() { // para crear con los threads clientes pedidos random
 		// TODO Auto-generated method stub
 		return null;
 	}
