@@ -62,6 +62,9 @@ public abstract class Chofer implements Serializable {
    public void setPuntaje(int puntaje) {
 	 this.puntaje = puntaje;
    }
+public int getPuntaje() {
+	return puntaje;
+}
    
    
 }
