@@ -29,11 +29,15 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
+
+import controlador.ControladorLogIn;
+
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-public class VentanaLogIn extends JFrame {
+public class VentanaLogIn extends JFrame{
 
+	private ControladorLogIn controlador;
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JPanel panel;
@@ -131,6 +135,8 @@ public class VentanaLogIn extends JFrame {
 		this.panel_1.add(this.panel_6);
 		
 		this.btnIniciarSesion = new JButton("Iniciar Sesion");
+		//this.btnIniciarSesion.addActionListener(controlador);    		         (esta la saque del video de guille)
+		this.btnIniciarSesion.setActionCommand("Iniciar Sesion");//(esta la saque de las filminas)  	   NOSE CUAL DE ESTAS DOS ES LA CORRECTA
 		this.panel_6.add(this.btnIniciarSesion);
 		
 		this.panel_2 = new JPanel();
@@ -169,7 +175,10 @@ public class VentanaLogIn extends JFrame {
 		this.panel_2.add(this.panel_10);
 		
 		this.btnRegistrarse = new JButton("Registrarse");
+		//this.btnRegistrarse.addActionListener(controlador);                (esta la saque del video de guille)
+		this.btnRegistrarse.setActionCommand("Registrarse");// (esta la saque de las filminas)  		NOSE CUAL DE ESTAS DOS ES LA CORRECTA
 		this.panel_10.add(this.btnRegistrarse);
 		
 	}
+
 }
