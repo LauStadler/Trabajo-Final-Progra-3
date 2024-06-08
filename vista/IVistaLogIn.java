@@ -2,13 +2,13 @@ package vista;
 
 import java.awt.event.ActionListener;
 
-import controlador.Controlador;
+import controlador.ControladorLogIn;
 
 public interface IVistaLogIn { //La vista en la que se loguea/registra el usuario
 
-	 public void setControlador(Controlador controlador);
-	 public String getUser();
-	 public String getContra();
-	 public String getNuevoUser();
-	 public String getNuevaContra();
+	 public void setControlador(ControladorLogIn controlador);
+	 public String getUsuario();
+	 public String getContrasena();
+	 public String getNuevoUsuario();
+	 public String getNuevaContrasena();
 }

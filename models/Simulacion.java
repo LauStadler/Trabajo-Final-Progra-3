@@ -5,8 +5,8 @@ import java.util.ArrayList;
 public class Simulacion {
 
 	private RecursoCompartido rc;
-	private ArrayList<ClienteThread> clientes = new ArrayList<> ();
-	private ArrayList<ChoferThread> choferes = new ArrayList<> ();
+	private ArrayList<ClienteThread> clientes = new ArrayList<> (); //thread
+	private ArrayList<ChoferThread> choferes = new ArrayList<> (); //thread
 	private SistemaThread sistemaThread;
 	private Sistema sistema = Sistema.getInstancia();
 	private int cantMaxSolicitudes = 5;
