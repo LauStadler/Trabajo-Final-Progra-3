@@ -3,7 +3,9 @@ package controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import models.ContrasenaIncorrectaException;
 import models.Sistema;
+import models.UsuarioInexistenteException;
 import vista.VentanaLogIn;
 
 public class ControladorLogIn implements ActionListener {
@@ -31,15 +33,35 @@ public class ControladorLogIn implements ActionListener {
 
 		if(evento.getActionCommand().equals("Iniciar Sesion")) {
             System.out.println("el pana quiere logearse");
+
+			String usuario= vista.getUsuario();
+			String contra= vista.getContrasena();
+
             try{
-                //intenta logear
+                modelo.verificaUsuario(usuario, contra);
             }
-            catch (ContraseniaIncorrectaException e){
+			catch (UsuarioInexistenteException e){
+                //avisa a la vista que tiene que volver a intentar
+            }
+            catch (ContrasenaIncorrectaException e){
                 //avisa a la vista que tiene que volver a intentar
             }
         }
         else if(evento.getActionCommand().equals("Registrarse")) {
-            System.out.println("el pana quiere logearse");
+            System.out.println("el pana quiere Registrarse");
+			String usuario= vista.getNuevoUsuario();
+			String contra= vista.getNuevaContrasena();
+
+			try{
+                modelo.creaUsuario(usuario, contra);
+            }
+			catch (UsuarioInexistenteException e){
+                //avisa a la vista que tiene que volver a intentar
+            }
+            catch (ContrasenaIncorrectaException e){
+                //avisa a la vista que tiene que volver a intentar
+            }
+
         }
 		
 	}

@@ -209,5 +209,30 @@ public class Sistema implements Serializable{
 		this.choferes.add(aux);
 		
 	}
+
+	public void nuevoCliente(String user, String contra) throws UsuarioYaExisteException {
+		this.clientes.add( new Cliente(user,contra) );
+		
+	}
 	
+	/**
+     * Este metodo Verifica tanto la existencia del usuario, como la correcta contrasenia del mismo. En caso de no verificarla, lanza una excepcion
+     * @param usuario Usuario del cliente.
+	 * @param contra Contrasena del cliente.
+     * @throws UsuarioInexistenteException 
+     * @throws ContrasenaIncorrectaException 
+     */	
+	public void verificaUsuario(String usuario, String contra) throws UsuarioInexistenteException, ContrasenaIncorrectaException{
+		int i=0;
+		while( i<clientes.size() && clientes.get(i).getUsuario()!= usuario )
+			i++;
+		
+		if (i==clientes.size())
+			throw new UsuarioInexistenteException("Usuario Inexistente");
+		
+		if(contra != clientes.get(i).getContrasenia())
+			throw new ContrasenaIncorrectaException("Contrasena incorrecta");
+		
+	}
+
 }

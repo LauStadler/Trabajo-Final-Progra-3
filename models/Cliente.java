@@ -37,7 +37,4 @@ public class Cliente implements Serializable {
 		return "Cliente usuario: " + usuario + ", contrasenia: " + contrasenia;
 	}
 	
-	
-	
-	
 }

@@ -37,7 +37,7 @@ import javax.swing.SwingConstants;
 
 public class VentanaLogIn extends JFrame{
 
-	private ControladorLogIn controlador;
+	//private ControladorLogIn controlador;  (con la manera de las filminas no es necesaria)
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JPanel panel;
@@ -46,10 +46,10 @@ public class VentanaLogIn extends JFrame{
 	private JPanel panel_5;
 	private JPanel panel_3;
 	private JLabel lblUser;
-	private JTextField textField_User;
+	private JTextField tfUser;
 	private JPanel panel_4;
 	private JLabel lblContrasena;
-	private JPasswordField passwordField_Contrasena;
+	private JPasswordField pfContrasena;
 	private JPanel panel_6;
 	private JButton btnIniciarSesion;
 	private JPanel panel_2;
@@ -57,10 +57,10 @@ public class VentanaLogIn extends JFrame{
 	private JPanel panel_7;
 	private JPanel panel_8;
 	private JLabel lblNuevoUser;
-	private JTextField textField_NuevoUser;
+	private JTextField tfNuevoUser;
 	private JPanel panel_9;
 	private JLabel lblNuevaContrasena;
-	private JPasswordField passwordField_NuevaContrasena;
+	private JPasswordField pfNuevaContrasena;
 	private JPanel panel_10;
 	private JButton btnRegistrarse;
 
@@ -117,9 +117,9 @@ public class VentanaLogIn extends JFrame{
 		this.lblUser = new JLabel("User");
 		this.panel_3.add(this.lblUser);
 		
-		this.textField_User = new JTextField();
-		this.textField_User.setColumns(10);
-		this.panel_3.add(this.textField_User);
+		this.tfUser = new JTextField();
+		this.tfUser.setColumns(10);
+		this.panel_3.add(this.tfUser);
 		
 		this.panel_4 = new JPanel();
 		this.panel_5.add(this.panel_4);
@@ -127,16 +127,16 @@ public class VentanaLogIn extends JFrame{
 		this.lblContrasena = new JLabel("Contrasena");
 		this.panel_4.add(this.lblContrasena);
 		
-		this.passwordField_Contrasena = new JPasswordField();
-		this.passwordField_Contrasena.setColumns(10);
-		this.panel_4.add(this.passwordField_Contrasena);
+		this.pfContrasena = new JPasswordField();
+		this.pfContrasena.setColumns(10);
+		this.panel_4.add(this.pfContrasena);
 		
 		this.panel_6 = new JPanel();
 		this.panel_1.add(this.panel_6);
 		
 		this.btnIniciarSesion = new JButton("Iniciar Sesion");
-		//this.btnIniciarSesion.addActionListener(controlador);    		         (esta la saque del video de guille)
-		this.btnIniciarSesion.setActionCommand("Iniciar Sesion");//(esta la saque de las filminas)  	   NOSE CUAL DE ESTAS DOS ES LA CORRECTA
+		this.btnIniciarSesion.addActionListener(controlador);        //(esta la saque del video de guille)
+		//this.btnIniciarSesion.setActionCommand("Iniciar Sesion");(esta la saque de las filminas)  	   NOSE CUAL DE ESTAS DOS ES LA CORRECTA
 		this.panel_6.add(this.btnIniciarSesion);
 		
 		this.panel_2 = new JPanel();
@@ -157,9 +157,9 @@ public class VentanaLogIn extends JFrame{
 		this.lblNuevoUser = new JLabel("Nuevo User");
 		this.panel_8.add(this.lblNuevoUser);
 		
-		this.textField_NuevoUser = new JTextField();
-		this.textField_NuevoUser.setColumns(10);
-		this.panel_8.add(this.textField_NuevoUser);
+		this.tfNuevoUser = new JTextField();
+		this.tfNuevoUser.setColumns(10);
+		this.panel_8.add(this.tfNuevoUser);
 		
 		this.panel_9 = new JPanel();
 		this.panel_7.add(this.panel_9);
@@ -167,9 +167,9 @@ public class VentanaLogIn extends JFrame{
 		this.lblNuevaContrasena = new JLabel("Nueva Contrasena");
 		this.panel_9.add(this.lblNuevaContrasena);
 		
-		this.passwordField_NuevaContrasena = new JPasswordField();
-		this.passwordField_NuevaContrasena.setColumns(10);
-		this.panel_9.add(this.passwordField_NuevaContrasena);
+		this.pfNuevaContrasena = new JPasswordField();
+		this.pfNuevaContrasena.setColumns(10);
+		this.panel_9.add(this.pfNuevaContrasena);
 		
 		this.panel_10 = new JPanel();
 		this.panel_2.add(this.panel_10);
@@ -179,6 +179,22 @@ public class VentanaLogIn extends JFrame{
 		this.btnRegistrarse.setActionCommand("Registrarse");// (esta la saque de las filminas)  		NOSE CUAL DE ESTAS DOS ES LA CORRECTA
 		this.panel_10.add(this.btnRegistrarse);
 		
+	}
+
+	public String getUsuario(){
+		return this.tfUser.getText();
+	}
+
+	public String getNuevoUsuario(){
+		return this.tfNuevoUser.getText();
+	}
+
+	public String getContrasena(){
+		return new String(this.pfContrasena.getPassword());
+	}
+
+	public String getNuevaContrasena(){
+		return new String(this.pfNuevaContrasena.getPassword());
 	}
 
 }
