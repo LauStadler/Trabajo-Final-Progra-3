@@ -28,20 +28,20 @@ public class OjoCliente implements Observer {
 		{
             if (this.cliente == o) {
 				String cartel = (String) arg;
-	            this.ventana.appendTextCliente(cartel);
+	            this.ventana.appendTextCliente(cartel);//estado del pedido
             }
 	        else
-	        	if (this.rc == o) {
+	        	if (this.rc == o) { //estado del viaje
 	        		IViaje viaje= (IViaje) arg;
 	   			 	if (viaje.getCliente() == this.cliente){
 		   				if(viaje.getEstado().equals("Solicitado")){
 		   					this.ventana.appendTextCliente("Viaje Solicitado");
 		   				}
 		   				else if(viaje.getEstado().equals("Con vehiuculo")){
-		   					this.ventana.appendTextCliente("Al viaje se le asigno el vehiculo"+viaje.getVehiculo().getPatente());
+		   					this.ventana.appendTextCliente("Al viaje se le asigno el vehiculo "+viaje.getVehiculo().getPatente());
 		   				}
 		   				else if(viaje.getEstado().equals("Iniciado")){
-		   					this.ventana.appendTextCliente("Al viaje lo tomo el chofer"+viaje.getChofer().getNombre());
+		   					this.ventana.appendTextCliente("Al viaje lo tomo el chofer "+viaje.getChofer().getNombre());
 		   					this.ventana.appendTextCliente("Viaje iniciado");
 		   					
 		   				}
