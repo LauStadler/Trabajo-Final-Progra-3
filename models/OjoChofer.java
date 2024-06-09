@@ -44,10 +44,10 @@ public class OjoChofer implements Observer{
 		 if(this.rc == o) {
 				 IViaje viaje = (IViaje) arg;
 		         if(viaje.getChofer() == this.chofer){
-					if(viaje.getEstado().equals("Iniaciado")){
+					if(viaje.getEstado().equals("Iniciado")){
 						this.ventana.appendTextChofer("El chofer "+viaje.getChofer().getNombre()+" agarro un viaje");
 					}
-					else if(viaje.getEstado().equals("Iniciado")){
+					else if(viaje.getEstado().equals("Pagado")){
 						this.ventana.appendTextChofer("El cliente "+viaje.getCliente().getUsuario()+" pago el viaje");
 					}
 					else if(viaje.getEstado().equals("Finalizado")){

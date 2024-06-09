@@ -20,7 +20,6 @@ public class Simulacion {
 	
 	public void start () {
 		
-		
 		for (int i = 0; i < sistema.getChoferes().size() ; i++)
 			choferes.add(new Thread(new ChoferThread(rc, (int) (Math.random() * this.cantMaxViajes) + 1, sistema.getChoferes().get(i))));
 		rc.setCantChoferes(choferes.size());
