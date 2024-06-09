@@ -232,9 +232,15 @@ public class Sistema implements Serializable{
 		
 	}
 
+	/**
+	 * Este metodo agrega un cliente a la lista.
+	 * <b>pre:</b> Los strings deben ser distintos de nulo y espacio vacio.
+	 * @param user username del cliente a crear.
+	 * @param contra contrasena del cliente a agregar.
+	 */
 	public void nuevoCliente(String user, String contra) throws UsuarioYaExistenteException {
 		int i=0;
-		while( i<clientes.size() && clientes.get(i).getUsuario()!= user )
+		while( i<clientes.size() && !clientes.get(i).getUsuario().equalsIgnoreCase(user) )
 			i++;
 		
 		if (i==clientes.size())
@@ -246,6 +252,7 @@ public class Sistema implements Serializable{
 	
 	/**
      * Este metodo Verifica tanto la existencia del usuario, como la correcta contrasenia del mismo. En caso de no verificarla, lanza una excepcion
+	 * <b>pre:</b> Los strings deben ser distintos de nulo y espacio vacio.
      * @param usuario Usuario del cliente.
 	 * @param contra Contrasena del cliente.
      * @throws UsuarioInexistenteException 
@@ -253,14 +260,14 @@ public class Sistema implements Serializable{
      */	
 	public void verificaUsuario(String usuario, String contra) throws UsuarioInexistenteException, ContrasenaIncorrectaException{
 		int i=0;
-
-		while( i<clientes.size() && clientes.get(i).getUsuario()!= usuario )
+		while( i<clientes.size() && !clientes.get(i).getUsuario().equalsIgnoreCase(usuario)) {
 			i++;
+		}
 		
 		if (i==clientes.size())
 			throw new UsuarioInexistenteException("Usuario Inexistente");
 		
-		if(contra != clientes.get(i).getContrasenia())
+		if(!clientes.get(i).getContrasenia().equals(contra))
 			throw new ContrasenaIncorrectaException("Contrasena incorrecta");
 		
 	}

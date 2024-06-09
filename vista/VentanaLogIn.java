@@ -189,7 +189,11 @@ public class VentanaLogIn extends JFrame implements IVistaLogIn{
 	@Override
 	public String getUsuario(){
 		try{
-			return this.tfUser.getText();
+			String aux = this.tfUser.getText();
+			if (!aux.equals(""))
+				return aux;
+			JOptionPane.showMessageDialog(null,"Debe Introducir un nombre de Usuario valido");
+			return null;
 		}
 		catch (NullPointerException e){
 			JOptionPane.showMessageDialog(null,"Debe Introducir un nombre de Usuario valido");
@@ -200,7 +204,11 @@ public class VentanaLogIn extends JFrame implements IVistaLogIn{
 	@Override
 	public String getNuevoUsuario(){
 		try{
-			return this.tfNuevoUser.getText();
+			String aux = this.tfNuevoUser.getText();
+			if (!aux.equals(""))
+				return aux;
+			JOptionPane.showMessageDialog(null,"Debe Introducir un nombre de Usuario valido");
+			return null;
 		}
 		catch (NullPointerException e){
 			JOptionPane.showMessageDialog(null,"Debe Introducir un nombre de Usuario valido");
@@ -211,7 +219,11 @@ public class VentanaLogIn extends JFrame implements IVistaLogIn{
 	@Override
 	public String getContrasena(){
 		try{
-			return new String(this.pfContrasena.getPassword());
+			String aux = new String(this.pfContrasena.getPassword());
+			if (!aux.equals(""))
+				return aux;
+			JOptionPane.showMessageDialog(null,"Debe Introducir una Contrasena valida");
+			return null;
 		}
 		catch (NullPointerException e){
 			JOptionPane.showMessageDialog(null,"Debe Introducir una Contrasena valida");
@@ -222,7 +234,11 @@ public class VentanaLogIn extends JFrame implements IVistaLogIn{
 	@Override
 	public String getNuevaContrasena(){
 		try{
-			return new String(this.pfNuevaContrasena.getPassword());
+			String aux = new String(this.pfNuevaContrasena.getPassword());
+			if (!aux.equals(""))
+				return aux;
+			JOptionPane.showMessageDialog(null,"Debe Introducir una Contrasena valida");
+			return null;
 		}
 		catch (NullPointerException e){
 			JOptionPane.showMessageDialog(null,"Debe Introducir una Contrasena valida");
@@ -230,6 +246,7 @@ public class VentanaLogIn extends JFrame implements IVistaLogIn{
 		}
 	}
 
+	@Override
 	public void ventanaAviso(String arg){
 		JOptionPane.showMessageDialog(null,arg);
 	}
