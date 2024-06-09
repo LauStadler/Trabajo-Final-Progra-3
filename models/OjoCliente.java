@@ -3,45 +3,55 @@ package models;
 import java.util.Observable;
 import java.util.Observer;
 
+import vista.VentanaSimulacion;
+
 public class OjoCliente implements Observer {
     
-	private RecursoCompartido rc;
-	private ClienteThread cliente;
-	private VentanaClienteT ventana;
+	private Observable rc;
+	private Observable cliente;
+	private VentanaSimulacion ventana;
 	
-	public OjoCliente(RecursoCompartido rc,ClienteThread cliente, VentanaClienteT ventana) {
+	public OjoCliente(RecursoCompartido rc,ClienteThread cliente, VentanaSimulacion ventana) {
 		this.setObservable(rc);
 		rc.addObserver(this);
 		this.setClienteThread(cliente);
-		this.setVentanaC(ventana)
+		this.setVentana(ventana);
 	}
 	
 	@Override
 	public void update(Observable o, Object arg) {
 	   
-		if (this.rc!=o ) {
-			throw new InterruptedException();
+		if (this.cliente != o && this.rc != o ) {
+			throw new IllegalArgumentException();
 		}
 		else
 		{
-             IViaje viaje= (IViaje) arg;
-			 if (viaje.getCliente==this.cliente){
-				if(viaje.getEstado.equals("Solicitado")){
-					this.ventana.appendText("Viaje Solicitado");
-				}
-				else if(viaje.getEstado.equals("Con vehiuculo"){
-					this.ventana.appendText("Al viaje se le asigno el vehiculo"+viaje.getVehiculo().getPatente());
-				}
-				else if(viaje.getEstado.equals("Iniciado")){
-					this.ventana.appendText("Al viaje lo tomo el chofer"+viaje.getChofer().getNombre());
-					this.ventana.appendText("Viaje iniciado");
-				}
-				else if(viaje.getEstado().equals("Pagado")){
-					this.ventana.appendText("El viaje fue pagado");
-				}
-				else if(viaje.getEstado().equals("Finalizado")){
-					this.ventana.appendText("El chofer "+viajes.getChofer().getNombre()+" finalizo el viaje");
-				}
+            if (this.cliente == o) {
+				String cartel = (String) arg;
+	            this.ventana.appendTextCliente(cartel);
+            }
+	        else
+	        	if (this.rc == o) {
+	        		IViaje viaje= (IViaje) arg;
+	   			 	if (viaje.getCliente() == this.cliente){
+		   				if(viaje.getEstado().equals("Solicitado")){
+		   					this.ventana.appendTextCliente("Viaje Solicitado");
+		   				}
+		   				else if(viaje.getEstado().equals("Con vehiuculo")){
+		   					this.ventana.appendTextCliente("Al viaje se le asigno el vehiculo"+viaje.getVehiculo().getPatente());
+		   				}
+		   				else if(viaje.getEstado().equals("Iniciado")){
+		   					this.ventana.appendTextCliente("Al viaje lo tomo el chofer"+viaje.getChofer().getNombre());
+		   					this.ventana.appendTextCliente("Viaje iniciado");
+		   					
+		   				}
+		   				else if(viaje.getEstado().equals("Pagado")){
+		   					this.ventana.appendTextCliente("El viaje fue pagado");
+		   				}
+		   				else if(viaje.getEstado().equals("Finalizado")){
+		   					this.ventana.appendTextCliente("El chofer "+ viaje.getChofer().getNombre()+" finalizo el viaje");
+		   				}
+	   			 	}
 			 }
  		}
 	}
@@ -50,23 +60,23 @@ public class OjoCliente implements Observer {
        this.cliente=cliente;
 	}
 
-	public ClienteThread getClienteThread(){
+	public Observable getClienteThread(){
 		return this.cliente;
 	}
 	
-	public RecursoCompartido getObservable() {
+	public Observable getObservable() {
 		return this.rc;
 	}
 
-	private void setObservable(RecursoCompartido rc) {
+	private void setObservable(Observable rc) {
 		this.rc=rc;
 	}
 
-	public void setVentanaC(VentanaClienteT ventana){
-		this.ventana=vetana;
+	public void setVentana(VentanaSimulacion ventana){
+		this.ventana=ventana;
 	}
 
-	public VentanaClienteT getVentana(){
+	public VentanaSimulacion getVentana(){
 		return this.ventana;
 	}
 }

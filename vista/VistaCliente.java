@@ -26,7 +26,7 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JRadioButton;
 
-public class VistaCliente extends JFrame implements ActionListener {
+public class VistaCliente extends JFrame{
 
 	private static final long serialVersionUID = 1L;
 	private JPanel panelGeneral;
@@ -59,6 +59,7 @@ public class VistaCliente extends JFrame implements ActionListener {
 	private JPanel panelPago;
 	private JLabel labelEstado;
 	private JButton botonPagar;
+	private JTextArea logviaje;
 	
 	public VistaCliente() {
 		getContentPane().setLayout(new GridLayout(0, 1, 0, 0));
@@ -78,7 +79,6 @@ public class VistaCliente extends JFrame implements ActionListener {
 		this.panelCantPasajeros.add(this.CantidadPasajeros);
 		
 		this.CantPasajeros = new JTextField();
-		this.CantPasajeros.addActionListener(this);
 		this.panelCantPasajeros.add(this.CantPasajeros);
 		this.CantPasajeros.setColumns(10);
 		
@@ -89,7 +89,6 @@ public class VistaCliente extends JFrame implements ActionListener {
 		this.panelZona.add(this.ingresaZona);
 		
 		this.comboBox = new JComboBox();
-		this.comboBox.addActionListener(this);
 		this.comboBox.setModel(new DefaultComboBoxModel(new String[] {"", "Zona Peligrosa", "Zona Estandar ", "Zona Calle de  Tierra"}));
 		this.panelZona.add(this.comboBox);
 		
@@ -142,7 +141,6 @@ public class VistaCliente extends JFrame implements ActionListener {
 		this.panelDistancia.add(this.labelDistancia);
 		
 		this.ingresaDistancia = new JTextField();
-		this.ingresaDistancia.addActionListener(this);
 		this.panelDistancia.add(this.ingresaDistancia);
 		this.ingresaDistancia.setColumns(10);
 		
@@ -163,6 +161,9 @@ public class VistaCliente extends JFrame implements ActionListener {
 		
 		this.scrollPaneEstadoViaje = new JScrollPane();
 		this.panelEstadoPedido.add(this.scrollPaneEstadoViaje, BorderLayout.CENTER);
+		
+		this.logviaje = new JTextArea();
+		this.scrollPaneEstadoViaje.setViewportView(this.logviaje);
 		
 		this.panelEstado = new JPanel();
 		this.panelEstadoPedido.add(this.panelEstado, BorderLayout.NORTH);
@@ -219,7 +220,14 @@ public class VistaCliente extends JFrame implements ActionListener {
 		this.botonPagar.addActionListener(c);
 	}
 	
-	
-	
+	public void appendText(String arg)
+    {
+	    this.logviaje.append(arg+"\n");
+    }
+
+	public void habilitaPago() {
+		this.botonPagar.setEnabled(true);
+		
+	}
 	
 }

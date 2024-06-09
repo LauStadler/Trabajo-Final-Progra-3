@@ -1,11 +1,12 @@
 package models;
 
 import java.io.Serializable;
+import java.util.Observable;
 
 /**
  * Clase abstracta de chofer.
  */
-public abstract class Chofer implements Serializable {
+public abstract class Chofer extends Observable implements Serializable {
    /**
 	 * 
 	 */

@@ -44,15 +44,19 @@ public class Controlador implements ActionListener {
 			mascota = vista.isMascota();
 			double distancia = vista.getIngresaDistancia();
 			int cantPasajeros = vista.getCantPasajeros();
-			Pedido pedido = modelo.creaPedido();		
+			Pedido pedido = modelo.creaPedido();
+			this.vista.appendText("Pedido creado");
 			if (modelo.validaPedido(pedido)) {		
 				try {
+					this.vista.appendText("Pedido valido");
 					this.viaje = modelo.creaViaje(pedido);
 				} catch (VehiculosNoDisponiblesException | ChoferNoDisponibleException | PedidoInvalidoException
 						| ZonaInvalidaException e1) {
 					e1.printStackTrace();
 				}
 			}
+			else
+				this.vista.appendText("Pedido invalido, intente de nuevo");
 		}
 		else
 			if(e.getActionCommand().equals("Pagar"))

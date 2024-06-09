@@ -1,16 +1,14 @@
 package models;
 
-public class ClienteThread extends Thread {
+public class ClienteThread extends Cliente implements Runnable {
 	
 	private RecursoCompartido rc;
 	private int cantSolicitudes;
-	private Cliente cliente;
 	
-	public ClienteThread(RecursoCompartido rc, int cantSolicitudes, Cliente cliente) {
+	public ClienteThread(RecursoCompartido rc, int cantSolicitudes) {
 		super();
 		this.rc = rc;
 		this.cantSolicitudes = cantSolicitudes;
-		this.cliente = cliente;
 	}
 	
 	public void run () {
@@ -21,11 +19,13 @@ public class ClienteThread extends Thread {
 		
 		while (pedidosValidos < cantSolicitudes && rc.getCantChoferes() > 0) {
 			pedido = rc.creaPedido();
+			notifyObservers("El cliente "+ this.getUsuario() +" creo un pedido");
 			if (rc.validaPedido(pedido)) {
-				
+				notifyObservers("Se valido el pedido del cliente "+ this.getUsuario());
 				pedidosValidos ++;
 				try {
 					viaje = rc.creaViaje(pedido);
+					notifyObservers("Se se solicito un viaje del cliente "+ this.getUsuario());
 					rc.pagarViaje(viaje);
 					
 				} catch (VehiculosNoDisponiblesException | ChoferNoDisponibleException | PedidoInvalidoException
@@ -34,6 +34,8 @@ public class ClienteThread extends Thread {
 				}
 				
 			}
+			else
+				notifyObservers("Pedido invalido");
 		
 		}
 		rc.setCantClientes(rc.getCantClientes()-1);

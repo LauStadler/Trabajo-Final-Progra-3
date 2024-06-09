@@ -1,18 +1,18 @@
 package models;
 
-public class ChoferThread extends  Thread{
+import util.Util;
+
+public class ChoferThread extends Chofer implements Runnable{
 
 	private RecursoCompartido rc;
 	private int cantMaxViajes;
-	private Chofer chofer;
 	
 	
 	
-	public ChoferThread(RecursoCompartido rc, int cantMaxViajes, Chofer chofer) {
+	public ChoferThread(RecursoCompartido rc, int cantMaxViajes) {
 		super();
 		this.rc = rc;
 		this.cantMaxViajes = cantMaxViajes;
-		this.chofer = chofer;
 	}
 
 	public void run () {
@@ -22,16 +22,18 @@ public class ChoferThread extends  Thread{
 		
 		while (cantViajes < this.cantMaxViajes  && rc.getCantClientes() > 0) {
 			viaje = rc.tomaViaje();
-			try {
-				//se supone que el hilo se duerme por 30 segs, para simular un viaje
-				sleep(30000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			} 
+			//se supone que el hilo se duerme por 30 segs, para simular un viaje
+			Util.espera(30000); 
 			rc.finalizaViaje(viaje);
 		}
 	
 		rc.setCantChoferes(rc.getCantChoferes()-1);
+	}
+
+	@Override
+	public double getSueldo() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 }

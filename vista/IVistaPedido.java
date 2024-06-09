@@ -6,10 +6,9 @@ import controlador.Controlador;
 
 public interface IVistaPedido { //La vista en la que se genera el pedido
 
-	 public void setControlador(Controlador controlador);
-	 public int getCantidadPasajeros();
-	 public String getTexto();
-	 public double getKm();
-	 public boolean getBaul();
-	 public boolean getMascota();
+	 public void setActionListener(Controlador c);
+	 public double getIngresaDistancia();
+	 public Integer getCantPasajeros();
+	 public boolean isBaul();
+	 public boolean isMascota();
 }

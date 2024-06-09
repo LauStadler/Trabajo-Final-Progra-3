@@ -1,8 +1,9 @@
 package models;
 
 import java.io.Serializable;
+import java.util.Observable;
 
-public class Cliente implements Serializable {
+public class Cliente extends Observable implements Serializable {
 
 	private String usuario;
 	private String contrasenia;
