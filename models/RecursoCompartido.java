@@ -191,4 +191,12 @@ public class RecursoCompartido extends Observable{
 	public void addObservers(Observer obj){
 		this.observadores.add(obj);
 	}
+
+	public void nuevoCliente(String usuario, String contra) throws UsuarioYaExistenteException {
+		empresa.nuevoCliente(usuario, contra);
+	}
+
+    public void verificaUsuario(String usuario, String contra) throws UsuarioInexistenteException, ContrasenaIncorrectaException {
+        empresa.verificaUsuario(usuario, contra);
+    }
 }
