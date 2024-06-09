@@ -3,17 +3,17 @@ package controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import models.Cliente;
 import models.ContrasenaIncorrectaException;
 import models.RecursoCompartido;
 import models.UsuarioInexistenteException;
 import models.UsuarioYaExistenteException;
 import vista.IVistaLogIn;
-import vista.VentanaLogIn;
 import vista.VistaCliente;
 
 public class ControladorLogIn implements ActionListener {
 
-	private RecursoCompartido modelo; //seria el sistema no?? pq va a modificar la lista de clientes y eso :D
+	private RecursoCompartido modelo;
 	private IVistaLogIn vista;
 	
 	public ControladorLogIn(RecursoCompartido modelo, IVistaLogIn vista) {
@@ -35,18 +35,17 @@ public class ControladorLogIn implements ActionListener {
 	public void actionPerformed(ActionEvent evento) {
 
 		if(evento.getActionCommand().equals("Iniciar Sesion")) {
-           
-			System.out.println("el pana quiere logearse");
 			String usuario= vista.getUsuario();
 			String contra= vista.getContrasena();
 
 			if(usuario!=null && contra!=null){
 				try{
-					modelo.verificaUsuario(usuario, contra);
+					Cliente cliente = modelo.verificaUsuario(usuario, contra);
 					//abre la vista de VistaCliente,
 					VistaCliente vista=new VistaCliente();
 					Controlador controlador = new Controlador( modelo , vista );
 					vista.setActionListener(controlador);
+					controlador.setCliente(cliente);
 					vista.setVisible(true);
 					this.vista.setVisible(false);
 				}
@@ -59,18 +58,17 @@ public class ControladorLogIn implements ActionListener {
 			}
         }
         else if(evento.getActionCommand().equals("Registrarse")) {
-        
-			System.out.println("el pana quiere Registrarse");	
 			String usuario= vista.getNuevoUsuario();
 			String contra= vista.getNuevaContrasena();
 			
 			if(usuario!=null && contra!=null){
 				try{
-					modelo.nuevoCliente(usuario, contra);
+					Cliente cliente= modelo.nuevoCliente(usuario, contra);
 					//abre la vista de VistaCliente,
 					VistaCliente vista=new VistaCliente();
 					Controlador controlador = new Controlador( modelo , vista );
 					vista.setActionListener(controlador);
+					controlador.setCliente(cliente);
 					vista.setVisible(true);
 					this.vista.setVisible(false);
 				}

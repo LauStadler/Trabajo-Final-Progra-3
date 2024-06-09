@@ -205,6 +205,11 @@ public class VistaCliente extends JFrame{
 			return false;
 				
 	}
+
+	public String getZona(){
+		//System.out.println(this.comboBox.getSelectedItem().toString());
+		return this.comboBox.getSelectedItem().toString();
+	}
 	
 	public boolean isMascota() {
 		if (this.RadioBotonSi.isSelected())

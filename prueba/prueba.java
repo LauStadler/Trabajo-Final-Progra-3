@@ -32,7 +32,7 @@ public class prueba {
 		Simulacion simulacion = new Simulacion();
 		RecursoCompartido rc = new RecursoCompartido(empresa);
 		VentanaLogIn vistaLogIn = new VentanaLogIn();
-		ControladorLogIn controladorLogIn = new ControladorLogIn( empresa, vistaLogIn );
+		ControladorLogIn controladorLogIn = new ControladorLogIn( rc, vistaLogIn );
 		vistaLogIn.setControlador(controladorLogIn);
 		vistaLogIn.setVisible(true);
 		VistaCliente ventanaPedido = new VistaCliente();

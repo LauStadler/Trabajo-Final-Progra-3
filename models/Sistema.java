@@ -238,13 +238,16 @@ public class Sistema implements Serializable{
 	 * @param user username del cliente a crear.
 	 * @param contra contrasena del cliente a agregar.
 	 */
-	public void nuevoCliente(String user, String contra) throws UsuarioYaExistenteException {
+	public Cliente nuevoCliente(String user, String contra) throws UsuarioYaExistenteException {
 		int i=0;
 		while( i<clientes.size() && !clientes.get(i).getUsuario().equalsIgnoreCase(user) )
 			i++;
 		
-		if (i==clientes.size())
-			this.clientes.add( new Cliente(user,contra) );
+		if (i==clientes.size()){
+			Cliente nuevo = new Cliente(user,contra);
+			this.clientes.add( nuevo );
+			return nuevo;
+		}
 		else
 			throw new UsuarioYaExistenteException("El cliente ya existe");
 		
@@ -258,7 +261,7 @@ public class Sistema implements Serializable{
      * @throws UsuarioInexistenteException 
      * @throws ContrasenaIncorrectaException 
      */	
-	public void verificaUsuario(String usuario, String contra) throws UsuarioInexistenteException, ContrasenaIncorrectaException{
+	public Cliente verificaUsuario(String usuario, String contra) throws UsuarioInexistenteException, ContrasenaIncorrectaException{
 		int i=0;
 		while( i<clientes.size() && !clientes.get(i).getUsuario().equalsIgnoreCase(usuario)) {
 			i++;
@@ -269,6 +272,8 @@ public class Sistema implements Serializable{
 		
 		if(!clientes.get(i).getContrasenia().equals(contra))
 			throw new ContrasenaIncorrectaException("Contrasena incorrecta");
+
+		return clientes.get(i);
 		
 	}
 

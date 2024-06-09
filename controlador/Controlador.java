@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import models.ChoferNoDisponibleException;
+import models.Cliente;
 import models.IViaje;
 import models.Pedido;
 import models.PedidoInvalidoException;
@@ -17,6 +18,7 @@ public class Controlador implements ActionListener {
 	private RecursoCompartido modelo;
 	private VistaCliente vista;
 	private IViaje viaje;
+	private Cliente cliente;
 	
 	public Controlador(RecursoCompartido modelo, VistaCliente vista) {
 		super();
@@ -33,6 +35,10 @@ public class Controlador implements ActionListener {
 		return vista;
 	}
 
+	public void setCliente(Cliente cliente) {
+		this.cliente= cliente;
+	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
@@ -40,16 +46,16 @@ public class Controlador implements ActionListener {
 		boolean mascota;
 		
 		if (e.getActionCommand().equals("Aceptar")) {
-			baul = vista.isBaul();
-			mascota = vista.isMascota();
-			double distancia = vista.getIngresaDistancia();
-			int cantPasajeros = vista.getCantPasajeros();
-			Pedido pedido = modelo.creaPedido();
+			
+			Pedido pedido = new Pedido(vista.getCantPasajeros(), vista.getZona(), vista.isMascota(), vista.isBaul(), this.cliente, vista.getIngresaDistancia());
+
 			this.vista.appendText("Pedido creado");
 			if (modelo.validaPedido(pedido)) {		
 				try {
 					this.vista.appendText("Pedido valido");
 					this.viaje = modelo.creaViaje(pedido);
+					//this.vista.appendText("Viaje solicitado"); se encarga el ojoHumano
+					this.vista.habilitaPago();
 				} catch (VehiculosNoDisponiblesException | ChoferNoDisponibleException | PedidoInvalidoException
 						| ZonaInvalidaException e1) {
 					e1.printStackTrace();

@@ -106,8 +106,8 @@ public class RecursoCompartido extends Observable{
 		if(!pedido.isPedidoValido()) 
 			return false;
 		
-		if (this.cantChoferes <= 0)
-			return false;
+		//if (this.cantChoferes <= 0)  no es necesario, lo chequea en creaViaje
+		//	return false;
 		
 		int i= empresa.getVehiculos().size() - 1;
 		while (i>0 && empresa.getVehiculos().get(i).getPrioridad(pedido)==null )
@@ -192,11 +192,11 @@ public class RecursoCompartido extends Observable{
 		this.observadores.add(obj);
 	}
 
-	public void nuevoCliente(String usuario, String contra) throws UsuarioYaExistenteException {
-		empresa.nuevoCliente(usuario, contra);
+	public Cliente nuevoCliente(String usuario, String contra) throws UsuarioYaExistenteException {
+		return empresa.nuevoCliente(usuario, contra);
 	}
 
-    public void verificaUsuario(String usuario, String contra) throws UsuarioInexistenteException, ContrasenaIncorrectaException {
-        empresa.verificaUsuario(usuario, contra);
+    public Cliente verificaUsuario(String usuario, String contra) throws UsuarioInexistenteException, ContrasenaIncorrectaException {
+        return empresa.verificaUsuario(usuario, contra);
     }
 }
