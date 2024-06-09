@@ -6,9 +6,11 @@ import controlador.ControladorLogIn;
 
 public interface IVistaLogIn { //La vista en la que se loguea/registra el usuario
 
-	 public void setControlador(ControladorLogIn controlador);
-	 public String getUsuario();
-	 public String getContrasena();
-	 public String getNuevoUsuario();
-	 public String getNuevaContrasena();
+	public void setControlador(ControladorLogIn controlador);
+	public String getUsuario();
+	public String getContrasena();
+	public String getNuevoUsuario();
+	public String getNuevaContrasena();
+    public void ventanaAviso(String string);
+    public void setVisible(boolean b);
 }

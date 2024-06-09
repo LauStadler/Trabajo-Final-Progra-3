@@ -4,6 +4,9 @@ import java.util.ArrayList;
 
 
 import java.util.GregorianCalendar;
+
+import controlador.Controlador;
+import controlador.ControladorLogIn;
 import models.Chofer;
 import models.ChoferPermanente;
 import models.ChoferTemporario;
@@ -14,12 +17,22 @@ import models.Sistema;
 import models.Vehiculo;
 import models.ChoferNoDisponibleException;
 import models.PedidoInvalidoException;
+import models.RecursoCompartido;
 import models.VehiculosNoDisponiblesException;
+import vista.IVistaLogIn;
+import vista.VentanaLogIn;
 public class prueba {
 
 	public static void main(String[] args) {
 		
-		Sistema s = Sistema.getInstancia();
+		System.out.println("asdddd");
+		/*Sistema s = Sistema.getInstancia();
+		RecursoCompartido rc = new RecursoCompartido(s);
+		VentanaLogIn vista=new VentanaLogIn();
+		ControladorLogIn controlador = new ControladorLogIn( rc, vista );
+		vista.setControlador(controlador);
+		vista.setVisible(true);*/
+		/* 
 		try {			
 			Chofer c1 = new ChoferPermanente("2343254", "Juan", 3, 02, 3, 2017);
 			Chofer c2 = new ChoferTemporario("423984", "Franco");
@@ -50,7 +63,7 @@ public class prueba {
 		}
 		finally {
 			
-		}
+		}*/
 	}
 	/**
   	 * Este metodo lista a los viajes de la lista.
