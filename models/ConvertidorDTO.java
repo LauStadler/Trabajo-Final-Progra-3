@@ -1,6 +1,43 @@
 package models;
 
+import java.util.ArrayList;
+
 public class ConvertidorDTO {
+	//DTO SISTEMA
+	public static SistemaDTO sistemaDTOfromSistema(Sistema sistema)
+	{
+		SistemaDTO respuesta = new SistemaDTO();
+		ArrayList<ChoferDTO> choferesDTO = new ArrayList<ChoferDTO>();
+		ArrayList<ClienteDTO> clientesDTO = new ArrayList<ClienteDTO>();
+		ArrayList<ViajeDTO> viajesDTO = new ArrayList<ViajeDTO>();
+		ArrayList<VehiculoDTO> vehiculosDTO = new ArrayList<VehiculoDTO>();
+		for (int i = 0; i < sistema.getChoferes().size(); i++)
+		    choferesDTO.add(ConvertidorDTO.choferDTOfromChofer(sistema.getChoferes().get(i)));
+		for (int i = 0; i < sistema.getClientes().size(); i++)
+		    clientesDTO.add(ConvertidorDTO.clienteDTOfromCliente(sistema.getClientes().get(i)));
+		for (int i = 0; i < sistema.getViajes().size(); i++)
+		    viajesDTO.add(ConvertidorDTO.viajeDTOfromViaje(sistema.getViajes().get(i)));
+		for (int i = 0; i < sistema.getVehiculos().size(); i++)
+		    vehiculosDTO.add(ConvertidorDTO.vehiculoDTOfromVehiculo(sistema.getVehiculos().get(i)));
+		respuesta.setChoferesDTO(choferesDTO);
+		respuesta.setClientesDTO(clientesDTO);
+		respuesta.setVehiculosDTO(vehiculosDTO);
+		respuesta.setViajesDTO(viajesDTO);
+		return respuesta;
+	}
+	public static Sistema sistemafromSistemaDTO(SistemaDTO sistema)
+	{
+		Sistema respuesta = Sistema.getInstancia();
+		for (int i = 0; i < sistema.getClientesDTO().size(); i++)
+		    respuesta.agregaCliente(ConvertidorDTO.clientefromClienteDTO(sistema.getClientesDTO().get(i)));
+		for (int i = 0; i < sistema.getChoferesDTO().size(); i++)
+			respuesta.agregaChofer(ConvertidorDTO.choferfromChoferDTO(sistema.getChoferesDTO().get(i)));
+		for (int i = 0; i < sistema.getVehiculosDTO().size(); i++)
+		    respuesta.agregaVehiculo(ConvertidorDTO.vehiculofromVehiculoDTO(sistema.getVehiculosDTO().get(i)));
+		for (int i = 0; i < sistema.getViajesDTO().size(); i++)
+		    respuesta.agregaViaje(ConvertidorDTO.iviajefromViajeDTO(sistema.getViajesDTO().get(i)));
+		return respuesta;
+	}
 	//DTO CLIENTES
 	public static ClienteDTO clienteDTOfromCliente(Cliente cliente)
 	{
@@ -72,8 +109,7 @@ public class ConvertidorDTO {
 	respuesta.setDistancia(viaje.getDistancia());
 	respuesta.setEstado(viaje.getEstado());
 	respuesta.setPedidoDTO(ConvertidorDTO.pedidoDTOfromPedido(viaje.getPedido()));
-	respuesta.setVehiculoDTO(ConvertidorDTO.vehiculoDTOfromVehiculo(viaje.getVehiculo()));
-	respuesta.setBase(viaje.getBase()); // COMO HAGO CON EL STATIC ??
+	respuesta.setVehiculoDTO(ConvertidorDTO.vehiculoDTOfromVehiculo(viaje.getVehiculo())); // COMO HAGO CON EL STATIC ??
 	return respuesta;
     }
 	public static IViaje iviajefromViajeDTO(ViajeDTO viaje)
@@ -90,13 +126,5 @@ public class ConvertidorDTO {
 	}
 	return respuesta;
     }
-	public static ViajeDTO viajeDTOfromIViaje(IViaje viaje)
-	{
-	ViajeDTO respuesta = new ViajeDTO();
-	PedidoDTO p = ConvertidorDTO.pedidoDTOfromPedido(viaje.getPedido());
-	VehiculoDTO v = ConvertidorDTO.vehiculoDTOfromVehiculo(viaje.getVehiculo());
-	ChoferDTO c = ConvertidorDTO.choferDTOfromChofer(viaje.getChofer());
-	return respuesta;
-	}
 	
 }

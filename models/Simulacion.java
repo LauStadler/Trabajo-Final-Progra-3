@@ -8,7 +8,7 @@ public class Simulacion {
 	private ArrayList<ClienteThread> clientes = new ArrayList<> (); //thread
 	private ArrayList<ChoferThread> choferes = new ArrayList<> (); //thread
 	private SistemaThread sistemaThread;
-	private Sistema sistema = Sistema.getInstancia();
+	private Sistema sistema;
 	private int cantMaxSolicitudes = 5;
 	private int cantMaxViajes = 10;
 	

@@ -1,5 +1,6 @@
 package models;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -9,7 +10,33 @@ public class Sistema implements Serializable{
 	private ArrayList<Vehiculo> vehiculos = new ArrayList<Vehiculo>();//add y remove
 	private ArrayList<IViaje> viajes = new ArrayList<IViaje>();	//add 
 	private ArrayList<Cliente> clientes = new ArrayList<Cliente>();
-	
+	IPersistencia persistencia = new PersistenciaXML();
+	//levanto archivo
+	public void lecturaArchivo() 
+	{
+		try {
+			persistencia.abrirInput("Datos.xml");
+			SistemaDTO sis = (SistemaDTO) persistencia.leer();
+			instancia = ConvertidorDTO.sistemafromSistemaDTO(sis);
+			persistencia.cerrarOutput();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch(ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	public void escrituraArchivo()
+	{
+		try {
+			persistencia.abrirOutput("Datos.xml");
+			SistemaDTO sis = ConvertidorDTO.sistemaDTOfromSistema(instancia);
+			persistencia.escribir(sis);
+		} catch (IOException e) {		
+			e.printStackTrace();
+		}
+		
+	}
 	public ArrayList <IViaje> getViajes() {
 		return viajes;
 	}
@@ -243,4 +270,16 @@ public class Sistema implements Serializable{
 		
 	}
 
+	public void agregaCliente(Cliente cliente) {
+		this.clientes.add(cliente);
+		
+	}
+	public void agregaVehiculo(Vehiculo vehiculo) {
+		this.vehiculos.add(vehiculo);
+	}
+
+	public void agregaViaje(IViaje iviaje) {
+		this.viajes.add(iviaje);
+		
+	}
 }
