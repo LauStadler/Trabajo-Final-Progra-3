@@ -1,19 +1,24 @@
 package models;
 
+import java.util.Observable;
+
 import util.Util;
 
-public class ChoferThread extends Chofer implements Runnable{
+public class ChoferThread extends Observable implements Runnable{
 
 	private RecursoCompartido rc;
 	private int cantMaxViajes;
+	private Chofer chofer;
 	
 	
 	
-	public ChoferThread(RecursoCompartido rc, int cantMaxViajes) {
+	public ChoferThread(RecursoCompartido rc, int cantMaxViajes, Chofer chofer) {
 		super();
 		this.rc = rc;
 		this.cantMaxViajes = cantMaxViajes;
+		this.chofer = chofer;
 	}
+
 
 	public void run () {
 		
@@ -28,12 +33,6 @@ public class ChoferThread extends Chofer implements Runnable{
 		}
 	
 		rc.setCantChoferes(rc.getCantChoferes()-1);
-	}
-
-	@Override
-	public double getSueldo() {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 	
 }

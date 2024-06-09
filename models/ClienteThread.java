@@ -1,14 +1,18 @@
 package models;
 
-public class ClienteThread extends Cliente implements Runnable {
+import java.util.Observable;
+
+public class ClienteThread extends Observable implements Runnable {
 	
 	private RecursoCompartido rc;
 	private int cantSolicitudes;
+	private Cliente cliente;
 	
-	public ClienteThread(RecursoCompartido rc, int cantSolicitudes) {
+	public ClienteThread(RecursoCompartido rc, int cantSolicitudes, Cliente cliente) {
 		super();
 		this.rc = rc;
 		this.cantSolicitudes = cantSolicitudes;
+		this.cliente = cliente;
 	}
 	
 	public void run () {
@@ -19,13 +23,13 @@ public class ClienteThread extends Cliente implements Runnable {
 		
 		while (pedidosValidos < cantSolicitudes && rc.getCantChoferes() > 0) {
 			pedido = rc.creaPedido();
-			notifyObservers("El cliente "+ this.getUsuario() +" creo un pedido");
+			notifyObservers("El cliente "+ cliente.getUsuario() +" creo un pedido");
 			if (rc.validaPedido(pedido)) {
-				notifyObservers("Se valido el pedido del cliente "+ this.getUsuario());
+				notifyObservers("Se valido el pedido del cliente "+ cliente.getUsuario());
 				pedidosValidos ++;
 				try {
 					viaje = rc.creaViaje(pedido);
-					notifyObservers("Se se solicito un viaje del cliente "+ this.getUsuario());
+					notifyObservers("Se se solicito un viaje del cliente "+ cliente.getUsuario());
 					rc.pagarViaje(viaje);
 					
 				} catch (VehiculosNoDisponiblesException | ChoferNoDisponibleException | PedidoInvalidoException

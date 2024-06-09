@@ -1,9 +1,13 @@
 package prueba;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 
 import java.util.GregorianCalendar;
+
+import controlador.Controlador;
+import controlador.ControladorLogIn;
 import models.Chofer;
 import models.ChoferPermanente;
 import models.ChoferTemporario;
@@ -14,43 +18,68 @@ import models.Sistema;
 import models.Vehiculo;
 import models.ChoferNoDisponibleException;
 import models.PedidoInvalidoException;
+import models.RecursoCompartido;
+import models.Simulacion;
 import models.VehiculosNoDisponiblesException;
+import vista.VentanaLogIn;
+import vista.VentanaSimulacion;
+import vista.VistaCliente;
 public class prueba {
 
 	public static void main(String[] args) {
 		
-		Sistema s = Sistema.getInstancia();
-		try {			
+		Sistema empresa = Sistema.getInstancia();
+		Simulacion simulacion = new Simulacion();
+		RecursoCompartido rc = new RecursoCompartido(empresa);
+		VentanaLogIn vistaLogIn = new VentanaLogIn();
+		ControladorLogIn controladorLogIn = new ControladorLogIn( empresa, vistaLogIn );
+		vistaLogIn.setControlador(controladorLogIn);
+		vistaLogIn.setVisible(true);
+		VistaCliente ventanaPedido = new VistaCliente();
+		Controlador controlador  = new Controlador(rc, ventanaPedido);
+		ventanaPedido.setActionListener(controlador);
+		ventanaPedido.setVisible(true);
+		VentanaSimulacion ventanaSimulacion = new VentanaSimulacion();
+		ventanaSimulacion.setVisible(true);
+		
+		try {
+			empresa.lecturaArchivo();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+			
 			Chofer c1 = new ChoferPermanente("2343254", "Juan", 3, 02, 3, 2017);
 			Chofer c2 = new ChoferTemporario("423984", "Franco");
-			s.agregaChofer(c1);
-			s.agregaChofer(c2);
+			empresa.agregaChofer(c1);
+			empresa.agregaChofer(c2);
 			
-			s.agregarVehiculo("Moto", "op34p2");
-			s.agregarVehiculo("Auto", "4odi432");
+			empresa.agregarVehiculo("Moto", "op34p2");
+			empresa.agregarVehiculo("Auto", "4odi432");
 			
-			Cliente lau = new Cliente("Laurita", "RuffoElMasLindo");
-			
-			Pedido p1 = new Pedido(4, "Zona Peligrosa", true, true, lau, 3);
-			IViaje viaje1= s.IniciaViaje(p1);
-			s.finalizaViaje(viaje1);
-			
-			ListadoViajes(s.getViajes());
-			
-			ListadoChoferes(s.getChoferes());
-			
-			ListadoVehiculos(s.getVehiculos());
-			
-			ListadoClientes(s.getClientes());
-			
-		}
-		catch (Exception e){
-			System.out.println(e.getLocalizedMessage());
 			
 		}
 		finally {
-			
+			simulacion.start();
+			while (!simulacion.isFinalizada()) {
+				
+			}
+			empresa.escrituraArchivo();
+				
 		}
+			
+			try {
+				ListadoViajes(empresa.getViajes());
+			} catch (CloneNotSupportedException e) {
+				e.printStackTrace();
+			}
+			
+			ListadoChoferes(empresa.getChoferes());
+			
+			ListadoVehiculos(empresa.getVehiculos());
+			
+			ListadoClientes(empresa.getClientes());
 	}
 	/**
   	 * Este metodo lista a los viajes de la lista.

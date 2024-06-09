@@ -5,8 +5,8 @@ import java.util.ArrayList;
 public class Simulacion {
 
 	private RecursoCompartido rc;
-	private ArrayList<ClienteThread> clientes = new ArrayList<> (); //thread
-	private ArrayList<ChoferThread> choferes = new ArrayList<> (); //thread
+	private ArrayList<Thread> clientes = new ArrayList<> (); //thread
+	private ArrayList<Thread> choferes = new ArrayList<> (); //thread
 	private SistemaThread sistemaThread;
 	private Sistema sistema;
 	private int cantMaxSolicitudes = 5;
@@ -22,11 +22,11 @@ public class Simulacion {
 		
 		
 		for (int i = 0; i < sistema.getChoferes().size() ; i++)
-			choferes.add(new ChoferThread(rc, (int) (Math.random() * this.cantMaxViajes) + 1, sistema.getChoferes().get(i)));
+			choferes.add(new Thread(new ChoferThread(rc, (int) (Math.random() * this.cantMaxViajes) + 1, sistema.getChoferes().get(i))));
 		rc.setCantChoferes(choferes.size());
 		
 		for (int i = 0; i < sistema.getClientes().size() ; i++) 
-			clientes.add(new ClienteThread(rc, (int) (Math.random() * this.cantMaxSolicitudes) + 1, sistema.getClientes().get(i)));
+			clientes.add(new Thread (new ClienteThread(rc, (int) (Math.random() * this.cantMaxSolicitudes) + 1, sistema.getClientes().get(i))));
 		rc.setCantClientes(clientes.size());
 
 		for (int i = 0; i < sistema.getChoferes().size() ; i++)
@@ -36,9 +36,11 @@ public class Simulacion {
 			clientes.get(i).start();
 
 		this.sistemaThread.start();
-
-		
 		
 	}
-	
+
+	public boolean isFinalizada() {
+		return (rc.getCantChoferes() == 0 && rc.getCantClientes() == 0);
+			
+	}
 }

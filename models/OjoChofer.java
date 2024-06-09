@@ -11,7 +11,7 @@ public class OjoChofer implements Observer{
 	private Observable chofer;
 	private VentanaSimulacion ventana;
 	
-	private OjoChofer(RecursoCompartido rc,ChoferThread chofer, VentanaSimulacion ventana) {
+	private OjoChofer(RecursoCompartido rc, ChoferThread chofer, VentanaSimulacion ventana) {
        this.setObservable(rc);
        this.rc.addObserver((Observer) this);
        this.setChoferThread(chofer);
@@ -41,12 +41,7 @@ public class OjoChofer implements Observer{
 	  }
 	  else
 	  {
-		 if (this.chofer == o) {
-			 String cartel = (String) arg;
-	         this.ventana.appendTextChofer(cartel);
-		 }
-		 else {
-			 if(this.rc == o) {
+		 if(this.rc == o) {
 				 IViaje viaje = (IViaje) arg;
 		         if(viaje.getChofer() == this.chofer){
 					if(viaje.getEstado().equals("Iniaciado")){
@@ -62,7 +57,7 @@ public class OjoChofer implements Observer{
 			 }
 		 }
 	  }
-	}
+}
 	
 
-}
+

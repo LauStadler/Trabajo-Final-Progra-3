@@ -11,19 +11,14 @@ public class Sistema implements Serializable{
 	private ArrayList<IViaje> viajes = new ArrayList<IViaje>();	//add 
 	private ArrayList<Cliente> clientes = new ArrayList<Cliente>();
 	IPersistencia persistencia = new PersistenciaXML();
+	
 	//levanto archivo
-	public void lecturaArchivo() 
+	public void lecturaArchivo() throws IOException, ClassNotFoundException 
 	{
-		try {
 			persistencia.abrirInput("Datos.xml");
 			SistemaDTO sis = (SistemaDTO) persistencia.leer();
 			instancia = ConvertidorDTO.sistemafromSistemaDTO(sis);
 			persistencia.cerrarOutput();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch(ClassNotFoundException e) {
-			e.printStackTrace();
-		}
 		
 	}
 	public void escrituraArchivo()
