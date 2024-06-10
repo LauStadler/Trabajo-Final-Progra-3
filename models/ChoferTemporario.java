@@ -8,9 +8,10 @@ public class ChoferTemporario extends Chofer {
     private static double pluscantviajes = 0.15;
     
     
-    public ChoferTemporario(String dni,String nombre){
+    public ChoferTemporario(String tipo,String dni,String nombre){
         super(dni,nombre);
-        
+        this.setTipo(tipo);
+     
     }
     
     public static double getSueldobasico() {

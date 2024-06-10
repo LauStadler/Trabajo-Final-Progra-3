@@ -5,14 +5,16 @@ public class Moto extends Vehiculo{
 	 * Inicializa el objeto moto<br>
 	 * <b>pre:<b> patente debe ser distinto de null y no ser vacio.
 	 * @param patente Patente del auto
+	 * @param patente2 
 	 */
-    public Moto (String patente){
+    public Moto (String tipo,String patente){
         super(patente);
         assert patente.equals("") != true : "La patente es vacia";
         assert patente != null : "La patente es null";
         this.baul = false;
         this.mascota = false;
         this.cantpasajeros = 1;
+        this.setTipo(tipo);
     }
     
     

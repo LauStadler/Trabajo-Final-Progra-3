@@ -8,10 +8,10 @@ import vista.VentanaSimulacion;
 public class OjoChofer implements Observer{
 	
 	private Observable rc;
-	private Observable chofer;
+	private ChoferThread chofer;
 	private VentanaSimulacion ventana;
 	
-	private OjoChofer(RecursoCompartido rc, ChoferThread chofer, VentanaSimulacion ventana) {
+	public OjoChofer(RecursoCompartido rc, ChoferThread chofer, VentanaSimulacion ventana) {
        this.setObservable(rc);
        this.rc.addObserver((Observer) this);
        this.setChoferThread(chofer);
@@ -26,24 +26,26 @@ public class OjoChofer implements Observer{
 		return this.rc;
 	}
 	
-	private void setChoferThread(Observable chofer) {
-		this.chofer= chofer;
+	private void setChoferThread(ChoferThread chofer) {
+		this.chofer  = chofer;
 	}
 
-	private Observable getChoferThread() {
+	private ChoferThread getChoferThread() {
 		return this.chofer;
 	}
 	
 	@Override
 	public void update(Observable o, Object arg) {
-	  if (this.rc!= o && this.chofer != o) {//o chofer nose
+	  
+		
+	  if (this.rc!= o ) {//o chofer nose
 		  throw new IllegalArgumentException();
 	  }
 	  else
 	  {
 		 if(this.rc == o) {
 				 IViaje viaje = (IViaje) arg;
-		         if(viaje.getChofer() == this.chofer){
+		         if(viaje.getChofer() == this.chofer.getChofer()){
 					if(viaje.getEstado().equals("Iniciado")){
 						this.ventana.appendTextChofer("El chofer "+viaje.getChofer().getNombre()+" agarro un viaje");
 					}
@@ -53,6 +55,9 @@ public class OjoChofer implements Observer{
 					else if(viaje.getEstado().equals("Finalizado")){
 						this.ventana.appendTextChofer("El chofer "+ viaje.getChofer().getNombre()+ " finalizo el viaje");
 					}
+					else if (viaje.getEstado().equals("Rechazado")) {
+	   					this.ventana.appendTextChofer("Se rechazo el viaje de " + viaje.getCliente().getUsuario());
+	   					}
 		         }
 			 }
 		 }

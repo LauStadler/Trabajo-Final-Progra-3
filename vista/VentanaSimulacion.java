@@ -16,6 +16,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 public class VentanaSimulacion extends JFrame {
 
@@ -92,13 +93,13 @@ public class VentanaSimulacion extends JFrame {
 		JPanel subPanelTextoCliente = new JPanel();
 		panel.add(subPanelTextoCliente);
 		
-		JLabel LabelCliente = new JLabel("Cliente");
+		JLabel LabelCliente = new JLabel("Chofer");
 		subPanelTextoCliente.add(LabelCliente);
 		
 		JPanel subPanelTextoChofer = new JPanel();
 		panel.add(subPanelTextoChofer);
 		
-		JLabel LabelChofer = new JLabel("Chofer");
+		JLabel LabelChofer = new JLabel("Cliente");
 		subPanelTextoChofer.add(LabelChofer);
 	}
 
@@ -116,4 +117,9 @@ public class VentanaSimulacion extends JFrame {
     {
 	    this.areaChofer.append(arg+"\n");
     }
+	
+	public void finalizar() {
+
+		this.setVisible(false);
+	}
 }

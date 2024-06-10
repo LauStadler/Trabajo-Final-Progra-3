@@ -1,6 +1,8 @@
 package models;
 
-public class ChoferDTO {
+import java.io.Serializable;
+
+public class ChoferDTO implements Serializable {
 	protected String dni;
 	protected String nombre;
 	protected int puntaje;

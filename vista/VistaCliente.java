@@ -14,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JSpinner;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.AbstractListModel;
 import javax.swing.JTextArea;
@@ -62,6 +63,11 @@ public class VistaCliente extends JFrame{
 	private JTextArea logviaje;
 	
 	public VistaCliente() {
+		
+		setTitle("Ventana Cliente");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		
 		getContentPane().setLayout(new GridLayout(0, 1, 0, 0));
 		
 		this.panelGeneral = new JPanel();
@@ -89,7 +95,7 @@ public class VistaCliente extends JFrame{
 		this.panelZona.add(this.ingresaZona);
 		
 		this.comboBox = new JComboBox();
-		this.comboBox.setModel(new DefaultComboBoxModel(new String[] {"", "Zona Peligrosa", "Zona Estandar ", "Zona Calle de  Tierra"}));
+		this.comboBox.setModel(new DefaultComboBoxModel(new String[] {"", "Zona Peligrosa", "Zona Estandar", "Zona Calle de Tierra"}));
 		this.panelZona.add(this.comboBox);
 		
 		this.panelMascotas = new JPanel();
@@ -110,9 +116,6 @@ public class VistaCliente extends JFrame{
 		this.RadioBotonSi = new JRadioButton("si");
 		this.panelOpciones.add(this.RadioBotonSi);
 		
-		this.RadioBotonNo = new JRadioButton("no");
-		this.panelOpciones.add(this.RadioBotonNo);
-		
 		this.panelBaul = new JPanel();
 		this.panelCreaPedido.add(this.panelBaul);
 		this.panelBaul.setLayout(new GridLayout(0, 2, 0, 0));
@@ -131,9 +134,6 @@ public class VistaCliente extends JFrame{
 		this.radioBotonSi = new JRadioButton("si");
 		this.panelOpcionesBaul.add(this.radioBotonSi);
 		
-		this.radioBotonNo = new JRadioButton("no");
-		this.panelOpcionesBaul.add(this.radioBotonNo);
-		
 		this.panelDistancia = new JPanel();
 		this.panelCreaPedido.add(this.panelDistancia);
 		
@@ -147,6 +147,7 @@ public class VistaCliente extends JFrame{
 		this.botonAceptar = new JButton("Aceptar");
 		this.botonAceptar.setActionCommand("Aceptar");
 		this.panelDistancia.add(this.botonAceptar);
+		this.botonAceptar.setEnabled(true);
 		
 		this.panelEstadoPedido = new JPanel();
 		this.panelGeneral.add(this.panelEstadoPedido);
@@ -211,12 +212,21 @@ public class VistaCliente extends JFrame{
 		return this.comboBox.getSelectedItem().toString();
 	}
 	
+	public String getZona(){
+
+			String aux = this.comboBox.getSelectedItem().toString();
+			if (aux.equals(""))
+				JOptionPane.showMessageDialog(null,"Debe Introducir una Zona valida");
+			return aux;
+
+	}
+	
 	public boolean isMascota() {
 		if (this.RadioBotonSi.isSelected())
-			return true;
+		return true;
 		else
-			return false;
-				
+		return false;
+		
 	}
 	
 	public void setActionListener(Controlador c) {
@@ -227,12 +237,29 @@ public class VistaCliente extends JFrame{
 	
 	public void appendText(String arg)
     {
-	    this.logviaje.append(arg+"\n");
+		this.logviaje.append(arg+"\n");
     }
-
+	
 	public void habilitaPago() {
 		this.botonPagar.setEnabled(true);
-		
+	}
+
+	public void deshabilitarPago(){
+		this.botonPagar.setEnabled(false);
+	}
+
+	public void habilitaPedir() {
+		System.out.println("time to work");
+		this.botonAceptar.setEnabled(true);
 	}
 	
+	public void deshabilitaPedir() {
+		System.out.println("a dormir");
+		this.botonAceptar.setEnabled(false);
+	}
+
+	public void finalizar() {
+		JOptionPane.showMessageDialog(null,"No es posible realizar más pedidos");
+		this.setVisible(false);
+	}
 }

@@ -9,12 +9,17 @@ import java.util.GregorianCalendar;
 import controlador.Controlador;
 import controlador.ControladorLogIn;
 import models.Chofer;
+import models.ChoferContratado;
 import models.ChoferPermanente;
 import models.ChoferTemporario;
 import models.Cliente;
 import models.IViaje;
+import models.OjoChofer;
+import models.OjoCliente;
+import models.OjoSistema;
 import models.Pedido;
 import models.Sistema;
+import models.UsuarioYaExistenteException;
 import models.Vehiculo;
 import models.ChoferNoDisponibleException;
 import models.PedidoInvalidoException;
@@ -29,6 +34,7 @@ public class prueba {
 	public static void main(String[] args) {
 		
 		Sistema empresa = Sistema.getInstancia();
+<<<<<<< Updated upstream
 		Simulacion simulacion = new Simulacion();
 		RecursoCompartido rc = new RecursoCompartido(empresa);
 		VentanaLogIn vistaLogIn = new VentanaLogIn();
@@ -41,34 +47,58 @@ public class prueba {
 		ventanaPedido.setVisible(true);
 		VentanaSimulacion ventanaSimulacion = new VentanaSimulacion();
 		ventanaSimulacion.setVisible(true);
+=======
+>>>>>>> Stashed changes
 		
 		try {
 			empresa.lecturaArchivo();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+				e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 			
-			Chofer c1 = new ChoferPermanente("2343254", "Juan", 3, 02, 3, 2017);
-			Chofer c2 = new ChoferTemporario("423984", "Franco");
-			empresa.agregaChofer(c1);
-			empresa.agregaChofer(c2);
+			try {
+				empresa.nuevoCliente("pepe", "lapa");
+				Chofer c1 = new ChoferPermanente("Permanente","2343254", "Juan", 3, 02, 3, 2017);
+				Chofer c2 = new ChoferTemporario("Temporario","423984", "Franco");
+				Chofer c3 = new ChoferContratado("Contratado", "4234234", "Pablo");
+				Chofer c5 = new ChoferPermanente("Permanente","3463453", "Egardo", 3, 02, 3, 2017);
+				Chofer c7 = new ChoferTemporario("Temporario","354534", "Hernesto");
+				Chofer c6 = new ChoferContratado("Contratado", "52354435", "Juan Carlos");
+				empresa.agregaChofer(c1);
+				empresa.agregaChofer(c2);
+				
+				empresa.agregarVehiculo("Moto", "MOT001");
+				empresa.agregarVehiculo("Auto", "AUT001");
+
+				empresa.nuevoCliente("lau","ruffo");
+				empresa.nuevoCliente("marcus","1234");
+				empresa.nuevoCliente("pili","1234");
+				empresa.escrituraArchivo();
+
+			} catch (UsuarioYaExistenteException e1) {
+				e1.printStackTrace();			
 			
-			empresa.agregarVehiculo("Moto", "op34p2");
-			empresa.agregarVehiculo("Auto", "4odi432");
-			
-			
+			}
 		}
 		finally {
-			simulacion.start();
+			
+			RecursoCompartido rc = new RecursoCompartido(empresa);
+			Simulacion simulacion = new Simulacion(rc);
+			VentanaLogIn vistaLogIn = new VentanaLogIn();
+			ControladorLogIn controladorLogIn = new ControladorLogIn( rc, vistaLogIn );
+			vistaLogIn.setControlador(controladorLogIn);
+			vistaLogIn.setVisible(true);
+			VentanaSimulacion ventanaSimulacion = new VentanaSimulacion();
+			ventanaSimulacion.setVisible(true);
+			simulacion.start(ventanaSimulacion);
 			while (!simulacion.isFinalizada()) {
 				
 			}
 			empresa.escrituraArchivo();
 				
-		}
-			
+		} 
+		/*	
 			try {
 				ListadoViajes(empresa.getViajes());
 			} catch (CloneNotSupportedException e) {
@@ -80,6 +110,7 @@ public class prueba {
 			ListadoVehiculos(empresa.getVehiculos());
 			
 			ListadoClientes(empresa.getClientes());
+		*/	
 	}
 	/**
   	 * Este metodo lista a los viajes de la lista.

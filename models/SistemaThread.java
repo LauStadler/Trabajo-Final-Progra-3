@@ -13,8 +13,15 @@ public class SistemaThread extends Thread{
 	public void run () {
 		
 		while (rc.getCantChoferes() > 0 && rc.getCantClientes() > 0) {
+			try {
+				sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			rc.asignaVehiculo();
 		}
+		rc.finalizar();
 	}
 	
 	

@@ -31,14 +31,14 @@ public class FactoryVehiculo {
         assert patente != null : "La patente es null";
     	
         if (tipo.equals("Moto"))
-            respuesta = new Moto(patente);
+            respuesta = new Moto(tipo,patente);
         else 
         	if(tipo.equals("Auto"))
-        		respuesta = new Auto(patente);
+        		respuesta = new Auto(tipo,patente);
 			else 
 				if (tipo.equals("Combi"))
 				
-					respuesta = new Combi(patente);
+					respuesta = new Combi(tipo,patente);
 		return respuesta;
 	}
     

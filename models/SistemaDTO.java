@@ -30,7 +30,7 @@ public void setVehiculosDTO(ArrayList<VehiculoDTO> vehiculos) {
 }
 
 public ArrayList<ViajeDTO> getViajesDTO() {
-	return viajes;
+	return viajesDTO;
 }
 
 public ArrayList<ChoferDTO> getChoferesDTO() {
@@ -44,26 +44,5 @@ public ArrayList<ClienteDTO> getClientesDTO() {
 public ArrayList<VehiculoDTO> getVehiculosDTO() {
 	return vehiculos;
 }
-/**   
-public void agregarChofer(Chofer chofer) { // hacen falta?
-	this.choferes.add(chofer);
-}
-
-public void eliminarChofer(Chofer chofer) {
-	this.choferes.remove(chofer);
-}
-
-public void agregarVehiculo(Vehiculo vehiculo) {
-	this.vehiculos.add(vehiculo);
-}
-public void eliminarVehiculo(Vehiculo vehiculo) {
-	this.vehiculos.remove(vehiculo);
-}
-public void agregarCliente(Cliente cliente) {
-	this.clientes.add(cliente);
-}
-public void agregarViaje(IViaje viaje) {
-	this.viajes.add(viaje);
-}
-**/   
+   
 }

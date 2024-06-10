@@ -2,11 +2,12 @@ package models;
 
 public class Combi extends Vehiculo{
 	
-    public Combi(String patente){
+    public Combi( String tipo,String patente){
         super(patente);
         this.baul = true;
         this.mascota = false;
         this.cantpasajeros = 10;
+        this.setTipo(tipo);
     }
 
  

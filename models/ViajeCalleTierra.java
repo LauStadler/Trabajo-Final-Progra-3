@@ -1,6 +1,6 @@
 package models;
 
-public class ViajeCalleTierra extends Viaje implements Cloneable {
+public class ViajeCalleTierra extends Viaje {
 
 	public ViajeCalleTierra() {
 		super();

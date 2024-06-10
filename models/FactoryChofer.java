@@ -24,14 +24,14 @@ private static FactoryChofer instancia = null;
         assert tipo != null : "El tipo es null";
     	
         if (tipo.equals("Permanente"))
-            respuesta = new ChoferPermanente(dni,nombre);
+            respuesta = new ChoferPermanente("Permanente",dni,nombre, 2, 12, 3, 2017);//hardcodeado
         else 
         	if(tipo.equals("Temporario"))
-        		respuesta = new ChoferTemporario(dni,nombre);
+        		respuesta = new ChoferTemporario("Temporario",dni,nombre);
 			else 
 				if (tipo.equals("Contratado"))
 				
-					respuesta = new ChoferContratado(dni,nombre);
+					respuesta = new ChoferContratado("Contratado",dni,nombre);
 		return respuesta;
 	}
     

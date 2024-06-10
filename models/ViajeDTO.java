@@ -1,6 +1,8 @@
 package models;
 
-public class ViajeDTO {
+import java.io.Serializable;
+
+public class ViajeDTO implements Serializable {
 	protected PedidoDTO pedidoDTO;
 	protected VehiculoDTO vehiculoDTO;
 	protected ChoferDTO choferDTO;

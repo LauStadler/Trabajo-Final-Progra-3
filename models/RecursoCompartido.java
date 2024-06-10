@@ -6,7 +6,6 @@ import java.util.Observer;
 
 public class RecursoCompartido extends Observable{
 
-	private boolean available;
 	private Sistema empresa;
 	private ArrayList<Chofer> choferes = new ArrayList<Chofer>();
 	private ArrayList<Vehiculo> vehiculosNoDisp = new ArrayList<Vehiculo>(); //vehiculos que estan siendo utilizados
@@ -22,6 +21,16 @@ public class RecursoCompartido extends Observable{
 	
 	public RecursoCompartido(Sistema s) {
 		this.empresa = s;
+		
+		for(int i=0; i<s.getChoferes().size(); i++)
+			this.choferes.add(s.getChoferes().get(i));
+
+		
+		for(int i=0; i<s.getVehiculos().size(); i++)
+			this.vehiculosDisp.add(s.getVehiculos().get(i));
+
+		this.cantClientes = s.getClientes().size();
+		this.cantChoferes = choferes.size();
 	}
 	
 	public int getCantChoferes() {
@@ -62,50 +71,91 @@ public class RecursoCompartido extends Observable{
 		
 	}
 	
-	public synchronized void asignaVehiculo() {
-		
+	public IViaje algunCombo(){ //busca si hay algun vehiculo disponible que cumpla los requisitos de algun viaje solicitado
+		Integer aux = null;
+		Pedido pedido;
+		for (IViaje v : viajesSolicitados){
+			pedido= v.getPedido();
+			for (Vehiculo i : vehiculosDisp) {
+				aux = i.getPrioridad(pedido);
+				if (aux != null)
+					return v;
+			}
+		}
+		return null;
+	}
+
+	public synchronized void asignaVehiculo()  {
 		IViaje viaje;
-		//busca un viaje en estadosolicitado;
-		while(vehiculosDisp.isEmpty()) {
+		Vehiculo vehiculo;
+		
+		while( viajesSolicitados.isEmpty() || (viaje=algunCombo())==null && (this.cantChoferes > 0 && this.cantClientes > 0) ) {
 			try {
 				wait();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
+			}			
+		}
+
+		if (this.cantChoferes > 0 && this.cantClientes > 0) {
+			viajesSolicitados.remove(viaje);		
+			try {
+				vehiculo = buscaVehiculoDisp(viaje.getPedido());
+				vehiculosDisp.remove(vehiculo);
+				viaje.setVehiculo(vehiculo);
+				viaje.setEstado("Con Vehiculo");
+				viajesConVehiculo.add(viaje);
+				vehiculosNoDisp.add(vehiculo);
+				setChanged();
+				notifyObservers(viaje);
+				notifyAll();	
+			} catch (VehiculosNoDisponiblesException e) {
+				e.printStackTrace();
 			}
-			
+		}
+		else {
+			viaje.setEstado("Rechazado");
+			setChanged();
+			notifyObservers(viaje);
 		}
 		
-		viaje = viajesSolicitados.get(0);
-		viajesSolicitados.remove(0);
-		Vehiculo vehiculo;
-		try {
-			vehiculo = empresa.buscaVehiculoDisp(viaje.getPedido());
-			viaje.setVehiculo(vehiculo);
-			viaje.setEstado("Con Vehiculo");
-			viajesSolicitados.remove(viaje);
-			viajesConVehiculo.add(viaje);
-			vehiculosDisp.remove(vehiculo);
-			vehiculosNoDisp.add(vehiculo);
-			
-		} catch (VehiculosNoDisponiblesException e) {
-			e.printStackTrace();
-		}
 		
-		notifyAll();	
-		setChanged();
-		notifyObservers(viaje);
 	}
+		
 	
-	public Pedido creaPedido() { // para crear con los threads clientes pedidos random
-		// TODO Auto-generated method stub
-		return null;
+
+	public Pedido creaPedido(Cliente cliente){
+		int cantPasajeros = (int) (Math.random() * 10) + 1;
+		boolean baul;
+		boolean mascota;
+		String zona;
+		double distancia =  (double) (Math.random() * 10.0) + 1;
+
+		if ((int) (Math.random() * 1) == 1)
+			baul = true;
+		else
+			baul = false; 
+
+		if ((int) (Math.random() * 1) == 1)
+			mascota = true;
+		else
+			mascota = false;	
+		int opc= (int) (Math.random() * 3 ) + 1;
+		if ( opc == 1)
+			zona = "Zona Peligrosa";
+		else if (opc==2)
+			zona  = "Zona Estandar"; 	
+		else
+			zona = "Zona Calle de Tierra";
+		return new Pedido(cantPasajeros, zona, baul, mascota, cliente, distancia);
 	}
 	
 	public boolean validaPedido(Pedido pedido) {
 		
-		if(!pedido.isPedidoValido()) 
+		if(!pedido.isPedidoValido())
 			return false;
 		
+<<<<<<< Updated upstream
 		//if (this.cantChoferes <= 0)  no es necesario, lo chequea en creaViaje
 		//	return false;
 		
@@ -115,25 +165,27 @@ public class RecursoCompartido extends Observable{
 		if ( empresa.getVehiculos().get(i).getPrioridad(pedido) != null )
 			return true;
 		else
+=======
+		if(empresa.buscaVehiculoDisp(pedido) == null)
+>>>>>>> Stashed changes
 			return false;
+		return true;
 	}
 	
 	public synchronized IViaje creaViaje(Pedido pedido) throws VehiculosNoDisponiblesException, ChoferNoDisponibleException, PedidoInvalidoException, ZonaInvalidaException {
 	
 		IViaje viaje = empresa.creaViaje(pedido);
-		this.viajesSolicitados.add(viaje);
 		viaje.setEstado("Solicitado");
+		this.viajesSolicitados.add(viaje);
 		notifyAll();
 		setChanged();
 		notifyObservers(viaje);
 		return viaje;
 	}
-
 	
-
-	public void pagarViaje(IViaje viaje) {
+	public synchronized void pagarViaje(IViaje viaje) {
 		
-		while (viaje.getEstado().equals("Iniciado")) {
+		while ( this.getCantChoferes() > 0 && !viaje.getEstado().equals("Iniciado") ) {
 			try {
 				wait();
 			} catch (InterruptedException e) {
@@ -141,50 +193,57 @@ public class RecursoCompartido extends Observable{
 				e.printStackTrace();
 			}
 		}
+		if (this.getCantChoferes() > 0){
+			viaje.setEstado("Pagado");
+			notifyAll();
+			setChanged();
+			notifyObservers(viaje);
+		}
 		
-		viaje.setEstado("Pagado");
-		notifyAll();
-		setChanged();
-		notifyObservers(viaje);
 		
 	}
 
-	public synchronized IViaje tomaViaje() {
+	public synchronized IViaje tomaViaje(Chofer chofer) {
 		
-		while ( viajesConVehiculo.isEmpty()) {
+		IViaje viaje = null;
+		while ( viajesConVehiculo.isEmpty() &&  this.getCantClientes() > 0) {
 			try {
 				wait();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
-		IViaje viaje = viajesConVehiculo.get(0);
-		viajesConVehiculo.remove(0);
-		viaje.setEstado("Iniciado");
-		viajesEnCurso.add(viaje);
-		notifyAll();
-		setChanged();
-		notifyObservers(viaje);
+		if (this.cantClientes >0 ){
+			viaje = viajesConVehiculo.get(0);
+			viaje.setChofer(chofer);
+			viajesConVehiculo.remove(0);
+			viaje.setEstado("Iniciado");
+			viajesEnCurso.add(viaje);
+			setChanged();
+			notifyObservers(viaje);
+			notifyAll();
+		}
 		return viaje;
 	}
 
 	public synchronized void finalizaViaje(IViaje viaje) {
 		
-		while (!viaje.getEstado().equals("Pagado")) {
+		while (!viaje.getEstado().equals("Pagado") && this.getCantClientes() > 0) {
 			try {
 				wait();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
-		
-		viaje.setEstado("Finalizado");
-		setChanged();
-		notifyObservers(viaje);
-		viajesEnCurso.remove(viaje);
-		viajesFinalizados.add(viaje);
-		vehiculosNoDisp.remove(viaje.getVehiculo());
-		vehiculosDisp.add(viaje.getVehiculo());
+			viaje.setEstado("Finalizado");
+			setChanged();
+			notifyObservers(viaje);
+			viajesEnCurso.remove(viaje);
+			viajesFinalizados.add(viaje);
+			vehiculosNoDisp.remove(viaje.getVehiculo());
+			vehiculosDisp.add(viaje.getVehiculo());
+
+
 		
 	}
 
@@ -193,10 +252,20 @@ public class RecursoCompartido extends Observable{
 	}
 
 	public Cliente nuevoCliente(String usuario, String contra) throws UsuarioYaExistenteException {
+<<<<<<< Updated upstream
 		return empresa.nuevoCliente(usuario, contra);
+=======
+		Cliente cliente= empresa.nuevoCliente(usuario, contra);
+		return cliente;
+>>>>>>> Stashed changes
 	}
 
     public Cliente verificaUsuario(String usuario, String contra) throws UsuarioInexistenteException, ContrasenaIncorrectaException {
         return empresa.verificaUsuario(usuario, contra);
     }
+
+	public synchronized void finalizar() {
+		notifyAll();
+		
+	}
 }

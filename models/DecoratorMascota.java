@@ -71,5 +71,33 @@ public abstract class DecoratorMascota implements IViaje, Cloneable{
 		// TODO Auto-generated method stub
 		return this.encapsulado.getFecha();
 	}
+	
+	@Override
+	public Pedido getPedido() {
+		// TODO Auto-generated method stub
+		return this.encapsulado.getPedido();
+	}
+
+	@Override
+	public String getEstado() {
+		// TODO Auto-generated method stub
+		return this.encapsulado.getEstado();
+	}
+
+	@Override
+	public void setEstado(String estado) {
+		this.encapsulado.setEstado(estado);
+		
+	}
+
+	@Override
+	public void setVehiculo(Vehiculo vehiculo) {
+		this.encapsulado.setVehiculo(vehiculo);
+		
+	}
+	public void setChofer(Chofer chofer) {
+		this.encapsulado.setChofer(chofer);
+	}
+
 }
 

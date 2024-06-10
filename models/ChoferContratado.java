@@ -1,4 +1,4 @@
-  package models;
+package models;
 /**
  * Clase concreta chofer contratado que hereda atributos de chofer.
  */
@@ -10,11 +10,13 @@ public class ChoferContratado extends Chofer {
      * <b>pre:</b> El nombre y dni deber no nulos y distinos de espacio.
      * @param nombre Nombre del chofer
      * @param dni Dni del chofer
+     * @param nombre2 
      */
-    public ChoferContratado(String nombre,String dni){
+    public ChoferContratado(String tipo,String nombre,String dni ){
         super(dni,nombre);
         assert dni.equals("") != true : "El dni esta vacio";
         assert dni != null : "El dni es null";
+        this.setTipo(tipo);
     }
    /**
     * Este metodo calcula el sueldo neto del chofer contratado.<br>

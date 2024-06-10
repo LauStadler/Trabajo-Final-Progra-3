@@ -42,10 +42,9 @@ public class Controlador implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-		boolean baul;
-		boolean mascota;
 		
 		if (e.getActionCommand().equals("Aceptar")) {
+<<<<<<< Updated upstream
 			
 			Pedido pedido = new Pedido(vista.getCantPasajeros(), vista.getZona(), vista.isMascota(), vista.isBaul(), this.cliente, vista.getIngresaDistancia());
 
@@ -59,15 +58,36 @@ public class Controlador implements ActionListener {
 				} catch (VehiculosNoDisponiblesException | ChoferNoDisponibleException | PedidoInvalidoException
 						| ZonaInvalidaException e1) {
 					e1.printStackTrace();
+=======
+			String zona= vista.getZona();
+			Pedido pedido = new Pedido(vista.getCantPasajeros(), zona, vista.isMascota(), vista.isBaul(), this.cliente, vista.getIngresaDistancia());
+			if (modelo.getCantChoferes() > 0 && modelo.getCantClientes() > 0) {
+				this.vista.appendText("Pedido creado");
+				if (!zona.equals("") && modelo.validaPedido(pedido)) {		
+					try {
+						this.vista.appendText("Pedido valido");
+						this.vista.deshabilitaPedir();
+						this.viaje = modelo.creaViaje(pedido);
+					} catch (VehiculosNoDisponiblesException | ChoferNoDisponibleException | PedidoInvalidoException
+							| ZonaInvalidaException e1) {
+						e1.printStackTrace();
+					}
+>>>>>>> Stashed changes
 				}
+				else
+					this.vista.appendText("Pedido invalido, intente de nuevo");
 			}
-			else
-				this.vista.appendText("Pedido invalido, intente de nuevo");
+			else {
+				this.vista.finalizar();
+				modelo.setCantClientes((modelo.getCantClientes()-1));
+			}
 		}
 		else
-			if(e.getActionCommand().equals("Pagar"))
+			if(e.getActionCommand().equals("Pagar")){
 				modelo.pagarViaje(this.viaje);
-		
+				vista.deshabilitarPago();
+				vista.habilitaPedir();
+			}
 	}
 
 }

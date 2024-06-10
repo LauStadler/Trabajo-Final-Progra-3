@@ -1,0 +1,68 @@
+public Vehiculo buscaVehiculoDisp(Pedido pedido) throws VehiculosNoDisponiblesException {
+		Vehiculo vehiculo = null;
+		Integer maxPrioridad = 0, aux = null;
+		assert pedido != null : "Pedido null";
+		for (Vehiculo i : vehiculosDisp) {
+			aux = i.getPrioridad(pedido);
+		    if (aux != null && aux> maxPrioridad) {
+				vehiculo = i;
+				maxPrioridad = aux;
+			}
+		}
+			
+		if(vehiculo == null )
+			throw new VehiculosNoDisponiblesException("No hay vehiculos disponibles, no se puede hacer el viaje en este momento");
+
+		return vehiculo;
+		
+	}
+
+
+	public IViaje algunCombo(){ //busca si hay algun vehiculo disponible que cumpla los requisitos de algun viaje solicitado
+		Integer aux = null;
+		Pedido pedido;
+		for (IViaje v : viajesSolicitados){
+			pedido= v.getPedido();
+			for (Vehiculo i : vehiculosDisp) {
+				aux = i.getPrioridad(pedido);
+				if (aux != null)
+					return v;
+			}
+		}
+		return null;
+	}
+
+	public synchronized void asignaVehiculo() {
+		System.out.println("Entre a asigna vehiculo");
+		IViaje viaje=null;
+		//busca un viaje en estadosolicitado;
+		while( (viajesSolicitados.isEmpty() || (viaje=algunCombo())==null)  && (getCantClientes()>0 && getCantChoferes()>0)) {
+			try {
+				wait();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+
+		if (getCantClientes()<=0 || getCantChoferes()<=0)
+			return;
+
+		viajesSolicitados.remove(viaje);
+		Vehiculo vehiculo;
+		try {
+			vehiculo = empresa.buscaVehiculoDisp(viaje.getPedido());
+			vehiculosDisp.remove(vehiculo);
+			viaje.setVehiculo(vehiculo);
+			viaje.setEstado("Con Vehiculo");
+			viajesConVehiculo.add(viaje);
+			vehiculosNoDisp.add(vehiculo);
+			setChanged();
+			notifyObservers(viaje);
+			
+		} catch (VehiculosNoDisponiblesException e) {
+			e.printStackTrace();
+		}
+		
+		notifyAll();	
+		
+	}

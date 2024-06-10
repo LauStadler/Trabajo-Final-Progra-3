@@ -25,18 +25,26 @@ public class ConvertidorDTO {
 		respuesta.setViajesDTO(viajesDTO);
 		return respuesta;
 	}
-	public static Sistema sistemafromSistemaDTO(SistemaDTO sistema)
+	public static /*Sistema*/void sistemafromSistemaDTO(SistemaDTO sistema)
 	{
 		Sistema respuesta = Sistema.getInstancia();
 		for (int i = 0; i < sistema.getClientesDTO().size(); i++)
+		{
 		    respuesta.agregaCliente(ConvertidorDTO.clientefromClienteDTO(sistema.getClientesDTO().get(i)));
-		for (int i = 0; i < sistema.getChoferesDTO().size(); i++)
+		    System.out.println(ConvertidorDTO.clientefromClienteDTO(sistema.getClientesDTO().get(i)));
+		}
+		for (int i = 0; i < sistema.getChoferesDTO().size(); i++) {
+
 			respuesta.agregaChofer(ConvertidorDTO.choferfromChoferDTO(sistema.getChoferesDTO().get(i)));
-		for (int i = 0; i < sistema.getVehiculosDTO().size(); i++)
+		}
+		for (int i = 0; i < sistema.getVehiculosDTO().size(); i++) {
 		    respuesta.agregaVehiculo(ConvertidorDTO.vehiculofromVehiculoDTO(sistema.getVehiculosDTO().get(i)));
+		}
+
 		for (int i = 0; i < sistema.getViajesDTO().size(); i++)
 		    respuesta.agregaViaje(ConvertidorDTO.iviajefromViajeDTO(sistema.getViajesDTO().get(i)));
-		return respuesta;
+
+		//return respuesta;
 	}
 	//DTO CLIENTES
 	public static ClienteDTO clienteDTOfromCliente(Cliente cliente)
@@ -58,6 +66,7 @@ public class ConvertidorDTO {
 	respuesta.setDni(chofer.getDNI());
 	respuesta.setNombre(chofer.getNombre());
 	respuesta.setPuntaje(chofer.getPuntaje());
+	respuesta.setTipo(chofer.getTipo());
 	return respuesta;
     }
 	public static Chofer choferfromChoferDTO(ChoferDTO choferDTO)
@@ -76,6 +85,7 @@ public class ConvertidorDTO {
 	respuesta.setCantpasajeros(vehiculo.getCantPasajeros());
 	respuesta.setMascota(vehiculo.isMascota());
 	respuesta.setPatente(vehiculo.getPatente());
+	respuesta.setTipo(vehiculo.getTipo());
 	return respuesta;
     }
 	public static Vehiculo vehiculofromVehiculoDTO(VehiculoDTO vehiculo)

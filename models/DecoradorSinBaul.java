@@ -9,8 +9,5 @@ public class DecoradorSinBaul extends DecoratorBaul{
 		super(encapsulado);
 		// TODO Auto-generated constructor stub
 	}
-
-	
-	
 	
 }

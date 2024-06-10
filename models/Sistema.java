@@ -15,18 +15,21 @@ public class Sistema implements Serializable{
 	//levanto archivo
 	public void lecturaArchivo() throws IOException, ClassNotFoundException 
 	{
+			
 			persistencia.abrirInput("Datos.xml");
 			SistemaDTO sis = (SistemaDTO) persistencia.leer();
-			instancia = ConvertidorDTO.sistemafromSistemaDTO(sis);
-			persistencia.cerrarOutput();
+			ConvertidorDTO.sistemafromSistemaDTO(sis);
+			persistencia.cerrarInput();
 		
 	}
 	public void escrituraArchivo()
 	{
 		try {
 			persistencia.abrirOutput("Datos.xml");
-			SistemaDTO sis = ConvertidorDTO.sistemaDTOfromSistema(instancia);
+
+			SistemaDTO sis = ConvertidorDTO.sistemaDTOfromSistema(Sistema.getInstancia());
 			persistencia.escribir(sis);
+			persistencia.cerrarOutput();
 		} catch (IOException e) {		
 			e.printStackTrace();
 		}
@@ -122,7 +125,7 @@ public class Sistema implements Serializable{
 	 * @return Devuelve un vehiculo disponible que cumple con el pedido.
 	 * @throws VehiculosNoDisponiblesException si no hubiera vehiculos desponibles para realizar el pedido, se dispara una excepcion indicando que no se puede realizar el viaje por falta de vehiculos.
 	 */
-	public Vehiculo buscaVehiculoDisp(Pedido pedido) throws VehiculosNoDisponiblesException {
+	public Vehiculo buscaVehiculoDisp(Pedido pedido) /*throws VehiculosNoDisponiblesException*/ {
 		Vehiculo vehiculo = null;
 		Integer maxPrioridad = 0, aux = null;
 		assert pedido != null : "Pedido null";
@@ -134,9 +137,9 @@ public class Sistema implements Serializable{
 			}
 		}
 			
-		if(vehiculo == null )
+		/*if(vehiculo == null )
 			throw new VehiculosNoDisponiblesException("No hay vehiculos disponibles, no se puede hacer el viaje");
-
+		*/
 		return vehiculo;
 		
 	}

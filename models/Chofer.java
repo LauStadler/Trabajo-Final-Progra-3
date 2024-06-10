@@ -1,5 +1,4 @@
 package models;
-
 import java.io.Serializable;
 import java.util.Observable;
 
@@ -13,12 +12,12 @@ public abstract class Chofer extends Observable implements Serializable {
    protected String dni;
    protected String nombre;
    protected int puntaje;
-   
+   protected String tipo;
    public Chofer() {
 	   super();
    }
    /**
-    * Iniciliza al obejto chofer.
+    * Iniciliza al objeto chofer.
     * <b>pre: </b> El dni y nombre deben ser distinto de null y espacio vacio.
     * @param dni Dni el chofer.
     * @param nombre Nombre del chofer.
@@ -65,6 +64,12 @@ public abstract class Chofer extends Observable implements Serializable {
    }
 public int getPuntaje() {
 	return puntaje;
+}
+public String getTipo() {
+	return tipo;
+}
+public void setTipo(String tipo) {
+	this.tipo = tipo;
 }
    
    

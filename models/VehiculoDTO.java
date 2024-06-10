@@ -1,6 +1,8 @@
 package models;
 
-public class VehiculoDTO {
+import java.io.Serializable;
+
+public class VehiculoDTO implements Serializable{
 	protected String patente;
 	protected boolean baul;
 	protected boolean mascota;

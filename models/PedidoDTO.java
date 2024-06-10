@@ -1,8 +1,10 @@
 package models;
 
+import java.io.Serializable;
 import java.util.GregorianCalendar;
 
-public class PedidoDTO {
+public class PedidoDTO implements Serializable{
+	
 	private int cantPasajeros;
 	private String zona;
 	private boolean mascota;
@@ -10,6 +12,7 @@ public class PedidoDTO {
 	private GregorianCalendar fecha;
 	private ClienteDTO clienteDTO;
 	private double km;
+	
 	public PedidoDTO() {
 		// TODO Auto-generated constructor stub
 	}
@@ -44,7 +47,7 @@ public class PedidoDTO {
 		this.fecha = fecha;
 	}
 	public ClienteDTO getCliente() {
-		return cliente;
+		return clienteDTO;
 	}
 	public void setCliente(ClienteDTO cliente) {
 		this.clienteDTO = cliente;

@@ -19,12 +19,11 @@ public abstract class Viaje implements IViaje, Cloneable, Serializable{
 
 	
 
-	public Viaje(Pedido pedido, Vehiculo vehiculo, Chofer chofer, double distancia) {
+	public Viaje(Pedido pedido, Vehiculo vehiculo, Chofer chofer) {
 		super();
 		this.pedido = pedido;
 		this.vehiculo = vehiculo;
 		this.chofer = chofer;
-		this.distancia = distancia;
 		this.estado = "Solicitado";
 	}
 	

@@ -13,13 +13,14 @@ public class ChoferPermanente extends Chofer{
     * <b>pre:</b> Los parametros enteros deben ser mayores o iguales a 0 y los tipo String deben ser distintos de null y espacio.
     * @param dni DNI del chofer.
     * @param nombre Nombre del chofer.
+ * @param tipo 
     * @param antiguedad Cantidad de años trabando en la empresa.
     * @param canthijos Cantidad de hijos.
     * @param dia Dia que empezo a trabajar.
     * @param mes Mes que empezo a trabajar.
     * @param anio Año que empezo a trabajar.
     */
-   public ChoferPermanente(String dni,String nombre,int canthijos, int dia, int mes, int anio){
+   public ChoferPermanente(String tipo, String dni,String nombre,int canthijos, int dia, int mes, int anio){
      super(dni,nombre);
      assert dni.equals("") != true : "EL dni esta vacio";
      assert dni != null : "El dni es null";
@@ -31,6 +32,7 @@ public class ChoferPermanente extends Chofer{
      assert (anio > 1950 ) : "Año invalido";
      this.canthijos=canthijos;
      this.fechaingreso.set(anio, mes, dia);
+     this.setTipo(tipo);
    } 
    public ChoferPermanente(String dni,String nombre) //no se como solucionar esto
    {

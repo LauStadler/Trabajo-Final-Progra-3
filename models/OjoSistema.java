@@ -25,16 +25,17 @@ public class OjoSistema implements Observer {
 	}
 
 	@Override
-	public void update(Observable o, Object arg) {
+	public void update(Observable o, Object arg){
+
 		if(this.rc!= o) {
-			throw new InterruptedException();
+			throw new IllegalArgumentException();
 		}
 		else
 		{	IViaje viaje= (IViaje) arg;
 			if(viaje.getEstado().equals("Solicitado")){
 				this.ventana.appendTextGeneral("Viaje solicitado por el cliente "+viaje.getCliente().getUsuario());
 			}
-			else if(viaje.getEstado().equals("Con vehiuculo")){
+			else if(viaje.getEstado().equals("Con Vehiculo")){
 				this.ventana.appendTextGeneral("Al viaje del cliente "+viaje.getCliente().getUsuario()+" se le asigno el vehiculo"+viaje.getVehiculo().getPatente());
 			}
 			else if(viaje.getEstado().equals("Iniciado")){
@@ -45,8 +46,11 @@ public class OjoSistema implements Observer {
 				this.ventana.appendTextGeneral("El viaje fue pagado por el cliente "+viaje.getCliente().getUsuario());
 			}
 			else if(viaje.getEstado().equals("Finalizado")){
-				this.ventana.appendTextGeneral("El chofer "+ viaje.getChofer().getNombre()+" finalizo el viaje del cliente "+viaje.getCliente().getUsuario());
-		 }	
+				this.ventana.appendTextGeneral(" finalizo el viaje del cliente "+viaje.getCliente().getUsuario());
+		    }
+			else if (viaje.getEstado().equals("Rechazado")) {
+					this.ventana.appendTextCliente("Se rechazo el viaje de " + viaje.getCliente().getUsuario());
+			}
 		}
 		
 	}

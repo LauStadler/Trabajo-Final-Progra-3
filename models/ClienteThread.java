@@ -1,12 +1,16 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.Observable;
+import java.util.Observer;
 
-public class ClienteThread extends Observable implements Runnable {
+public class ClienteThread extends Thread {
 	
 	private RecursoCompartido rc;
 	private int cantSolicitudes;
 	private Cliente cliente;
+	private ArrayList<Observer> observadores = new ArrayList<>();
+	
 	
 	public ClienteThread(RecursoCompartido rc, int cantSolicitudes, Cliente cliente) {
 		super();
@@ -21,15 +25,13 @@ public class ClienteThread extends Observable implements Runnable {
 		IViaje viaje;
 		Pedido pedido;
 		
-		while (pedidosValidos < cantSolicitudes && rc.getCantChoferes() > 0) {
-			pedido = rc.creaPedido();
-			notifyObservers("El cliente "+ cliente.getUsuario() +" creo un pedido");
+		while (pedidosValidos < this.cantSolicitudes && rc.getCantChoferes() > 0) {
+			
+			pedido = rc.creaPedido(this.cliente);
 			if (rc.validaPedido(pedido)) {
-				notifyObservers("Se valido el pedido del cliente "+ cliente.getUsuario());
 				pedidosValidos ++;
 				try {
 					viaje = rc.creaViaje(pedido);
-					notifyObservers("Se se solicito un viaje del cliente "+ cliente.getUsuario());
 					rc.pagarViaje(viaje);
 					
 				} catch (VehiculosNoDisponiblesException | ChoferNoDisponibleException | PedidoInvalidoException
@@ -38,11 +40,31 @@ public class ClienteThread extends Observable implements Runnable {
 				}
 				
 			}
-			else
-				notifyObservers("Pedido invalido");
 		
 		}
 		rc.setCantClientes(rc.getCantClientes()-1);
+	}
+	
+	
+	
+	public RecursoCompartido getRc() {
+		return rc;
+	}
+
+	public int getCantSolicitudes() {
+		return cantSolicitudes;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public ArrayList<Observer> getObservadores() {
+		return observadores;
+	}
+
+	public void addObservers(Observer obj) {
+		observadores.add(obj);
 	}
 }
 

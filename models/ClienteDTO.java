@@ -1,6 +1,8 @@
 package models;
 
-public class ClienteDTO {
+import java.io.Serializable;
+
+public class ClienteDTO implements Serializable{
 	private String usuario;
 	private String contrasenia;
 	
